@@ -61,10 +61,8 @@
 <body class="text-slate-800 antialiased">
 
     <div class="dashboard-container">
-        <!-- SIDEBAR NAVIGATION -->
-        <nav class="bg-[#355B36] text-[#F7F0E8] w-full md:w-72 flex-shrink-0 z-20 shadow-2xl sticky top-0 md:h-screen md:overflow-y-auto border-r border-[#2a482b]">
-            <div class="p-6 border-b border-[#F7F0E8]/10">
-                <!-- Brand Logo & Name -->
+        <nav class="bg-[#355B36] text-[#F7F0E8] w-full md:w-72 flex-shrink-0 z-20 shadow-2xl sticky top-0 md:h-screen flex flex-col border-r border-[#2a482b]">
+            <div class="p-6 border-b border-[#F7F0E8]/10 flex-shrink-0">
                 <div class="flex items-center gap-3 mb-2">
                     <div class="bg-[#88AD4B]/20 p-2.5 rounded-lg text-[#88AD4B] border border-[#88AD4B]/30">
                         <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path></svg>
@@ -73,43 +71,70 @@
                         Fysiotherapie <br><span class="text-[#88AD4B] font-bold">Hoogezand</span>
                     </h1>
                 </div>
-                <p class="text-[10px] text-[#F7F0E8]/60 uppercase tracking-widest font-bold mt-4">Klinische Protocollen</p>
             </div>
             
-            <ul class="nav-scroller flex md:flex-col overflow-x-auto md:overflow-visible p-2 md:p-4 gap-2 border-b md:border-b-0 border-[#F7F0E8]/10">
-                <li>
-                    <button onclick="switchTab('ecu')" id="nav-ecu" class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-lg text-left whitespace-nowrap md:whitespace-normal transition-all duration-200 text-[#F7F0E8]/80 hover:bg-[#F7F0E8]/10 hover:text-white">
-                        <span class="text-xl opacity-80">✋</span> <span class="font-medium tracking-wide">ECU Tendinitis</span>
+            <div class="flex-grow overflow-y-auto nav-scroller p-4 space-y-6">
+                
+                <div>
+                    <button onclick="toggleCategory('cat-pols')" class="w-full flex items-center justify-between text-[#88AD4B] px-2 py-1 mb-2 hover:opacity-80 transition-opacity">
+                        <span class="font-bold uppercase tracking-widest text-xs">Pols & Onderarm</span>
+                        <svg id="icon-cat-pols" class="w-4 h-4 transform transition-transform duration-300 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                     </button>
-                </li>
-                <li>
-                    <button onclick="switchTab('radius')" id="nav-radius" class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-lg text-left whitespace-nowrap md:whitespace-normal transition-all duration-200 text-[#F7F0E8]/80 hover:bg-[#F7F0E8]/10 hover:text-white">
-                        <span class="text-xl opacity-80">🦴</span> <span class="font-medium tracking-wide">Radiusfractuur ORIF</span>
+                    <ul id="cat-pols" class="space-y-1 overflow-hidden transition-all duration-300">
+                        <li>
+                            <button onclick="switchTab('ecu')" id="nav-ecu" class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-lg text-left transition-all duration-200 text-[#F7F0E8]/80 hover:bg-[#F7F0E8]/10 hover:text-white">
+                                <span class="text-xl opacity-80 flex-shrink-0">✋</span> <span class="font-medium tracking-wide truncate">ECU Tendinitis</span>
+                            </button>
+                        </li>
+                        <li>
+                            <button onclick="switchTab('radius')" id="nav-radius" class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-lg text-left transition-all duration-200 text-[#F7F0E8]/80 hover:bg-[#F7F0E8]/10 hover:text-white">
+                                <span class="text-xl opacity-80 flex-shrink-0">🦴</span> <span class="font-medium tracking-wide truncate">Radiusfractuur ORIF</span>
+                            </button>
+                        </li>
+                        <li>
+                            <button onclick="switchTab('ctr')" id="nav-ctr" class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-lg text-left transition-all duration-200 text-[#F7F0E8]/80 hover:bg-[#F7F0E8]/10 hover:text-white">
+                                <span class="text-xl opacity-80 flex-shrink-0">⚡</span> <span class="font-medium tracking-wide truncate">Carpaal Tunnel</span>
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+
+                <div>
+                    <button onclick="toggleCategory('cat-duim')" class="w-full flex items-center justify-between text-[#88AD4B] px-2 py-1 mb-2 hover:opacity-80 transition-opacity">
+                        <span class="font-bold uppercase tracking-widest text-xs">Duim</span>
+                        <svg id="icon-cat-duim" class="w-4 h-4 transform transition-transform duration-300 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                     </button>
-                </li>
-                <li>
-                    <button onclick="switchTab('ctr')" id="nav-ctr" class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-lg text-left whitespace-nowrap md:whitespace-normal transition-all duration-200 text-[#F7F0E8]/80 hover:bg-[#F7F0E8]/10 hover:text-white">
-                        <span class="text-xl opacity-80">⚡</span> <span class="font-medium tracking-wide">Carpaal Tunnel</span>
+                    <ul id="cat-duim" class="space-y-1 overflow-hidden transition-all duration-300">
+                        <li>
+                            <button onclick="switchTab('quervain')" id="nav-quervain" class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-lg text-left transition-all duration-200 text-[#F7F0E8]/80 hover:bg-[#F7F0E8]/10 hover:text-white">
+                                <span class="text-xl opacity-80 flex-shrink-0">👍</span> <span class="font-medium tracking-wide truncate">De Quervain</span>
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+
+                <div>
+                    <button onclick="toggleCategory('cat-vingers')" class="w-full flex items-center justify-between text-[#88AD4B] px-2 py-1 mb-2 hover:opacity-80 transition-opacity">
+                        <span class="font-bold uppercase tracking-widest text-xs">Vingers</span>
+                        <svg id="icon-cat-vingers" class="w-4 h-4 transform transition-transform duration-300 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                     </button>
-                </li>
-                <li>
-                    <button onclick="switchTab('quervain')" id="nav-quervain" class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-lg text-left whitespace-nowrap md:whitespace-normal transition-all duration-200 text-[#F7F0E8]/80 hover:bg-[#F7F0E8]/10 hover:text-white">
-                        <span class="text-xl opacity-80">👍</span> <span class="font-medium tracking-wide">De Quervain</span>
-                    </button>
-                </li>
-                <li>
-                    <button onclick="switchTab('trigger')" id="nav-trigger" class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-lg text-left whitespace-nowrap md:whitespace-normal transition-all duration-200 text-[#F7F0E8]/80 hover:bg-[#F7F0E8]/10 hover:text-white">
-                        <span class="text-xl opacity-80">🖐️</span> <span class="font-medium tracking-wide">Triggerfinger</span>
-                    </button>
-                </li>
-                <li>
-                    <button onclick="switchTab('mallet')" id="nav-mallet" class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-lg text-left whitespace-nowrap md:whitespace-normal transition-all duration-200 text-[#F7F0E8]/80 hover:bg-[#F7F0E8]/10 hover:text-white">
-                        <span class="text-xl opacity-80">🔨</span> <span class="font-medium tracking-wide">Mallet Vinger</span>
-                    </button>
-                </li>
-            </ul>
+                    <ul id="cat-vingers" class="space-y-1 overflow-hidden transition-all duration-300">
+                        <li>
+                            <button onclick="switchTab('trigger')" id="nav-trigger" class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-lg text-left transition-all duration-200 text-[#F7F0E8]/80 hover:bg-[#F7F0E8]/10 hover:text-white">
+                                <span class="text-xl opacity-80 flex-shrink-0">🖐️</span> <span class="font-medium tracking-wide truncate">Triggerfinger</span>
+                            </button>
+                        </li>
+                        <li>
+                            <button onclick="switchTab('mallet')" id="nav-mallet" class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-lg text-left transition-all duration-200 text-[#F7F0E8]/80 hover:bg-[#F7F0E8]/10 hover:text-white">
+                                <span class="text-xl opacity-80 flex-shrink-0">🔨</span> <span class="font-medium tracking-wide truncate">Mallet Vinger</span>
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
             
-            <div class="hidden md:block p-6 mt-auto">
+            <div class="hidden md:block p-6 mt-auto flex-shrink-0">
                 <div class="bg-[#2a482b] border border-[#88AD4B]/20 rounded-lg p-4 text-xs text-[#F7F0E8]/70">
                     <strong>Masterniveau Zorg</strong><br>
                     Evidence-based richtlijnen voor integrale en deskundige beweegzorg.
@@ -117,18 +142,12 @@
             </div>
         </nav>
 
-        <!-- MAIN CONTENT AREA -->
         <main class="flex-grow p-4 md:p-8 overflow-y-auto w-full max-w-7xl mx-auto bg-[#F7F0E8]">
 
-            <!-- ========================================== -->
-            <!-- 1. ECU TENDINITIS SECTION                  -->
-            <!-- ========================================== -->
             <div id="sec-ecu" class="protocol-section hidden fade-in space-y-8">
-                <!-- Unified Brand Header met Print Knop -->
                 <header class="bg-[#355B36] rounded-2xl p-8 md:p-10 text-white shadow-xl relative overflow-hidden">
                     <div class="absolute -right-10 -top-10 w-64 h-64 bg-[#88AD4B]/20 rounded-full blur-3xl pointer-events-none"></div>
                     
-                    <!-- Print Button -->
                     <button onclick="window.print()" class="print-hidden absolute top-6 right-6 bg-white/10 hover:bg-white/20 text-white px-4 py-2.5 rounded-lg flex items-center gap-2 transition-all duration-200 border border-white/20 backdrop-blur-sm z-20 focus:ring-2 focus:ring-white/50">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path></svg>
                         <span class="text-sm font-semibold tracking-wide">Afdrukken</span>
@@ -270,7 +289,6 @@
                             </div>
                         </div>
 
-                        <!-- Esthetische Afronding -->
                         <div class="relative z-10 pl-12 mt-2 pb-4">
                             <div class="absolute left-[6px] top-1 w-8 h-8 rounded-full bg-[#88AD4B]/10 border border-[#88AD4B]/30 flex items-center justify-center text-[#88AD4B] shadow-sm ring-4 ring-[#F7F0E8] z-10">
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
@@ -284,14 +302,10 @@
             </div>
 
 
-            <!-- ========================================== -->
-            <!-- 2. RADIUSFRACTUUR ORIF SECTION             -->
-            <!-- ========================================== -->
             <div id="sec-radius" class="protocol-section hidden fade-in space-y-8">
                 <header class="bg-[#355B36] rounded-2xl p-8 md:p-10 text-white shadow-xl relative overflow-hidden">
                     <div class="absolute -right-10 -top-10 w-64 h-64 bg-[#88AD4B]/20 rounded-full blur-3xl pointer-events-none"></div>
                     
-                    <!-- Print Button -->
                     <button onclick="window.print()" class="print-hidden absolute top-6 right-6 bg-white/10 hover:bg-white/20 text-white px-4 py-2.5 rounded-lg flex items-center gap-2 transition-all duration-200 border border-white/20 backdrop-blur-sm z-20 focus:ring-2 focus:ring-white/50">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path></svg>
                         <span class="text-sm font-semibold tracking-wide">Afdrukken</span>
@@ -433,7 +447,6 @@
                             </div>
                         </div>
 
-                        <!-- Esthetische Afronding -->
                         <div class="relative z-10 pl-12 mt-2 pb-4">
                             <div class="absolute left-[6px] top-1 w-8 h-8 rounded-full bg-[#88AD4B]/10 border border-[#88AD4B]/30 flex items-center justify-center text-[#88AD4B] shadow-sm ring-4 ring-[#F7F0E8] z-10">
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
@@ -447,14 +460,10 @@
             </div>
 
 
-            <!-- ========================================== -->
-            <!-- 3. CARPAAL TUNNEL SECTION                  -->
-            <!-- ========================================== -->
             <div id="sec-ctr" class="protocol-section hidden fade-in space-y-8">
                 <header class="bg-[#355B36] rounded-2xl p-8 md:p-10 text-white shadow-xl relative overflow-hidden">
                     <div class="absolute -right-10 -top-10 w-64 h-64 bg-[#88AD4B]/20 rounded-full blur-3xl pointer-events-none"></div>
                     
-                    <!-- Print Button -->
                     <button onclick="window.print()" class="print-hidden absolute top-6 right-6 bg-white/10 hover:bg-white/20 text-white px-4 py-2.5 rounded-lg flex items-center gap-2 transition-all duration-200 border border-white/20 backdrop-blur-sm z-20 focus:ring-2 focus:ring-white/50">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path></svg>
                         <span class="text-sm font-semibold tracking-wide">Afdrukken</span>
@@ -596,7 +605,6 @@
                             </div>
                         </div>
 
-                        <!-- Esthetische Afronding -->
                         <div class="relative z-10 pl-12 mt-2 pb-4">
                             <div class="absolute left-[6px] top-1 w-8 h-8 rounded-full bg-[#88AD4B]/10 border border-[#88AD4B]/30 flex items-center justify-center text-[#88AD4B] shadow-sm ring-4 ring-[#F7F0E8] z-10">
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
@@ -609,14 +617,10 @@
                 </section>
             </div>
 
-            <!-- ========================================== -->
-            <!-- 4. DE QUERVAIN SECTION                     -->
-            <!-- ========================================== -->
             <div id="sec-quervain" class="protocol-section hidden fade-in space-y-8">
                 <header class="bg-[#355B36] rounded-2xl p-8 md:p-10 text-white shadow-xl relative overflow-hidden">
                     <div class="absolute -right-10 -top-10 w-64 h-64 bg-[#88AD4B]/20 rounded-full blur-3xl pointer-events-none"></div>
                     
-                    <!-- Print Button -->
                     <button onclick="window.print()" class="print-hidden absolute top-6 right-6 bg-white/10 hover:bg-white/20 text-white px-4 py-2.5 rounded-lg flex items-center gap-2 transition-all duration-200 border border-white/20 backdrop-blur-sm z-20 focus:ring-2 focus:ring-white/50">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path></svg>
                         <span class="text-sm font-semibold tracking-wide">Afdrukken</span>
@@ -758,9 +762,8 @@
                             </div>
                         </div>
 
-                        <!-- Esthetische Afronding -->
                         <div class="relative z-10 pl-12 mt-2 pb-4">
-                            <div class="absolute left-[6px] top-1 w-8 h-8 rounded-full bg-[#88AD4B]/10 border border-[#88AD4B]/30 flex items-center justify-center text-[#88AD4B] shadow-sm ring-4 ring-[#F7F0E8] z-10">
+                            <div class="timeline-dot absolute left-[6px] top-1 w-8 h-8 rounded-full bg-[#88AD4B]/10 border border-[#88AD4B]/30 flex items-center justify-center text-[#88AD4B] shadow-sm ring-4 ring-[#F7F0E8] z-10">
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
                             </div>
                             <div class="pt-1.5">
@@ -771,14 +774,10 @@
                 </section>
             </div>
 
-            <!-- ========================================== -->
-            <!-- 5. TRIGGERFINGER SECTION                   -->
-            <!-- ========================================== -->
             <div id="sec-trigger" class="protocol-section hidden fade-in space-y-8">
                  <header class="bg-[#355B36] rounded-2xl p-8 md:p-10 text-white shadow-xl relative overflow-hidden">
                     <div class="absolute -right-10 -top-10 w-64 h-64 bg-[#88AD4B]/20 rounded-full blur-3xl pointer-events-none"></div>
                     
-                    <!-- Print Button -->
                     <button onclick="window.print()" class="print-hidden absolute top-6 right-6 bg-white/10 hover:bg-white/20 text-white px-4 py-2.5 rounded-lg flex items-center gap-2 transition-all duration-200 border border-white/20 backdrop-blur-sm z-20 focus:ring-2 focus:ring-white/50">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path></svg>
                         <span class="text-sm font-semibold tracking-wide">Afdrukken</span>
@@ -1003,7 +1002,6 @@
                             </div>
                         </div>
 
-                        <!-- Esthetische Afronding (Brand Vinkje) -->
                         <div class="relative z-10 pl-12 mt-2 pb-4">
                             <div class="timeline-dot absolute left-[6px] top-1 w-8 h-8 rounded-full bg-[#88AD4B]/10 border border-[#88AD4B]/30 flex items-center justify-center text-[#88AD4B] shadow-sm ring-4 ring-[#F7F0E8] z-10">
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
@@ -1017,14 +1015,10 @@
                 </section>
             </div>
 
-            <!-- ========================================== -->
-            <!-- 6. MALLET VINGER SECTION                   -->
-            <!-- ========================================== -->
             <div id="sec-mallet" class="protocol-section hidden fade-in space-y-8">
                 <header class="bg-[#355B36] rounded-2xl p-8 md:p-10 text-white shadow-xl relative overflow-hidden">
                     <div class="absolute -right-10 -top-10 w-64 h-64 bg-[#88AD4B]/20 rounded-full blur-3xl pointer-events-none"></div>
                     
-                    <!-- Print Button -->
                     <button onclick="window.print()" class="print-hidden absolute top-6 right-6 bg-white/10 hover:bg-white/20 text-white px-4 py-2.5 rounded-lg flex items-center gap-2 transition-all duration-200 border border-white/20 backdrop-blur-sm z-20 focus:ring-2 focus:ring-white/50">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path></svg>
                         <span class="text-sm font-semibold tracking-wide">Afdrukken</span>
@@ -1194,7 +1188,6 @@
                             </div>
                         </div>
 
-                        <!-- Esthetische Afronding (Brand Vinkje) -->
                         <div class="relative z-10 pl-12 mt-2 pb-4">
                             <div class="timeline-dot absolute left-[6px] top-1 w-8 h-8 rounded-full bg-[#88AD4B]/10 border border-[#88AD4B]/30 flex items-center justify-center text-[#88AD4B] shadow-sm ring-4 ring-[#F7F0E8] z-10">
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
@@ -1211,7 +1204,6 @@
         </main>
     </div>
 
-    <!-- JAVASCRIPT VOOR TABS EN GRAFIEKEN -->
     <script>
         // Global Chart Defaults
         Chart.defaults.font.family = "'Inter', sans-serif";
@@ -1228,6 +1220,24 @@
         // State Management
         const chartsInitialized = { ecu: false, radius: false, ctr: false, quervain: false, trigger: false, mallet: false };
 
+        // Accordeon functie voor categorieën
+        function toggleCategory(catId) {
+            const ul = document.getElementById(catId);
+            const icon = document.getElementById('icon-' + catId);
+            
+            if (ul.style.maxHeight === '0px' || ul.style.maxHeight === '') {
+                ul.style.maxHeight = ul.scrollHeight + 'px';
+                ul.style.opacity = '1';
+                ul.style.marginTop = '0.5rem';
+                icon.classList.add('rotate-180');
+            } else {
+                ul.style.maxHeight = '0px';
+                ul.style.opacity = '0';
+                ul.style.marginTop = '0';
+                icon.classList.remove('rotate-180');
+            }
+        }
+
         function switchTab(tabId) {
             // Update Navigation UI (Brand Colors)
             document.querySelectorAll('.nav-btn').forEach(btn => {
@@ -1237,6 +1247,15 @@
             const activeBtn = document.getElementById('nav-' + tabId);
             activeBtn.classList.remove('text-[#F7F0E8]/80', 'hover:bg-[#F7F0E8]/10');
             activeBtn.classList.add('bg-[#88AD4B]', 'text-white', 'shadow-md', 'shadow-[#88AD4B]/20');
+
+            // Zorg ervoor dat de actieve categorie open blijft
+            const parentUl = activeBtn.closest('ul');
+            if (parentUl && parentUl.id.startsWith('cat-')) {
+                parentUl.style.maxHeight = '500px'; // veilige hoogte voor animatie
+                parentUl.style.opacity = '1';
+                parentUl.style.marginTop = '0.5rem';
+                document.getElementById('icon-' + parentUl.id).classList.add('rotate-180');
+            }
 
             // Hide all sections, show target
             document.querySelectorAll('.protocol-section').forEach(sec => sec.classList.add('hidden'));
@@ -1381,8 +1400,16 @@
             });
         }
 
-        // Initialize App
-        window.onload = () => switchTab('ecu');
+        // Open alle acccordeons standaard bij het laden
+        window.onload = () => {
+            ['cat-pols', 'cat-duim', 'cat-vingers'].forEach(id => {
+                const ul = document.getElementById(id);
+                ul.style.maxHeight = '500px'; 
+                ul.style.opacity = '1';
+                document.getElementById('icon-' + id).classList.add('rotate-180');
+            });
+            switchTab('ecu');
+        };
     </script>
 </body>
 </html>
