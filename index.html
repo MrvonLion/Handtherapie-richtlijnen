@@ -18,7 +18,6 @@
         @media (min-width: 768px) { .chart-container-large { height: 400px; } }
         .fade-in { animation: fadeIn 0.4s ease-out; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
-
         @media print {
             @page { margin: 15mm; size: auto; }
             body, html { height: auto !important; background-color: #ffffff !important; -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
@@ -57,11 +56,9 @@
             <div class="p-6 border-b border-[#F7F0E8]/10 flex-shrink-0">
                 <div class="flex items-center gap-3 mb-2">
                     <div class="bg-[#88AD4B]/20 p-2.5 rounded-lg text-[#88AD4B] border border-[#88AD4B]/30">
-                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path></svg>
+                        <svg class="w-7 h-7"><use href="#icon-check"></use></svg>
                     </div>
-                    <h1 class="text-lg font-extrabold tracking-tight leading-tight uppercase">
-                        Fysiotherapie <br><span class="text-[#88AD4B] font-bold">Hoogezand</span>
-                    </h1>
+                    <h1 class="text-lg font-extrabold tracking-tight leading-tight uppercase">Fysiotherapie <br><span class="text-[#88AD4B] font-bold">Hoogezand</span></h1>
                 </div>
             </div>
             
@@ -87,6 +84,7 @@
                         <svg id="icon-cat-duim" class="w-4 h-4 transform transition-transform duration-300 rotate-180"><use href="#icon-chevron"></use></svg>
                     </button>
                     <ul id="cat-duim" class="space-y-1 overflow-hidden transition-all duration-300">
+                        <li><button onclick="switchTab('duimbasis')" id="nav-duimbasis" class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-lg text-left transition-all duration-200 text-[#F7F0E8]/80 hover:bg-[#F7F0E8]/10 hover:text-white"><span class="text-xl opacity-80 flex-shrink-0">🦴</span> <span class="font-medium tracking-wide truncate">Duimbasis Fractuur</span></button></li>
                         <li><button onclick="switchTab('cmc1-cons')" id="nav-cmc1-cons" class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-lg text-left transition-all duration-200 text-[#F7F0E8]/80 hover:bg-[#F7F0E8]/10 hover:text-white"><span class="text-xl opacity-80 flex-shrink-0">👐</span> <span class="font-medium tracking-wide truncate">CMC-1 Artrose (Cons.)</span></button></li>
                         <li><button onclick="switchTab('cmc1')" id="nav-cmc1" class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-lg text-left transition-all duration-200 text-[#F7F0E8]/80 hover:bg-[#F7F0E8]/10 hover:text-white"><span class="text-xl opacity-80 flex-shrink-0">🦾</span> <span class="font-medium tracking-wide truncate">CMC-1 Artrose (Post-op)</span></button></li>
                         <li><button onclick="switchTab('quervain')" id="nav-quervain" class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-lg text-left transition-all duration-200 text-[#F7F0E8]/80 hover:bg-[#F7F0E8]/10 hover:text-white"><span class="text-xl opacity-80 flex-shrink-0">👍</span> <span class="font-medium tracking-wide truncate">De Quervain</span></button></li>
@@ -108,7 +106,7 @@
             
             <div class="hidden md:block p-6 mt-auto flex-shrink-0">
                 <div class="bg-[#2a482b] border border-[#88AD4B]/20 rounded-lg p-4 text-xs text-[#F7F0E8]/70">
-                    <strong>Masterniveau Zorg</strong><br>Evidence-based richtlijnen voor integrale en deskundige beweegzorg.
+                    <strong>Masterniveau Zorg</strong><br>Klinisch onderbouwde, uitgebreide richtlijnen.
                 </div>
             </div>
         </nav>
@@ -116,115 +114,6 @@
         <!-- MAIN CONTENT AREA -->
         <main class="flex-grow p-4 md:p-8 overflow-y-auto w-full max-w-7xl mx-auto bg-[#F7F0E8]">
 
-            <!-- ========================================== -->
-            <!-- NIEUW: CMC-1 ARTROSE (CONSERVATIEF) SECTION-->
-            <!-- ========================================== -->
-            <div id="sec-cmc1-cons" class="protocol-section hidden fade-in space-y-8">
-                <header class="bg-[#355B36] rounded-2xl p-8 md:p-10 text-white shadow-xl relative overflow-hidden">
-                    <div class="absolute -right-10 -top-10 w-64 h-64 bg-[#88AD4B]/20 rounded-full blur-3xl pointer-events-none"></div>
-                    <button onclick="window.print()" class="print-hidden absolute top-6 right-6 bg-white/10 hover:bg-white/20 text-white px-4 py-2.5 rounded-lg flex items-center gap-2 transition-all duration-200 border border-white/20 backdrop-blur-sm z-20 focus:ring-2 focus:ring-white/50">
-                        <svg class="w-5 h-5"><use href="#icon-print"></use></svg><span class="text-sm font-semibold tracking-wide">Afdrukken</span>
-                    </button>
-                    <h2 class="text-[#88AD4B] font-bold tracking-widest uppercase text-xs mb-2">Protocol 09</h2>
-                    <h1 class="text-3xl md:text-5xl font-extrabold mb-4 tracking-tight text-[#F7F0E8]">CMC-1 Artrose (Conservatief)</h1>
-                    <p class="text-lg text-[#F7F0E8]/80 max-w-3xl font-light pr-24">Conservatief beleid voor slijtage van het duimbasisgewricht. Focus op spalken, adaptatie en actieve stabiliteit.</p>
-                </header>
-                
-                <section class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div class="bg-white rounded-xl shadow-sm border border-[#F7F0E8] p-6 border-t-4 border-t-[#88AD4B]">
-                        <h3 class="text-lg font-bold mb-3 text-[#355B36]">🎯 Klinisch Beeld</h3>
-                        <ul class="space-y-2 text-sm text-slate-600">
-                            <li class="flex items-start"><svg class="w-4 h-4 text-[#88AD4B] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-check"></use></svg><span>Pijn aan de duimbasis, vooral bij knijpen, wringen en potten opendraaien.</span></li>
-                            <li class="flex items-start"><svg class="w-4 h-4 text-[#88AD4B] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-check"></use></svg><span>Vaak sprake van ochtendstijfheid, startpijn en krachtsverlies in de pinch-grip.</span></li>
-                        </ul>
-                    </div>
-                    <div class="bg-white rounded-xl shadow-sm border border-[#F7F0E8] p-6 border-t-4 border-t-[#355B36]">
-                        <h3 class="text-lg font-bold text-[#355B36] mb-3">🧬 Differentiatie</h3>
-                        <ul class="space-y-3 text-sm text-slate-700">
-                            <li class="flex items-start"><svg class="w-4 h-4 text-[#88AD4B] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-check"></use></svg><span><strong>Milde/Matige Artrose:</strong> Pijn op de voorgrond, gewricht nog stuurbaar. Focus op trainen van intrinsieke stabiliteit (APB, FDI).</span></li>
-                            <li class="flex items-start"><svg class="w-4 h-4 text-[#88AD4B] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-check"></use></svg><span><strong>Ernstige Artrose (Z-deformiteit):</strong> Subluxatie basis, overstrekt MCP. Focus ligt hierbij strikter op spalken en gewrichtsbescherming.</span></li>
-                        </ul>
-                    </div>
-                    <div class="bg-white rounded-xl shadow-sm border border-[#E7B24F]/30 p-6 border-t-4 border-t-[#E7B24F]">
-                        <h3 class="text-lg font-bold text-[#E7B24F] mb-3">🚨 CAVE</h3>
-                        <ul class="space-y-2 text-sm text-slate-700">
-                            <li class="flex items-start"><svg class="w-4 h-4 text-[#E7B24F] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-alert"></use></svg><span><strong>Tip-to-tip pinch:</strong> Vermijd zware krachten waarbij het topje van de duim direct op de wijsvinger drukt (dit luxeert het CMC-gewricht).</span></li>
-                            <li class="flex items-start"><svg class="w-4 h-4 text-[#E7B24F] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-alert"></use></svg><span><strong>Adductie contractuur:</strong> Bewaak actief de webspace tussen duim en wijsvinger om verlies van spanwijdte te voorkomen.</span></li>
-                        </ul>
-                    </div>
-                </section>
-
-                <section class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                    <div class="bg-white rounded-xl shadow-sm border border-[#F7F0E8] p-6"><h3 class="text-xl font-bold mb-4 text-[#355B36]">Behandelfocus</h3><div class="chart-container-large"><canvas id="cmc1ConsModalityChart"></canvas></div></div>
-                    <div class="bg-white rounded-xl shadow-sm border border-[#F7F0E8] p-6"><h3 class="text-xl font-bold mb-4 text-[#355B36]">Pijn vs. Belastbaarheid</h3><div class="chart-container-large"><canvas id="cmc1ConsRecoveryChart"></canvas></div></div>
-                </section>
-
-                <section class="bg-white rounded-xl shadow-sm border border-[#F7F0E8] p-6 md:p-10 mt-8">
-                    <h3 class="text-2xl font-extrabold mb-8 text-center text-[#355B36]">Het Conservatieve 3-Fasen Protocol</h3>
-                    <div class="relative max-w-5xl mx-auto">
-                        <div class="timeline-line absolute left-5 top-5 bottom-4 w-1 bg-[#88AD4B]/30 rounded-full z-0"></div>
-                        
-                        <div class="relative z-10 pl-12 pb-8">
-                            <div class="timeline-dot absolute left-[6px] top-1 w-8 h-8 rounded-full bg-[#E7B24F] flex items-center justify-center text-white font-bold text-sm shadow ring-4 ring-white">1</div>
-                            <div class="bg-[#F7F0E8]/50 border border-[#F7F0E8] rounded-xl p-6 hover:shadow-md transition-shadow">
-                                <h4 class="text-lg font-bold text-[#355B36] mb-2">Fase 1: Pijndemping & Ontlasten (Wk 0-4)</h4>
-                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                    <div class="bg-white p-4 rounded shadow-sm border-l-4 border-l-[#88AD4B]">
-                                        <h5 class="text-sm font-bold text-[#355B36] mb-2">1. Spalkbeleid</h5>
-                                        <p class="text-xs text-slate-700">Aanmeten CMC-1 brace (bijv. Push Ortho CMC of maatwerk thermoplast) in goede abductie. Draagadvies: overdag bij belastende ADL. Bij ernstige pijn ook tijdelijk nachtspalk (rustspalk) inzetten ter pijndemping.</p>
-                                    </div>
-                                    <div class="bg-white p-4 rounded shadow-sm border-l-4 border-l-[#E7B24F]">
-                                        <h5 class="text-sm font-bold text-[#355B36] mb-2">2. Gewrichtsbescherming</h5>
-                                        <p class="text-xs text-slate-700">Voorlichting en ergonomie. Analyseer de dagelijkse taken. Introduceer hulpmiddelen (zoals pottenopeners, verdikte pennen) om repetitieve en krachtige pinch-belasting te vermijden.</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="relative z-10 pl-12 pb-8">
-                            <div class="timeline-dot absolute left-[6px] top-1 w-8 h-8 rounded-full bg-[#88AD4B] flex items-center justify-center text-white font-bold text-sm shadow ring-4 ring-white">2</div>
-                            <div class="bg-[#F7F0E8]/50 border border-[#F7F0E8] rounded-xl p-6 hover:shadow-md transition-shadow">
-                                <h4 class="text-lg font-bold text-[#355B36] mb-2">Fase 2: Mobiliteit & Proprioceptie (Wk 4-8)</h4>
-                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                    <div class="bg-white p-4 rounded shadow-sm border-l-4 border-l-[#88AD4B]">
-                                        <h5 class="text-sm font-bold text-[#355B36] mb-2">1. Spierbalans herstellen</h5>
-                                        <p class="text-xs text-slate-700">Spalkgebruik geleidelijk afbouwen bij lichte taken. Start isometrische activatie van de thenar-musculatuur (M. APB) en First Dorsal Interosseus (FDI) om het MC-1 bot centraal in het zadelgewricht te 'trekken' en subluxatie tegen te gaan.</p>
-                                    </div>
-                                    <div class="bg-white p-4 rounded shadow-sm border-l-4 border-l-[#E7B24F]">
-                                        <h5 class="text-sm font-bold text-[#355B36] mb-2">2. Webspace behoud</h5>
-                                        <p class="text-xs text-slate-700">Milde, onbelaste Range of Motion oefeningen. Voorkom verstijving van de adductor pollicis (webspace massage/stretches). Oefen het maken van een 'grote C' (sleutelgreep in plaats van pincetgreep).</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="relative z-10 pl-12 pb-8">
-                            <div class="timeline-dot absolute left-[6px] top-1 w-8 h-8 rounded-full bg-[#355B36] flex items-center justify-center text-white font-bold text-sm shadow ring-4 ring-white">3</div>
-                            <div class="bg-[#F7F0E8]/50 border border-[#F7F0E8] rounded-xl p-6 hover:shadow-md transition-shadow">
-                                <h4 class="text-lg font-bold text-[#355B36] mb-2">Fase 3: Kracht & Duurzame Belasting (Wk 8+)</h4>
-                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                    <div class="bg-white p-4 rounded shadow-sm border-l-4 border-l-[#88AD4B]">
-                                        <h5 class="text-sm font-bold text-[#355B36] mb-2">1. Functioneel Belasten</h5>
-                                        <p class="text-xs text-slate-700">Dynamische krachtoefeningen (putty, elastiek) gericht op het integreren van de nieuw aangeleerde sleutelgreep in ADL-taken. Spalk wordt nu voornamelijk als 'gereedschap' ingezet tijdens zware huishoudelijke of werkgerelateerde taken.</p>
-                                    </div>
-                                    <div class="bg-white p-4 rounded shadow-sm border-l-4 border-l-[#E7B24F]">
-                                        <h5 class="text-sm font-bold text-[#355B36] mb-2">2. Lange-termijn beleid</h5>
-                                        <p class="text-xs text-slate-700">Artrose is progressief. Behandeldoel is acceptatie, pijndemping en maximaal functiebehoud. Bij blijvende, invaliderende klachten ondanks 3-6 maanden intensieve conservatieve therapie (en evt. corticosteroïdinjectie): verwijs voor operatief consult.</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="relative z-10 pl-12 mt-2 pb-4">
-                            <div class="timeline-dot absolute left-[6px] top-1 w-8 h-8 rounded-full bg-[#88AD4B]/10 border border-[#88AD4B]/30 flex items-center justify-center text-[#88AD4B] shadow-sm ring-4 ring-[#F7F0E8] z-10"><svg class="w-5 h-5"><use href="#icon-check"></use></svg></div>
-                            <div class="pt-1.5"><span class="text-[#88AD4B] font-bold tracking-widest text-sm uppercase">Revalidatie Voltooid</span></div>
-                        </div>
-                    </div>
-                </section>
-            </div>
-
-            <!-- ========================================== -->
-            <!-- OVERIGE PROTOCOLLEN BEHOUDEN -->
             <!-- 1. ECU SECTION -->
             <div id="sec-ecu" class="protocol-section hidden fade-in space-y-8">
                 <header class="bg-[#355B36] rounded-2xl p-8 md:p-10 text-white shadow-xl relative overflow-hidden">
@@ -240,22 +129,22 @@
                     <div class="bg-white rounded-xl shadow-sm border border-[#F7F0E8] p-6 border-t-4 border-t-[#88AD4B]">
                         <h3 class="text-lg font-bold mb-3 text-[#355B36]">🎯 Klinisch Beeld</h3>
                         <ul class="space-y-2 text-sm text-slate-600">
-                            <li class="flex items-start"><svg class="w-4 h-4 text-[#88AD4B] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-check"></use></svg><span><strong>Locatie:</strong> Ulnaire zijde pols, distaal van proc. styloideus ulnae.</span></li>
-                            <li class="flex items-start"><svg class="w-4 h-4 text-[#88AD4B] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-check"></use></svg><span><strong>Provocatie:</strong> Actieve ulnair deviatie + extensie (tegen weerstand).</span></li>
+                            <li class="flex items-start"><svg class="w-4 h-4 text-[#88AD4B] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-check"></use></svg><span><strong>Locatie:</strong> Pijn en zwelling gelokaliseerd aan de ulnaire zijde van de pols, direct distaal van de processus styloideus ulnae, in de 6e dorsale peeskoker.</span></li>
+                            <li class="flex items-start"><svg class="w-4 h-4 text-[#88AD4B] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-check"></use></svg><span><strong>Provocatie:</strong> De klachten verergeren sterk bij actieve ulnaire deviatie, pols extensie en supinatie (zoals bij een backhand slag of uitwringen).</span></li>
                         </ul>
                     </div>
                     <div class="bg-white rounded-xl shadow-sm border border-[#F7F0E8] p-6 border-t-4 border-t-[#355B36]">
                         <h3 class="text-lg font-bold mb-3 text-[#355B36]">🩺 Diagnostiek</h3>
                         <ul class="space-y-2 text-sm text-slate-600">
-                            <li class="flex items-start"><svg class="w-4 h-4 text-[#88AD4B] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-check"></use></svg><span><strong>ECU Synergy Test:</strong> Positief bij provocatie.</span></li>
-                            <li class="flex items-start"><svg class="w-4 h-4 text-[#88AD4B] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-check"></use></svg><span><strong>Palpatie:</strong> Drukpijn in de 6e dorsale peeskoker.</span></li>
+                            <li class="flex items-start"><svg class="w-4 h-4 text-[#88AD4B] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-check"></use></svg><span><strong>ECU Synergy Test:</strong> Betrouwbare provocatietest; patiënt spreidt vingers krachtig tegen weerstand in neutrale polsstand. Positief bij pijn ulno-dorsaal.</span></li>
+                            <li class="flex items-start"><svg class="w-4 h-4 text-[#88AD4B] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-check"></use></svg><span><strong>Palpatie:</strong> Duidelijke drukpijn en vaak crepitaties (kraken door vocht/frictie) voelbaar in het verloop van de 6e extensor loge.</span></li>
                         </ul>
                     </div>
                     <div class="bg-white rounded-xl shadow-sm border border-[#E7B24F]/30 p-6 border-t-4 border-t-[#E7B24F]">
                         <h3 class="text-lg font-bold text-[#E7B24F] mb-3">🚨 CAVE</h3>
                         <ul class="space-y-2 text-sm text-slate-700">
-                            <li class="flex items-start"><svg class="w-4 h-4 text-[#E7B24F] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-alert"></use></svg><span><strong>Subluxatie:</strong> Voel 'snapping' over ulna styloid bij pro/supinatie.</span></li>
-                            <li class="flex items-start"><svg class="w-4 h-4 text-[#E7B24F] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-alert"></use></svg><span><strong>Zenuwirritatie:</strong> Branderige pijn wijst op n. ulnaris (r. dorsalis) irritatie.</span></li>
+                            <li class="flex items-start"><svg class="w-4 h-4 text-[#E7B24F] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-alert"></use></svg><span><strong>Subluxatie:</strong> Test op structurele instabiliteit. Voel op 'snapping' van de pees over de ulna styloid bij actieve pro/supinatie in ulnaire deviatie.</span></li>
+                            <li class="flex items-start"><svg class="w-4 h-4 text-[#E7B24F] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-alert"></use></svg><span><strong>Zenuwirritatie:</strong> Branderige, uitstralende pijn wijst op secundaire irritatie van de ramus dorsalis nervus ulnaris door peesschede-zwelling.</span></li>
                         </ul>
                     </div>
                 </section>
@@ -271,9 +160,10 @@
                             <div class="timeline-dot absolute left-[6px] top-1 w-8 h-8 rounded-full bg-[#E7B24F] flex items-center justify-center text-white font-bold text-sm shadow ring-4 ring-white">1</div>
                             <div class="bg-[#F7F0E8]/50 border border-[#F7F0E8] rounded-xl p-6 hover:shadow-md transition-shadow">
                                 <h4 class="text-lg font-bold text-[#355B36] mb-2">Fase 1: Acute Fase & Immobilisatie (Wk 0-3)</h4>
+                                <p class="text-sm text-slate-600 mb-3 font-medium">Doel: Direct de-escaleren van het ontstekingsproces door mechanische spanning op de pees/subschede te minimaliseren.</p>
                                 <ul class="space-y-2 text-sm text-slate-700">
-                                    <li class="flex items-start"><svg class="w-4 h-4 text-[#88AD4B] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-check"></use></svg><span><strong>Immobilisatie:</strong> Maatwerk polsspalk of ulnar gutter. Fulltime dragen.</span></li>
-                                    <li class="flex items-start"><svg class="w-4 h-4 text-[#88AD4B] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-check"></use></svg><span><strong>Oefentherapie:</strong> Onbelast actief mobiliseren niet-betrokken gewrichten.</span></li>
+                                    <li class="flex items-start"><svg class="w-4 h-4 text-[#88AD4B] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-check"></use></svg><span><strong>Immobilisatie:</strong> Maatwerk polsspalk of ulnar gutter. Pols strikt in 15-20° dorsaalflexie en lichte (10°) ulnaire deviatie. Deze houding ontspant de pees maximaal. Fulltime dragen, 24/7.</span></li>
+                                    <li class="flex items-start"><svg class="w-4 h-4 text-[#88AD4B] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-check"></use></svg><span><strong>Oefentherapie (Onbelast):</strong> Voorkom stijfheid door actieve, onbelaste Range of Motion (AROM) van vingers en elleboog. Start lichte isometrische (statische) aanspanning van de ECU pees IN de spalk, uitsluitend als dit 100% pijnvrij is.</span></li>
                                 </ul>
                             </div>
                         </div>
@@ -281,9 +171,10 @@
                             <div class="timeline-dot absolute left-[6px] top-1 w-8 h-8 rounded-full bg-[#88AD4B] flex items-center justify-center text-white font-bold text-sm shadow ring-4 ring-white">2</div>
                             <div class="bg-[#F7F0E8]/50 border border-[#F7F0E8] rounded-xl p-6 hover:shadow-md transition-shadow">
                                 <h4 class="text-lg font-bold text-[#355B36] mb-2">Fase 2: Gecontroleerde Mobilisatie (Wk 3-6)</h4>
+                                <p class="text-sm text-slate-600 mb-3 font-medium">Doel: Verklevingen voorkomen en weefseltolerantie langzaam opbouwen zonder her-irritatie.</p>
                                 <ul class="space-y-2 text-sm text-slate-700">
-                                    <li class="flex items-start"><svg class="w-4 h-4 text-[#88AD4B] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-check"></use></svg><span><strong>Spalkbeleid:</strong> Geleidelijk afbouwen overdag in veilige omstandigheden.</span></li>
-                                    <li class="flex items-start"><svg class="w-4 h-4 text-[#88AD4B] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-check"></use></svg><span><strong>Belasting:</strong> Start onbelast AROM en lichte concentrische versterking.</span></li>
+                                    <li class="flex items-start"><svg class="w-4 h-4 text-[#88AD4B] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-check"></use></svg><span><strong>Spalkbeleid Afbouwen:</strong> Bij pijnreductie spalk overdag stapsgewijs afbouwen in veilige omgevingen. Bij risicovolle (onverwachte) taken, slaap en zwaardere ADL de spalk nog consequent dragen.</span></li>
+                                    <li class="flex items-start"><svg class="w-4 h-4 text-[#88AD4B] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-check"></use></svg><span><strong>Gecontroleerd Belasten:</strong> Start AROM buiten de spalk (flex/ext, langzaam pro/supinatie). Vanaf week 4-5 lichte, concentrische krachttraining met putty/elastiek. Pijngrens is leidend (VAS < 4 acceptabel mits vlot herstel).</span></li>
                                 </ul>
                             </div>
                         </div>
@@ -291,9 +182,10 @@
                             <div class="timeline-dot absolute left-[6px] top-1 w-8 h-8 rounded-full bg-[#355B36] flex items-center justify-center text-white font-bold text-sm shadow ring-4 ring-white">3</div>
                             <div class="bg-[#F7F0E8]/50 border border-[#F7F0E8] rounded-xl p-6 hover:shadow-md transition-shadow">
                                 <h4 class="text-lg font-bold text-[#355B36] mb-2">Fase 3: Remodellering & Belastbaarheid (Wk 6-12)</h4>
+                                <p class="text-sm text-slate-600 mb-3 font-medium">Doel: Structurele versterking en hermodellering van het collageen in de pees voor duurzaam herstel.</p>
                                 <ul class="space-y-2 text-sm text-slate-700">
-                                    <li class="flex items-start"><svg class="w-4 h-4 text-[#88AD4B] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-check"></use></svg><span><strong>Excentrische training:</strong> Essentieel voor tendinopathie-herstel.</span></li>
-                                    <li class="flex items-start"><svg class="w-4 h-4 text-[#88AD4B] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-check"></use></svg><span><strong>Stabiliteit:</strong> Proprioceptieve training (bijv. Bodyblade) voor coördinatie.</span></li>
+                                    <li class="flex items-start"><svg class="w-4 h-4 text-[#88AD4B] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-check"></use></svg><span><strong>Excentrische Training:</strong> De gouden standaard. Trage en gecontroleerde excentrische oefeningen (afremmen van gewicht tijdens verlengen van pees) met theraband of Flexbar. Vermindert neovascularisatie.</span></li>
+                                    <li class="flex items-start"><svg class="w-4 h-4 text-[#88AD4B] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-check"></use></svg><span><strong>Proprioceptie & Stabiliteit:</strong> Voeg ritmische stabilisatie toe. Gebruik een Bodyblade of Powerball voor snelle, reactieve sturing van de pols. Spalkgebruik is nu geminimaliseerd.</span></li>
                                 </ul>
                             </div>
                         </div>
@@ -301,9 +193,10 @@
                             <div class="timeline-dot absolute left-[6px] top-1 w-8 h-8 rounded-full bg-[#355B36] flex items-center justify-center text-white font-bold text-sm shadow ring-4 ring-white">4</div>
                             <div class="bg-[#F7F0E8]/50 border border-[#F7F0E8] rounded-xl p-6 hover:shadow-md transition-shadow">
                                 <h4 class="text-lg font-bold text-[#355B36] mb-2">Fase 4: Return to Play/Work (Wk 12+)</h4>
+                                <p class="text-sm text-slate-600 mb-3 font-medium">Doel: Veilige en naadloze terugkeer naar maximale, sport- of werkspecifieke piekbelastingen.</p>
                                 <ul class="space-y-2 text-sm text-slate-700">
-                                    <li class="flex items-start"><svg class="w-4 h-4 text-[#88AD4B] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-check"></use></svg><span><strong>Specifieke Training:</strong> Sportspecifieke plyometrie en ketentraining.</span></li>
-                                    <li class="flex items-start"><svg class="w-4 h-4 text-[#88AD4B] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-check"></use></svg><span><strong>Optimalisatie:</strong> Verbeteren van gripkracht gecombineerd met asymmetrische belasting.</span></li>
+                                    <li class="flex items-start"><svg class="w-4 h-4 text-[#88AD4B] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-check"></use></svg><span><strong>Keten- en Plyometrie:</strong> Versterk schouder, elleboog en core-stabiliteit om overcompensatie in de pols te voorkomen. Introduceer plyometrische, snelle reactieve stoten.</span></li>
+                                    <li class="flex items-start"><svg class="w-4 h-4 text-[#88AD4B] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-check"></use></svg><span><strong>Sportspecifieke Translatie:</strong> Begeleid de transitie naar de werkvloer. Optimaliseer de asymmetrische gripkracht nodig bij racket-sporten, golf of zware arbeid. Bij stagnering TFCC-letsel uitsluiten.</span></li>
                                 </ul>
                             </div>
                         </div>
@@ -317,7 +210,6 @@
 
             <!-- 2. RADIUSFRACTUUR SECTION -->
             <div id="sec-radius" class="protocol-section hidden fade-in space-y-8">
-                <!-- ... Same compact structure for Radius as before ... -->
                 <header class="bg-[#355B36] rounded-2xl p-8 md:p-10 text-white shadow-xl relative overflow-hidden">
                     <div class="absolute -right-10 -top-10 w-64 h-64 bg-[#88AD4B]/20 rounded-full blur-3xl pointer-events-none"></div>
                     <button onclick="window.print()" class="print-hidden absolute top-6 right-6 bg-white/10 hover:bg-white/20 text-white px-4 py-2.5 rounded-lg flex items-center gap-2 transition-all duration-200 border border-white/20 backdrop-blur-sm z-20 focus:ring-2 focus:ring-white/50">
@@ -325,28 +217,28 @@
                     </button>
                     <h2 class="text-[#88AD4B] font-bold tracking-widest uppercase text-xs mb-2">Protocol 02</h2>
                     <h1 class="text-3xl md:text-5xl font-extrabold mb-4 tracking-tight text-[#F7F0E8]">Radiusfractuur ORIF</h1>
-                    <p class="text-lg text-[#F7F0E8]/80 max-w-3xl font-light pr-24">Post-op revalidatie na volaire plaatosteosynthese. Focus op vroege mobilisatie en weefselherstel.</p>
+                    <p class="text-lg text-[#F7F0E8]/80 max-w-3xl font-light pr-24">Post-operatieve revalidatie na volaire plaatosteosynthese (ORIF) van de distale radius. Focus op oedeembeheer en vroege weefselmobilisatie.</p>
                 </header>
                 <section class="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <div class="bg-white rounded-xl shadow-sm border border-[#F7F0E8] p-6 border-t-4 border-t-[#88AD4B]">
                         <h3 class="text-lg font-bold mb-3 text-[#355B36]">📋 Post-Op Focus</h3>
                         <ul class="space-y-2 text-sm text-slate-600">
-                            <li class="flex items-start"><svg class="w-4 h-4 text-[#88AD4B] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-check"></use></svg><span><strong>Oefenstabiel:</strong> Door plaatfixatie is onbelaste AROM pols vaak al binnen 3-5 dagen toegestaan.</span></li>
-                            <li class="flex items-start"><svg class="w-4 h-4 text-[#88AD4B] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-check"></use></svg><span><strong>Oedeem:</strong> Elevatie en 'pompen' cruciaal in week 1-2.</span></li>
+                            <li class="flex items-start"><svg class="w-4 h-4 text-[#88AD4B] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-check"></use></svg><span><strong>Oefenstabiel:</strong> Door inwendige plaatfixatie is gecontroleerde, onbelaste AROM van de pols vaak al binnen 3 tot 5 dagen veilig toegestaan.</span></li>
+                            <li class="flex items-start"><svg class="w-4 h-4 text-[#88AD4B] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-check"></use></svg><span><strong>Oedeembeheer:</strong> Flinke post-operatieve zwelling beperkt de weefselglijding aanzienlijk. Actief spierpompen en hooghouden is de eerste 2 weken prioritair.</span></li>
                         </ul>
                     </div>
                     <div class="bg-white rounded-xl shadow-sm border border-[#F7F0E8] p-6 border-t-4 border-t-[#355B36]">
                         <h3 class="text-lg font-bold mb-3 text-[#355B36]">🔍 Controles</h3>
                         <ul class="space-y-2 text-sm text-slate-600">
-                            <li class="flex items-start"><svg class="w-4 h-4 text-[#88AD4B] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-check"></use></svg><span><strong>TGE's:</strong> Volledige vuist en volledige extensie vingers controleren.</span></li>
-                            <li class="flex items-start"><svg class="w-4 h-4 text-[#88AD4B] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-check"></use></svg><span><strong>N. Medianus:</strong> Let op symptomen van post-operatief CTS.</span></li>
+                            <li class="flex items-start"><svg class="w-4 h-4 text-[#88AD4B] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-check"></use></svg><span><strong>Peesglijden:</strong> Kan de patiënt een volledige vuist maken en de vingers volledig strekken? Dit test de flexor- en extensorglijding.</span></li>
+                            <li class="flex items-start"><svg class="w-4 h-4 text-[#88AD4B] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-check"></use></svg><span><strong>Zenuwfunctie:</strong> Controleer actief op tintelingen in de Medianus regio (post-operatief CTS door bloeding of oedeem komt frequent voor).</span></li>
                         </ul>
                     </div>
                     <div class="bg-white rounded-xl shadow-sm border border-[#E7B24F]/30 p-6 border-t-4 border-t-[#E7B24F]">
                         <h3 class="text-lg font-bold text-[#E7B24F] mb-3">🚨 CAVE</h3>
                         <ul class="space-y-2 text-sm text-slate-700">
-                            <li class="flex items-start"><svg class="w-4 h-4 text-[#E7B24F] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-alert"></use></svg><span><strong>CRPS:</strong> Wees alert op disproportionele pijn en temperatuurverschillen.</span></li>
-                            <li class="flex items-start"><svg class="w-4 h-4 text-[#E7B24F] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-alert"></use></svg><span><strong>EPL Ruptuur:</strong> Plotseling verlies van actieve extensie IP duim = direct overleg!</span></li>
+                            <li class="flex items-start"><svg class="w-4 h-4 text-[#E7B24F] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-alert"></use></svg><span><strong>CRPS:</strong> Wees extreem alert op rode vlaggen voor Complex Regionaal Pijn Syndroom (glanzende strakke huid, disproportionele pijn, temperatuurveranderingen).</span></li>
+                            <li class="flex items-start"><svg class="w-4 h-4 text-[#E7B24F] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-alert"></use></svg><span><strong>EPL Ruptuur:</strong> Plotseling onvermogen om het IP-gewricht van de duim actief te strekken kan wijzen op een peesruptuur door frictie over schroeven.</span></li>
                         </ul>
                     </div>
                 </section>
@@ -361,40 +253,44 @@
                         <div class="relative z-10 pl-12 pb-8">
                             <div class="timeline-dot absolute left-[6px] top-1 w-8 h-8 rounded-full bg-[#E7B24F] flex items-center justify-center text-white font-bold text-sm shadow ring-4 ring-white">1</div>
                             <div class="bg-[#F7F0E8]/50 border border-[#F7F0E8] rounded-xl p-6 hover:shadow-md transition-shadow">
-                                <h4 class="text-lg font-bold text-[#355B36] mb-2">Fase 1: Vroege Mobilisatie (Wk 0-2)</h4>
+                                <h4 class="text-lg font-bold text-[#355B36] mb-2">Fase 1: Vroege Mobilisatie & Ontzwellen (Wk 0-2)</h4>
+                                <p class="text-sm text-slate-600 mb-3 font-medium">Doel: Wondgenezing ondersteunen, forse oedeemvorming bestrijden en contracturen van vingers voorkomen.</p>
                                 <ul class="space-y-2 text-sm text-slate-700">
-                                    <li class="flex items-start"><svg class="w-4 h-4 text-[#88AD4B] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-check"></use></svg><span><strong>Oedeembeheer:</strong> Hand consequent hoog houden en TGE's vingers uitvoeren.</span></li>
-                                    <li class="flex items-start"><svg class="w-4 h-4 text-[#88AD4B] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-check"></use></svg><span><strong>Mobilisatie Pols:</strong> Indien oefenstabiel: start onbelaste AROM pols.</span></li>
+                                    <li class="flex items-start"><svg class="w-4 h-4 text-[#88AD4B] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-check"></use></svg><span><strong>Oedeem- en Peesmanagement:</strong> Elevatie van de hand en compressie (Coban) toepassen. Strikte Tendon Gliding Exercises (TGE's) minimaal 5x/dag uitvoeren ter preventie van peesadhesies rondom de fractuurzone.</span></li>
+                                    <li class="flex items-start"><svg class="w-4 h-4 text-[#88AD4B] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-check"></use></svg><span><strong>Mobilisatie Pols:</strong> Indien door arts oefenstabiel verklaard: start voorzichtige, onbelaste AROM pols. Elke vorm van passief forceren is ten strengste verboden wegens weefselkwetsbaarheid en risico op materiaaluitbraak!</span></li>
                                 </ul>
                             </div>
                         </div>
                         <div class="relative z-10 pl-12 pb-8">
                             <div class="timeline-dot absolute left-[6px] top-1 w-8 h-8 rounded-full bg-[#88AD4B] flex items-center justify-center text-white font-bold text-sm shadow ring-4 ring-white">2</div>
                             <div class="bg-[#F7F0E8]/50 border border-[#F7F0E8] rounded-xl p-6 hover:shadow-md transition-shadow">
-                                <h4 class="text-lg font-bold text-[#355B36] mb-2">Fase 2: ROM & Littekenbehandeling (Wk 2-6)</h4>
+                                <h4 class="text-lg font-bold text-[#355B36] mb-2">Fase 2: ROM Uitbreiding & Littekenbehandeling (Wk 2-6)</h4>
+                                <p class="text-sm text-slate-600 mb-3 font-medium">Doel: Glijvlakken van weefsels herstellen, litteken weefsel soepel maken en mobiliteit verruimen.</p>
                                 <ul class="space-y-2 text-sm text-slate-700">
-                                    <li class="flex items-start"><svg class="w-4 h-4 text-[#88AD4B] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-check"></use></svg><span><strong>Litteken:</strong> Start massage zodra de wond gesloten is. Spalk overdag afbouwen.</span></li>
-                                    <li class="flex items-start"><svg class="w-4 h-4 text-[#88AD4B] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-check"></use></svg><span><strong>Mobilisatie:</strong> Uitbreiden AROM. GEEN zware weerstand of afsteunen!</span></li>
+                                    <li class="flex items-start"><svg class="w-4 h-4 text-[#88AD4B] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-check"></use></svg><span><strong>Wondzorg & Litteken:</strong> Zodra hechtingen eruit zijn en wond dicht is, start intensieve littekenmassage (dwarse fricties/huidrollen) om verkleving met de onderliggende fascie te doorbreken. Spalk overdag stapsgewijs afbouwen.</span></li>
+                                    <li class="flex items-start"><svg class="w-4 h-4 text-[#88AD4B] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-check"></use></svg><span><strong>Mobilisatie Uitbreiden:</strong> Verruim AROM flexie/extensie en bouw geleidelijk pro- en supinatie op. Axiaal steunen of zware trek/duw-weerstand is nog niet toegestaan ter bescherming van het zich vormende calluskraakbeen.</span></li>
                                 </ul>
                             </div>
                         </div>
                         <div class="relative z-10 pl-12 pb-8">
                             <div class="timeline-dot absolute left-[6px] top-1 w-8 h-8 rounded-full bg-[#355B36] flex items-center justify-center text-white font-bold text-sm shadow ring-4 ring-white">3</div>
                             <div class="bg-[#F7F0E8]/50 border border-[#F7F0E8] rounded-xl p-6 hover:shadow-md transition-shadow">
-                                <h4 class="text-lg font-bold text-[#355B36] mb-2">Fase 3: Consolidatie & Kracht (Wk 6-12)</h4>
+                                <h4 class="text-lg font-bold text-[#355B36] mb-2">Fase 3: Consolidatie, Opbouw & Kracht (Wk 6-12)</h4>
+                                <p class="text-sm text-slate-600 mb-3 font-medium">Doel: Na klinische consolidatie (botgenezing) verschuift de focus naar weefselbelasting en spierkracht.</p>
                                 <ul class="space-y-2 text-sm text-slate-700">
-                                    <li class="flex items-start"><svg class="w-4 h-4 text-[#88AD4B] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-check"></use></svg><span><strong>Mobilisatie:</strong> Indien AROM stagneert, mag PROM voorzichtig worden geïntroduceerd.</span></li>
-                                    <li class="flex items-start"><svg class="w-4 h-4 text-[#88AD4B] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-check"></use></svg><span><strong>Krachtopbouw:</strong> Starten met progressieve weerstand en axiaal afsteunen.</span></li>
+                                    <li class="flex items-start"><svg class="w-4 h-4 text-[#88AD4B] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-check"></use></svg><span><strong>Intensiveren ROM:</strong> Indien AROM stagneert, pas Active-Assisted en zeer voorzichtige PROM toe. Overweeg inzet van statisch-progressieve nachtspalken bij hardnekkige, rigide gewrichtscontracturen.</span></li>
+                                    <li class="flex items-start"><svg class="w-4 h-4 text-[#88AD4B] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-check"></use></svg><span><strong>Kracht & Gewichtsdragen:</strong> Start gerichte progressieve weerstandstraining (van isometrisch naar isotoon) met dumbbells/putty. Initieer veilig axiaal gewichtsdragen: van steunen op hoge tafel naar muur push-ups en later op de grond.</span></li>
                                 </ul>
                             </div>
                         </div>
                         <div class="relative z-10 pl-12 pb-8">
                             <div class="timeline-dot absolute left-[6px] top-1 w-8 h-8 rounded-full bg-[#355B36] flex items-center justify-center text-white font-bold text-sm shadow ring-4 ring-white">4</div>
                             <div class="bg-[#F7F0E8]/50 border border-[#F7F0E8] rounded-xl p-6 hover:shadow-md transition-shadow">
-                                <h4 class="text-lg font-bold text-[#355B36] mb-2">Fase 4: Remodellering & Functionaliteit (Wk 12-26+)</h4>
+                                <h4 class="text-lg font-bold text-[#355B36] mb-2">Fase 4: Volledig Functieherstel & Remodellering (Wk 12-26+)</h4>
+                                <p class="text-sm text-slate-600 mb-3 font-medium">Doel: Naadloze terugkeer naar het hoogste individuele niveau van belastbaarheid (zwaar werk, topsport).</p>
                                 <ul class="space-y-2 text-sm text-slate-700">
-                                    <li class="flex items-start"><svg class="w-4 h-4 text-[#88AD4B] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-check"></use></svg><span><strong>Zware Belasting:</strong> Volledige push-ups en sporthervatting toegestaan.</span></li>
-                                    <li class="flex items-start"><svg class="w-4 h-4 text-[#88AD4B] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-check"></use></svg><span><strong>Verwachtingsmanagement:</strong> Lichte beperkingen eindstanden kunnen tot 1 jaar duren.</span></li>
+                                    <li class="flex items-start"><svg class="w-4 h-4 text-[#88AD4B] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-check"></use></svg><span><strong>Volledige Weefselbelasting:</strong> Radius is massief geconsolideerd. Zware krachttraining, plyometrie, volledige push-ups, en high-impact contact sporten zijn toegestaan. Begeleid functionele transitie.</span></li>
+                                    <li class="flex items-start"><svg class="w-4 h-4 text-[#88AD4B] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-check"></use></svg><span><strong>Verwachtingsmanagement:</strong> Informeer patiënt eerlijk dat lichte beperkingen in eindgraden, ongemak bij weersomslagen en ochtendstijfheid nog normaal zijn. Bindweefsel hermodelleert zich nog tot 1 a 2 jaar.</span></li>
                                 </ul>
                             </div>
                         </div>
@@ -408,7 +304,6 @@
 
             <!-- 3. CTR SECTION -->
             <div id="sec-ctr" class="protocol-section hidden fade-in space-y-8">
-                <!-- ... Same compact structure for CTR as before ... -->
                 <header class="bg-[#355B36] rounded-2xl p-8 md:p-10 text-white shadow-xl relative overflow-hidden">
                     <div class="absolute -right-10 -top-10 w-64 h-64 bg-[#88AD4B]/20 rounded-full blur-3xl pointer-events-none"></div>
                     <button onclick="window.print()" class="print-hidden absolute top-6 right-6 bg-white/10 hover:bg-white/20 text-white px-4 py-2.5 rounded-lg flex items-center gap-2 transition-all duration-200 border border-white/20 backdrop-blur-sm z-20 focus:ring-2 focus:ring-white/50">
@@ -416,28 +311,28 @@
                     </button>
                     <h2 class="text-[#88AD4B] font-bold tracking-widest uppercase text-xs mb-2">Protocol 03</h2>
                     <h1 class="text-3xl md:text-5xl font-extrabold mb-4 tracking-tight text-[#F7F0E8]">Carpaal Tunnel Release (CTR)</h1>
-                    <p class="text-lg text-[#F7F0E8]/80 max-w-3xl font-light pr-24">Postoperatief protocol met een snelle doorstroom naar functionaliteit.</p>
+                    <p class="text-lg text-[#F7F0E8]/80 max-w-3xl font-light pr-24">Postoperatief protocol ter decompressie van de N. Medianus, met snelle doorstroom naar functionaliteit.</p>
                 </header>
                 <section class="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <div class="bg-white rounded-xl shadow-sm border border-[#F7F0E8] p-6 border-t-4 border-t-[#88AD4B]">
                         <h3 class="text-lg font-bold mb-3 text-[#355B36]">📋 Post-Op Focus</h3>
                         <ul class="space-y-2 text-sm text-slate-600">
-                            <li class="flex items-start"><svg class="w-4 h-4 text-[#88AD4B] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-check"></use></svg><span><strong>Glijden:</strong> Vroege Nerve Gliding en TGE's zijn cruciaal.</span></li>
-                            <li class="flex items-start"><svg class="w-4 h-4 text-[#88AD4B] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-check"></use></svg><span><strong>Pillar Pain:</strong> Pijn over thenar/hypothenar is normaal.</span></li>
+                            <li class="flex items-start"><svg class="w-4 h-4 text-[#88AD4B] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-check"></use></svg><span><strong>Glijden:</strong> Vroege Nerve Gliding en TGE's zijn direct cruciaal om vastgroeien van de N. Medianus en buigpezen te voorkomen.</span></li>
+                            <li class="flex items-start"><svg class="w-4 h-4 text-[#88AD4B] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-check"></use></svg><span><strong>Pillar Pain:</strong> De typische zeurende pijn over de thenar en hypothenar is een fysiologisch normaal proces na doorsnijden dwarsbandje.</span></li>
                         </ul>
                     </div>
                     <div class="bg-white rounded-xl shadow-sm border border-[#F7F0E8] p-6 border-t-4 border-t-[#355B36]">
                         <h3 class="text-lg font-bold mb-3 text-[#355B36]">🔍 Controles</h3>
                         <ul class="space-y-2 text-sm text-slate-600">
-                            <li class="flex items-start"><svg class="w-4 h-4 text-[#88AD4B] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-check"></use></svg><span><strong>Litteken:</strong> Neiging tot overmatig verharden?</span></li>
-                            <li class="flex items-start"><svg class="w-4 h-4 text-[#88AD4B] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-check"></use></svg><span><strong>M. APB:</strong> Evalueer motorisch herstel oppositie.</span></li>
+                            <li class="flex items-start"><svg class="w-4 h-4 text-[#88AD4B] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-check"></use></svg><span><strong>Litteken:</strong> Palpeer wekelijks op diepe verhardingen of bindweefselstrengen die de buig- of strekfunctie in de vingers kunnen beperken.</span></li>
+                            <li class="flex items-start"><svg class="w-4 h-4 text-[#88AD4B] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-check"></use></svg><span><strong>M. APB:</strong> Evalueer of de thenar-musculatuur (bij pre-operatieve atrofie) zich motorisch zichtbaar begint te herstellen.</span></li>
                         </ul>
                     </div>
                     <div class="bg-white rounded-xl shadow-sm border border-[#E7B24F]/30 p-6 border-t-4 border-t-[#E7B24F]">
                         <h3 class="text-lg font-bold text-[#E7B24F] mb-3">🚨 CAVE</h3>
                         <ul class="space-y-2 text-sm text-slate-700">
-                            <li class="flex items-start"><svg class="w-4 h-4 text-[#E7B24F] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-alert"></use></svg><span><strong>Infectie:</strong> Toenemende roodheid/kloppende pijn.</span></li>
-                            <li class="flex items-start"><svg class="w-4 h-4 text-[#E7B24F] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-alert"></use></svg><span><strong>Incomplete Release:</strong> Geen verandering in tintelingen.</span></li>
+                            <li class="flex items-start"><svg class="w-4 h-4 text-[#E7B24F] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-alert"></use></svg><span><strong>Infectie:</strong> Toenemende of abnormale roodheid, warmte of fel kloppende pijn binnen de eerste 3 tot 7 dagen vereist directe actie.</span></li>
+                            <li class="flex items-start"><svg class="w-4 h-4 text-[#E7B24F] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-alert"></use></svg><span><strong>Incomplete Release:</strong> Indien de zenuwtintelingen in de eerste 3 vingers geen enkele procent afnemen na operatie = her-evaluatie arts.</span></li>
                         </ul>
                     </div>
                 </section>
@@ -452,20 +347,22 @@
                         <div class="relative z-10 pl-12 pb-8">
                             <div class="timeline-dot absolute left-[6px] top-1 w-8 h-8 rounded-full bg-[#E7B24F] flex items-center justify-center text-white font-bold text-sm shadow ring-4 ring-white">1</div>
                             <div class="bg-[#F7F0E8]/50 border border-[#F7F0E8] rounded-xl p-6 hover:shadow-md transition-shadow">
-                                <h4 class="text-lg font-bold text-[#355B36] mb-2">Fase 1: Wondgenezing & Vroege Mobilisatie (Wk 0-2)</h4>
+                                <h4 class="text-lg font-bold text-[#355B36] mb-2">Fase 1: Wondgenezing & Vroege Zenuwmobilisatie (Wk 0-2)</h4>
+                                <p class="text-sm text-slate-600 mb-3 font-medium">Doel: Voorkomen van verkleving van de gedecomprimeerde zenuw in het verse chirurgische wondbed.</p>
                                 <ul class="space-y-2 text-sm text-slate-700">
-                                    <li class="flex items-start"><svg class="w-4 h-4 text-[#88AD4B] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-check"></use></svg><span><strong>Oefeningen:</strong> Vingers direct actief onbelast bewegen. Focus op TGE's.</span></li>
-                                    <li class="flex items-start"><svg class="w-4 h-4 text-[#88AD4B] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-check"></use></svg><span><strong>Beperkingen:</strong> Geen zwaar tillen of afsteunen.</span></li>
+                                    <li class="flex items-start"><svg class="w-4 h-4 text-[#88AD4B] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-check"></use></svg><span><strong>Vroege Oefeningen:</strong> Drukverband mag na 2-3 dagen af; dek af met luchtige pleister. Direct actief onbelast bewegen vingers. Focus op N. Medianus Nerve Gliding en TGE's (geen agressieve stretch).</span></li>
+                                    <li class="flex items-start"><svg class="w-4 h-4 text-[#88AD4B] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-check"></use></svg><span><strong>Beperkingen:</strong> Geen kracht of zwaar tillen. Niet afsteunen op de geopereerde handpalm. Diepe, gecombineerde polsextensie met kracht vermijden wegens tractie op het helende ligament.</span></li>
                                 </ul>
                             </div>
                         </div>
                         <div class="relative z-10 pl-12 pb-8">
                             <div class="timeline-dot absolute left-[6px] top-1 w-8 h-8 rounded-full bg-[#88AD4B] flex items-center justify-center text-white font-bold text-sm shadow ring-4 ring-white">2</div>
                             <div class="bg-[#F7F0E8]/50 border border-[#F7F0E8] rounded-xl p-6 hover:shadow-md transition-shadow">
-                                <h4 class="text-lg font-bold text-[#355B36] mb-2">Fase 2: Litteken, Pillar Pain & Opbouw ROM (Wk 2-4)</h4>
+                                <h4 class="text-lg font-bold text-[#355B36] mb-2">Fase 2: Littekenmanagement & Pillar Pain (Wk 2-4)</h4>
+                                <p class="text-sm text-slate-600 mb-3 font-medium">Doel: Optimaliseren van weefselkwaliteit (handpalm soepel maken) en stapsgewijs lichte ADL hervatten.</p>
                                 <ul class="space-y-2 text-sm text-slate-700">
-                                    <li class="flex items-start"><svg class="w-4 h-4 text-[#88AD4B] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-check"></use></svg><span><strong>Litteken:</strong> Start intensieve littekenmassage, dwarse fricties.</span></li>
-                                    <li class="flex items-start"><svg class="w-4 h-4 text-[#88AD4B] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-check"></use></svg><span><strong>Pillar Pain:</strong> Lichte ADL hervatten op geleide van pijn.</span></li>
+                                    <li class="flex items-start"><svg class="w-4 h-4 text-[#88AD4B] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-check"></use></svg><span><strong>Littekentherapie:</strong> Na verwijderen hechtingen intensieve littekenmassage en dwarse fricties (DTF) starten, plus tactiele desensibilisatie met texturen om neurogene overgevoeligheid te dimmen.</span></li>
+                                    <li class="flex items-start"><svg class="w-4 h-4 text-[#88AD4B] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-check"></use></svg><span><strong>Pillar Pain:</strong> De veranderde weefselspanning geeft klassieke 'Pillar Pain'. Adviseer een beschermpad of fietshandschoen voor meer comfort. Lichte ADL-taken kunnen naar geleide van pijn worden hervat.</span></li>
                                 </ul>
                             </div>
                         </div>
@@ -473,9 +370,10 @@
                             <div class="timeline-dot absolute left-[6px] top-1 w-8 h-8 rounded-full bg-[#355B36] flex items-center justify-center text-white font-bold text-sm shadow ring-4 ring-white">3</div>
                             <div class="bg-[#F7F0E8]/50 border border-[#F7F0E8] rounded-xl p-6 hover:shadow-md transition-shadow">
                                 <h4 class="text-lg font-bold text-[#355B36] mb-2">Fase 3: Opbouw Kracht & Volledig Belasten (Wk 4+)</h4>
+                                <p class="text-sm text-slate-600 mb-3 font-medium">Doel: Herstel van initieel knijpkrachtverlies en hervatting van zware en repetitieve (werk)taken.</p>
                                 <ul class="space-y-2 text-sm text-slate-700">
-                                    <li class="flex items-start"><svg class="w-4 h-4 text-[#88AD4B] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-check"></use></svg><span><strong>Krachttraining:</strong> Start met Theraputty en isometrie.</span></li>
-                                    <li class="flex items-start"><svg class="w-4 h-4 text-[#88AD4B] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-check"></use></svg><span><strong>Werk hervatten:</strong> Hervatten trillende gereedschappen.</span></li>
+                                    <li class="flex items-start"><svg class="w-4 h-4 text-[#88AD4B] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-check"></use></svg><span><strong>Krachttraining:</strong> Door klieven retinaculum verandert de mechanische werklijn van buigpezen (tijdelijk krachtsverlies). Start systematisch met Theraputty en knijpkrachtversterking. Voorzichtig axiaal steunen op handpalm opbouwen.</span></li>
+                                    <li class="flex items-start"><svg class="w-4 h-4 text-[#88AD4B] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-check"></use></svg><span><strong>Groot Herstel:</strong> Hervatten van blootstelling aan o.a. trillende gereedschappen. Informeer dat zenuwschade soms traag herstelt ("ontwaken"). Maximale bruto knijpkracht hermodelleert en piekt pas na 3 tot 6 maanden!</span></li>
                                 </ul>
                             </div>
                         </div>
@@ -489,7 +387,6 @@
 
             <!-- 4. DE QUERVAIN SECTION -->
             <div id="sec-quervain" class="protocol-section hidden fade-in space-y-8">
-                <!-- ... Same compact structure for Quervain as before ... -->
                 <header class="bg-[#355B36] rounded-2xl p-8 md:p-10 text-white shadow-xl relative overflow-hidden">
                     <div class="absolute -right-10 -top-10 w-64 h-64 bg-[#88AD4B]/20 rounded-full blur-3xl pointer-events-none"></div>
                     <button onclick="window.print()" class="print-hidden absolute top-6 right-6 bg-white/10 hover:bg-white/20 text-white px-4 py-2.5 rounded-lg flex items-center gap-2 transition-all duration-200 border border-white/20 backdrop-blur-sm z-20 focus:ring-2 focus:ring-white/50">
@@ -497,28 +394,28 @@
                     </button>
                     <h2 class="text-[#88AD4B] font-bold tracking-widest uppercase text-xs mb-2">Protocol 04</h2>
                     <h1 class="text-3xl md:text-5xl font-extrabold mb-4 tracking-tight text-[#F7F0E8]">Morbus de Quervain</h1>
-                    <p class="text-lg text-[#F7F0E8]/80 max-w-3xl font-light pr-24">Conservatief protocol voor 1e loge tendinopathie. Focus op load management en excentrische opbouw.</p>
+                    <p class="text-lg text-[#F7F0E8]/80 max-w-3xl font-light pr-24">Conservatief protocol voor 1e loge tendinopathie. Focus op load management en gerichte excentrische opbouw.</p>
                 </header>
                 <section class="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <div class="bg-white rounded-xl shadow-sm border border-[#F7F0E8] p-6 border-t-4 border-t-[#88AD4B]">
                         <h3 class="text-lg font-bold mb-3 text-[#355B36]">🎯 Klinisch Beeld</h3>
                         <ul class="space-y-2 text-sm text-slate-600">
-                            <li class="flex items-start"><svg class="w-4 h-4 text-[#88AD4B] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-check"></use></svg><span><strong>Locatie:</strong> Radiaal over proc. styloideus radii (APL/EPB pezen).</span></li>
-                            <li class="flex items-start"><svg class="w-4 h-4 text-[#88AD4B] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-check"></use></svg><span><strong>Provocatie:</strong> Tillen (Baby Lift), theedoek wringen.</span></li>
+                            <li class="flex items-start"><svg class="w-4 h-4 text-[#88AD4B] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-check"></use></svg><span><strong>Locatie:</strong> Zwelling, warmte en pijn gelokaliseerd radiaal over proc. styloideus radii, precies in de peesschede van de APL/EPB.</span></li>
+                            <li class="flex items-start"><svg class="w-4 h-4 text-[#88AD4B] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-check"></use></svg><span><strong>Provocatie:</strong> Tillen in ulnaire deviatie (klassieke 'Baby Lift' beweging bij jonge moeders), theedoek wringen, repetitief muisgebruik met de duim.</span></li>
                         </ul>
                     </div>
                     <div class="bg-white rounded-xl shadow-sm border border-[#F7F0E8] p-6 border-t-4 border-t-[#355B36]">
                         <h3 class="text-lg font-bold mb-3 text-[#355B36]">🔍 Tests</h3>
                         <ul class="space-y-2 text-sm text-slate-600">
-                            <li class="flex items-start"><svg class="w-4 h-4 text-[#88AD4B] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-check"></use></svg><span><strong>Eichhoff/Finkelstein:</strong> Passieve ulnaire deviatie met duim gesloten in vuist.</span></li>
-                            <li class="flex items-start"><svg class="w-4 h-4 text-[#88AD4B] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-check"></use></svg><span><strong>WHAT Test:</strong> Wrist Hyperflexion and Abduction of Thumb (weerstand).</span></li>
+                            <li class="flex items-start"><svg class="w-4 h-4 text-[#88AD4B] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-check"></use></svg><span><strong>Eichhoff/Finkelstein:</strong> Hoog sensitief en specifiek; felle pijn bij passieve ulnaire deviatie terwijl de duim gesloten is in de handpalm.</span></li>
+                            <li class="flex items-start"><svg class="w-4 h-4 text-[#88AD4B] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-check"></use></svg><span><strong>WHAT Test:</strong> Wrist Hyperflexion and Abduction of Thumb (actieve krachttest tegen lichte weerstand).</span></li>
                         </ul>
                     </div>
                     <div class="bg-white rounded-xl shadow-sm border border-[#E7B24F]/30 p-6 border-t-4 border-t-[#E7B24F]">
                         <h3 class="text-lg font-bold text-[#E7B24F] mb-3">🚨 Diff. Diagnose</h3>
                         <ul class="space-y-2 text-sm text-slate-700">
-                            <li class="flex items-start"><svg class="w-4 h-4 text-[#E7B24F] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-alert"></use></svg><span><strong>CMC-1 Artrose:</strong> Sluit uit middels positieve Grind test.</span></li>
-                            <li class="flex items-start"><svg class="w-4 h-4 text-[#E7B24F] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-alert"></use></svg><span><strong>Wartenberg Syndroom:</strong> N. Radialis superficialis irritatie (pos. Tinel).</span></li>
+                            <li class="flex items-start"><svg class="w-4 h-4 text-[#E7B24F] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-alert"></use></svg><span><strong>CMC-1 Artrose:</strong> Pijn bevindt zich veelal iets meer distaal, in het gewricht. Sluit uit middels positieve Grind test of voelbare crepitaties.</span></li>
+                            <li class="flex items-start"><svg class="w-4 h-4 text-[#E7B24F] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-alert"></use></svg><span><strong>Wartenberg Syndroom:</strong> Neuralgie N. Radialis superficialis. Kenmerkt zich door neuropathische pijn of positieve Tinel kloptest stroomopwaarts.</span></li>
                         </ul>
                     </div>
                 </section>
@@ -534,29 +431,32 @@
                             <div class="timeline-dot absolute left-[6px] top-1 w-8 h-8 rounded-full bg-[#E7B24F] flex items-center justify-center text-white font-bold text-sm shadow ring-4 ring-white">1</div>
                             <div class="bg-[#F7F0E8]/50 border border-[#F7F0E8] rounded-xl p-6 hover:shadow-md transition-shadow">
                                 <h4 class="text-lg font-bold text-[#355B36] mb-2">Fase 1: Acute Fase & Ontlasten (Wk 0-3)</h4>
+                                <p class="text-sm text-slate-600 mb-3 font-medium">Doel: Drastisch inperken van frictie binnen de peesschede (eerste loge) voor pijndemping en weefselrust.</p>
                                 <ul class="space-y-2 text-sm text-slate-700">
-                                    <li class="flex items-start"><svg class="w-4 h-4 text-[#88AD4B] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-check"></use></svg><span><strong>Immobilisatie:</strong> Aanmeten lange duimspica spalk. Meestal fulltime dragen.</span></li>
-                                    <li class="flex items-start"><svg class="w-4 h-4 text-[#88AD4B] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-check"></use></svg><span><strong>Ergonomie:</strong> Analyse van werkhoudingen. Leer tillen vanuit neutrale pols.</span></li>
+                                    <li class="flex items-start"><svg class="w-4 h-4 text-[#88AD4B] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-check"></use></svg><span><strong>Immobilisatie & Spalk:</strong> Aanmeten lange duimspica spalk (pols in lichte dorsaalflexie, CMC-1 in lichte abductie, IP vrij!). Strikt fulltime (24/7) dragen om APL/EPB maximaal gerelaxeerd te fixeren.</span></li>
+                                    <li class="flex items-start"><svg class="w-4 h-4 text-[#88AD4B] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-check"></use></svg><span><strong>Ergonomie:</strong> Analyse van provocerende werkhoudingen. Train direct biomechanische aanpassing: objecten "opscheppen" (scoop) vanuit neutrale pols i.p.v. schadelijke radiale hefboom-tilt.</span></li>
                                 </ul>
                             </div>
                         </div>
                         <div class="relative z-10 pl-12 pb-8">
                             <div class="timeline-dot absolute left-[6px] top-1 w-8 h-8 rounded-full bg-[#88AD4B] flex items-center justify-center text-white font-bold text-sm shadow ring-4 ring-white">2</div>
                             <div class="bg-[#F7F0E8]/50 border border-[#F7F0E8] rounded-xl p-6 hover:shadow-md transition-shadow">
-                                <h4 class="text-lg font-bold text-[#355B36] mb-2">Fase 2: Subacuut & Peesglijden (Wk 3-6)</h4>
+                                <h4 class="text-lg font-bold text-[#355B36] mb-2">Fase 2: Subacuut, Glijden & Load Management (Wk 3-6)</h4>
+                                <p class="text-sm text-slate-600 mb-3 font-medium">Doel: Herstel van weefselmobiliteit en een voorzichtige opbouw in dynamische belasting.</p>
                                 <ul class="space-y-2 text-sm text-slate-700">
-                                    <li class="flex items-start"><svg class="w-4 h-4 text-[#88AD4B] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-check"></use></svg><span><strong>Mobilisatie:</strong> Start onbelaste AROM (Dart-Thrower's Motion). Spalk afbouwen.</span></li>
-                                    <li class="flex items-start"><svg class="w-4 h-4 text-[#88AD4B] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-check"></use></svg><span><strong>Belasting:</strong> Lichte concentrische krachtopbouw. Tolerantie nauwgezet monitoren.</span></li>
+                                    <li class="flex items-start"><svg class="w-4 h-4 text-[#88AD4B] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-check"></use></svg><span><strong>Mobilisatie:</strong> Start onbelaste AROM. Oefen frequent de <em>Dart-Thrower's Motion</em> (levert de minste mechanische stress op APL/EPB). Spalk overdag geleidelijk weglaten tijdens lichte taken.</span></li>
+                                    <li class="flex items-start"><svg class="w-4 h-4 text-[#88AD4B] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-check"></use></svg><span><strong>Belasting & Tolerantie:</strong> Indien pijnvrij, start lichte concentrische abductie/extensie oefeningen. Pijn mag heel iets stijgen, maar moet binnen 24 uur genormaliseerd zijn.</span></li>
                                 </ul>
                             </div>
                         </div>
                         <div class="relative z-10 pl-12 pb-8">
                             <div class="timeline-dot absolute left-[6px] top-1 w-8 h-8 rounded-full bg-[#355B36] flex items-center justify-center text-white font-bold text-sm shadow ring-4 ring-white">3</div>
                             <div class="bg-[#F7F0E8]/50 border border-[#F7F0E8] rounded-xl p-6 hover:shadow-md transition-shadow">
-                                <h4 class="text-lg font-bold text-[#355B36] mb-2">Fase 3: Excentrisch & Belasten (Wk 6+)</h4>
+                                <h4 class="text-lg font-bold text-[#355B36] mb-2">Fase 3: Excentrische Versterking & Volledig Belasten (Wk 6+)</h4>
+                                <p class="text-sm text-slate-600 mb-3 font-medium">Doel: Optimaliseren collageenorganisatie, robuust weefselherstel en voorkomen van chronisch recidief.</p>
                                 <ul class="space-y-2 text-sm text-slate-700">
-                                    <li class="flex items-start"><svg class="w-4 h-4 text-[#88AD4B] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-check"></use></svg><span><strong>Peesbelasting:</strong> Excentrische training. Met elastiek traag afremmen ter remodellering.</span></li>
-                                    <li class="flex items-start"><svg class="w-4 h-4 text-[#88AD4B] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-check"></use></svg><span><strong>Hervatting:</strong> Volledige inzet werk. Bij falen overweeg operatief consult.</span></li>
+                                    <li class="flex items-start"><svg class="w-4 h-4 text-[#88AD4B] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-check"></use></svg><span><strong>Excentrische Training (Gouden Standaard):</strong> Introduceer trage excentrische bewegingen met elastiek of gewicht (duim zéér langzaam gecontroleerd met weerstand laten zakken). Bevordert remodellering.</span></li>
+                                    <li class="flex items-start"><svg class="w-4 h-4 text-[#88AD4B] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-check"></use></svg><span><strong>Werkhervatting & Beleid:</strong> Spalk is afgebouwd. Hervatting zware ADL/werk. Indien conservatief beleid (spalk + excentrisch + max. 1 CSI) na maanden faalt, is chirurgische release geïndiceerd.</span></li>
                                 </ul>
                             </div>
                         </div>
@@ -577,29 +477,29 @@
                     </button>
                     <h2 class="text-[#88AD4B] font-bold tracking-widest uppercase text-xs mb-2">Protocol 05</h2>
                     <h1 class="text-3xl md:text-5xl font-extrabold mb-4 tracking-tight text-[#F7F0E8]">Triggerfinger</h1>
-                    <p class="text-lg text-[#F7F0E8]/80 max-w-3xl font-light pr-24">Gedifferentieerde aanpak voor de haperende vinger verwerkt in een snel 3-fasen opbouwmodel.</p>
+                    <p class="text-lg text-[#F7F0E8]/80 max-w-3xl font-light pr-24">Gedifferentieerde aanpak voor de haperende vinger (Tendovaginitis Stenosans), verwerkt in een strak fasenmodel.</p>
                 </header>
                 <section class="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <div class="bg-white rounded-xl shadow-sm border border-[#F7F0E8] p-6 border-t-4 border-t-[#88AD4B] flex flex-col">
                         <h3 class="text-lg font-bold mb-3 text-[#355B36]">🎯 Klinisch Beeld</h3>
                         <ul class="space-y-2 text-sm text-slate-600">
-                            <li class="flex items-start"><svg class="w-4 h-4 text-[#88AD4B] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-check"></use></svg><span>'Haken' of vastzitten van de vinger, vooral bij actieve strekking na sluiten vuist.</span></li>
-                            <li class="flex items-start"><svg class="w-4 h-4 text-[#88AD4B] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-check"></use></svg><span>Symptomen het hevigst in de ochtend. Palpabele nodulus volair bij MCP.</span></li>
+                            <li class="flex items-start"><svg class="w-4 h-4 text-[#88AD4B] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-check"></use></svg><span>Voelbaar/hoorbaar 'haken' en vastzitten van vinger, primair bij actieve strekking ná het krachtig sluiten van vuist.</span></li>
+                            <li class="flex items-start"><svg class="w-4 h-4 text-[#88AD4B] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-check"></use></svg><span>Klachten het hevigst in ochtend. Palpabele, pijnlijke nodulus (knobbel) volair bij MCP die meebeweegt.</span></li>
                         </ul>
                     </div>
                     <div class="bg-white rounded-xl shadow-sm border border-[#F7F0E8] p-6 border-t-4 border-t-[#355B36]">
-                        <h3 class="text-lg font-bold text-[#355B36] mb-3">🧬 Differentiatie & Oorzaak</h3>
+                        <h3 class="text-lg font-bold text-[#355B36] mb-3">🧬 Oorzaak & Differentiatie</h3>
                         <ul class="space-y-3 text-sm text-slate-700">
-                            <li class="flex items-start"><svg class="w-4 h-4 text-[#88AD4B] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-check"></use></svg><span><strong>1. Verdikte A1-Pulley:</strong> Focus op rust middels MCP-blokkade.</span></li>
-                            <li class="flex items-start"><svg class="w-4 h-4 text-[#88AD4B] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-check"></use></svg><span><strong>2. Tenosynovitis:</strong> Focus op strikte rust of CSI (injectie).</span></li>
-                            <li class="flex items-start"><svg class="w-4 h-4 text-[#88AD4B] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-check"></use></svg><span><strong>3. Tendinopathie:</strong> Focus op excentrische belasting / load management.</span></li>
+                            <li class="flex items-start"><svg class="w-4 h-4 text-[#88AD4B] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-check"></use></svg><span><strong>1. Verdikte A1-Pulley:</strong> Weefselhypertrofie (mechanisch). Focus op rust via MCP-blokkade en frictiereductie.</span></li>
+                            <li class="flex items-start"><svg class="w-4 h-4 text-[#88AD4B] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-check"></use></svg><span><strong>2. Tenosynovitis:</strong> Acuut ontstekingsproces. Focus op agressieve rust of een gerichte Corticosteroïd Injectie (CSI).</span></li>
+                            <li class="flex items-start"><svg class="w-4 h-4 text-[#88AD4B] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-check"></use></svg><span><strong>3. Tendinopathie:</strong> Degeneratie peesweefsel zónder ontsteking. Vraagt gedoseerde excentrische belasting en load management.</span></li>
                         </ul>
                     </div>
                     <div class="bg-white rounded-xl shadow-sm border border-[#E7B24F]/30 p-6 border-t-4 border-t-[#E7B24F]">
                         <h3 class="text-lg font-bold text-[#E7B24F] mb-3">🚨 CAVE</h3>
                         <ul class="space-y-2 text-sm text-slate-700">
-                            <li class="flex items-start"><svg class="w-4 h-4 text-[#E7B24F] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-alert"></use></svg><span><strong>Locked Digit (Quinnell 4):</strong> Passief niet te strekken = direct CSI/Release.</span></li>
-                            <li class="flex items-start"><svg class="w-4 h-4 text-[#E7B24F] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-alert"></use></svg><span><strong>Diabetes / Reuma (RA):</strong> Conservatieve spalktherapie is minder succesvol.</span></li>
+                            <li class="flex items-start"><svg class="w-4 h-4 text-[#E7B24F] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-alert"></use></svg><span><strong>Locked Digit (Quinnell Graad 4):</strong> Vinger vast in buigstand, passief niet meer in strekking te dwingen. Verwijs direct voor CSI/Release!</span></li>
+                            <li class="flex items-start"><svg class="w-4 h-4 text-[#E7B24F] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-alert"></use></svg><span><strong>Diabetes / Reuma (RA):</strong> Conservatieve spalktherapie en injecties zijn significant minder succesvol bij systemische ziektes.</span></li>
                         </ul>
                     </div>
                 </section>
@@ -616,26 +516,11 @@
                         <div class="md:w-1/3">
                             <h3 class="text-xl font-bold mb-3 text-[#355B36]">Quinnell Classificatie</h3>
                             <div class="text-sm text-slate-600 space-y-3 bg-white p-5 rounded-xl shadow-sm border border-[#F7F0E8]">
-                                <div class="flex items-start">
-                                    <span class="font-bold text-[#E7B24F] w-12 shrink-0">Gr. 4:</span>
-                                    <span class="leading-snug">Locked digit (vast in flexie).</span>
-                                </div>
-                                <div class="flex items-start">
-                                    <span class="font-bold text-[#E7B24F] w-12 shrink-0">Gr. 3:</span>
-                                    <span class="leading-snug">Actief buigen, passief strekken (hulp nodig).</span>
-                                </div>
-                                <div class="flex items-start">
-                                    <span class="font-bold text-[#88AD4B] w-12 shrink-0">Gr. 2:</span>
-                                    <span class="leading-snug">Actief strekken lukt, met hoorbare/voelbare klik.</span>
-                                </div>
-                                <div class="flex items-start">
-                                    <span class="font-bold text-[#88AD4B] w-12 shrink-0">Gr. 1:</span>
-                                    <span class="leading-snug">Stroefheid en pijn, geen klik of vastzitten.</span>
-                                </div>
-                                <div class="flex items-start">
-                                    <span class="font-bold text-[#355B36] w-12 shrink-0">Gr. 0:</span>
-                                    <span class="leading-snug">Normaal, asymptomatisch.</span>
-                                </div>
+                                <div class="flex items-start"><span class="font-bold text-[#E7B24F] w-12 shrink-0">Gr. 4:</span><span class="leading-snug">Locked digit (onvermogen tot passief en actief strekken).</span></div>
+                                <div class="flex items-start"><span class="font-bold text-[#E7B24F] w-12 shrink-0">Gr. 3:</span><span class="leading-snug">Actief buigen lukt, patiënt heeft andere hand nodig om passief de vinger te strekken.</span></div>
+                                <div class="flex items-start"><span class="font-bold text-[#88AD4B] w-12 shrink-0">Gr. 2:</span><span class="leading-snug">Actief strekken lukt net, met hoorbare of voelbare klik/sprong.</span></div>
+                                <div class="flex items-start"><span class="font-bold text-[#88AD4B] w-12 shrink-0">Gr. 1:</span><span class="leading-snug">Stroefheid en pijn lokaal, nog géén harde klik of vastzitten.</span></div>
+                                <div class="flex items-start"><span class="font-bold text-[#355B36] w-12 shrink-0">Gr. 0:</span><span class="leading-snug">Normaal, volledig functionerend en pijnvrij.</span></div>
                             </div>
                         </div>
                         <div class="md:w-2/3 w-full"><div class="chart-container-large"><canvas id="tfRecoveryChart"></canvas></div></div>
@@ -647,18 +532,19 @@
                             <div class="timeline-dot absolute left-[6px] top-1 w-8 h-8 rounded-full bg-[#E7B24F] flex items-center justify-center text-white font-bold text-sm shadow ring-4 ring-white">1</div>
                             <div class="bg-[#F7F0E8]/50 border border-[#F7F0E8] rounded-xl p-6 hover:shadow-md transition-shadow">
                                 <h4 class="text-lg font-bold text-[#355B36] mb-2">Fase 1: Acuut / Bescherming (Wk 0-4)</h4>
+                                <p class="text-sm text-slate-600 mb-4 font-medium">Doel: Voorkomen van daadwerkelijke triggering om de vicieuze cirkel van frictie-irritatie-zwelling te doorbreken.</p>
                                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                                     <div class="bg-white p-4 rounded shadow-sm border-l-4 border-l-[#88AD4B]">
                                         <h5 class="text-sm font-bold text-[#355B36] mb-2">1. Verdikte Pulley</h5>
-                                        <p class="text-xs text-slate-700">Aanmeten MCP-blokkadespalk (MCP 0-15° flexie). 's Nachts en zware ADL dragen. Hook Fist mits zonder klik.</p>
+                                        <p class="text-xs text-slate-700"><strong>Interventie:</strong> Aanmeten MCP-blokkadespalk (MCP 0-15° flexie). Draagadvies primair voor de nacht (ochtendstijfheid) en zware repeterende taken. Vinger mag enkel de 'Hook Fist' maken (zonder klik).</p>
                                     </div>
                                     <div class="bg-white p-4 rounded shadow-sm border-l-4 border-l-[#E7B24F]">
                                         <h5 class="text-sm font-bold text-[#355B36] mb-2">2. Tenosynovitis</h5>
-                                        <p class="text-xs text-slate-700">Strikte rust essentieel. Bij forse ontsteking: snelle verwijzing voor CSI geïndiceerd. NSAID's in overleg.</p>
+                                        <p class="text-xs text-slate-700"><strong>Interventie:</strong> Strikte rust essentieel bij aanwezigheid van ontstekingsexsudaat. Bij forse acute ontsteking is een directe, vlotte verwijzing voor een Corticosteroïd Injectie (CSI) de meest effectieve indicatie (icm spalk).</p>
                                     </div>
                                     <div class="bg-white p-4 rounded shadow-sm border-l-4 border-l-[#355B36]">
                                         <h5 class="text-sm font-bold text-[#355B36] mb-2">3. Tendinopathie</h5>
-                                        <p class="text-xs text-slate-700">Volledig immobiliseren vermijden. Spalk alleen ter comfort 's nachts. Start met pijnbewust 'load management'.</p>
+                                        <p class="text-xs text-slate-700"><strong>Interventie:</strong> Volledig strak immobiliseren moet absoluut vermeden worden; dat verzwakt de pees. Spalk enkel als pijn-comfort 's nachts. Uitsluitend zacht 'load management' i.p.v. totale rust.</p>
                                     </div>
                                 </div>
                             </div>
@@ -666,19 +552,20 @@
                         <div class="relative z-10 pl-12 pb-8">
                             <div class="timeline-dot absolute left-[6px] top-1 w-8 h-8 rounded-full bg-[#88AD4B] flex items-center justify-center text-white font-bold text-sm shadow ring-4 ring-white">2</div>
                             <div class="bg-[#F7F0E8]/50 border border-[#F7F0E8] rounded-xl p-6 hover:shadow-md transition-shadow">
-                                <h4 class="text-lg font-bold text-[#355B36] mb-2">Fase 2: Gecontroleerde Mobilisatie (Wk 4-8)</h4>
+                                <h4 class="text-lg font-bold text-[#355B36] mb-2">Fase 2: Gecontroleerde Mobilisatie & Glide (Wk 4-8)</h4>
+                                <p class="text-sm text-slate-600 mb-4 font-medium">Doel: Na afname van zwelling, het vloeiend differentieel glijden optimaliseren zonder trigger-respons (klik).</p>
                                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                                     <div class="bg-white p-4 rounded shadow-sm border-l-4 border-l-[#88AD4B]">
                                         <h5 class="text-sm font-bold text-[#355B36] mb-2">1. Verdikte Pulley</h5>
-                                        <p class="text-xs text-slate-700">Indien trigger absent is, start afbouwen spalk overdag. TGE's uitbreiden buiten spalk ter preventie stijfheid.</p>
+                                        <p class="text-xs text-slate-700">Indien de klik afwezig is, spalk overdag afbouwen. Introduceer TGE's (Hook & Straight Fist) om buigpezen lokaal in het kanaal soepel te trainen ter preventie van weefseladhesie.</p>
                                     </div>
                                     <div class="bg-white p-4 rounded shadow-sm border-l-4 border-l-[#E7B24F]">
                                         <h5 class="text-sm font-bold text-[#355B36] mb-2">2. Tenosynovitis</h5>
-                                        <p class="text-xs text-slate-700">Na afname zwelling: voorzichtig onbelast peesglijden. Absoluut geen weerstandsoefeningen!</p>
+                                        <p class="text-xs text-slate-700">Pas wanneer lokaal ontstekingsvocht (vaak door CSI) is afgenomen, uiterst voorzichtig starten met onbelast peesglijden. Cruciaal: Implementeer in deze ontstekingsfase nog géén weerstand/knijpoefeningen!</p>
                                     </div>
                                     <div class="bg-white p-4 rounded shadow-sm border-l-4 border-l-[#355B36]">
                                         <h5 class="text-sm font-bold text-[#355B36] mb-2">3. Tendinopathie</h5>
-                                        <p class="text-xs text-slate-700">Starten met diepe dwarse fricties over nodulus. Voorzichtige isometrie introduceren.</p>
+                                        <p class="text-xs text-slate-700">Start (mits pijnvrij) manuele diepe dwarse fricties over de nodulus/A1-pulley om remodellering te stimuleren. Start oefentherapie met het verhogen van belastingstolerantie middels isometrische buigoefeningen.</p>
                                     </div>
                                 </div>
                             </div>
@@ -686,19 +573,20 @@
                         <div class="relative z-10 pl-12 pb-8">
                             <div class="timeline-dot absolute left-[6px] top-1 w-8 h-8 rounded-full bg-[#355B36] flex items-center justify-center text-white font-bold text-sm shadow ring-4 ring-white">3</div>
                             <div class="bg-[#F7F0E8]/50 border border-[#F7F0E8] rounded-xl p-6 hover:shadow-md transition-shadow">
-                                <h4 class="text-lg font-bold text-[#355B36] mb-2">Fase 3: Opbouw Belastbaarheid & Evaluatie (Wk 8+)</h4>
+                                <h4 class="text-lg font-bold text-[#355B36] mb-2">Fase 3: Opbouw Kracht & Functioneel Herstel (Wk 8+)</h4>
+                                <p class="text-sm text-slate-600 mb-4 font-medium">Doel: Ongeremd kunnen introduceren van volwaardige knijp- en trekkracht in een systeem vrij van mechanische belemmeringen.</p>
                                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                                     <div class="bg-white p-4 rounded shadow-sm border-l-4 border-l-[#88AD4B]">
                                         <h5 class="text-sm font-bold text-[#355B36] mb-2">1. Verdikte Pulley</h5>
-                                        <p class="text-xs text-slate-700">Opbouw gripkracht. Handvatten verdikken. Bij stagnering (> Quinnell 2): indicatie release.</p>
+                                        <p class="text-xs text-slate-700">Integreer ergonomische begeleiding in ADL: adviseer stevig over het lokaal verdikken van gereedschap om scherp afknikken in A1 te voorkomen. Bij stagnering in effectiviteit (> Quinnell 2+): chirurgische A1 release.</p>
                                     </div>
                                     <div class="bg-white p-4 rounded shadow-sm border-l-4 border-l-[#E7B24F]">
                                         <h5 class="text-sm font-bold text-[#355B36] mb-2">2. Tenosynovitis</h5>
-                                        <p class="text-xs text-slate-700">Uiterst langzaam belasting opbouwen. Bij frequent recidief op meerdere vingers: lijden (RA/Diabetes) uitsluiten.</p>
+                                        <p class="text-xs text-slate-700">Voer belasting uiterst langzaam op om 'opvlamming' (met hevige ochtendstijfheid) te voorkomen. Bij frequent recidiverende ontstekingen (of bilateraal): onderzoek naar reumatologisch/onderliggend lijden (RA/jicht) via huisarts.</p>
                                     </div>
                                     <div class="bg-white p-4 rounded shadow-sm border-l-4 border-l-[#355B36]">
                                         <h5 class="text-sm font-bold text-[#355B36] mb-2">3. Tendinopathie</h5>
-                                        <p class="text-xs text-slate-700">Gecontroleerde excentrische training. Indien load-management faalt: chirurgisch consult.</p>
+                                        <p class="text-xs text-slate-700">Integreer zwaardere, trage en gecontroleerde excentrische training als standaard voor peesregeneratie. Bij uitblijven progressie/stugge nodulus: overweeg specialistische ESWT of als laatste redmiddel een chirurgische release.</p>
                                     </div>
                                 </div>
                             </div>
@@ -720,28 +608,28 @@
                     </button>
                     <h2 class="text-[#88AD4B] font-bold tracking-widest uppercase text-xs mb-2">Protocol 06</h2>
                     <h1 class="text-3xl md:text-5xl font-extrabold mb-4 tracking-tight text-[#F7F0E8]">Mallet Vinger</h1>
-                    <p class="text-lg text-[#F7F0E8]/80 max-w-3xl font-light pr-24">Conservatief protocol voor de tendinogene en ossale (avulsie) mallet vinger.</p>
+                    <p class="text-lg text-[#F7F0E8]/80 max-w-3xl font-light pr-24">Conservatief protocol voor de tendinogene en ossale (avulsie) mallet vinger in 3 overzichtelijke fases.</p>
                 </header>
                 <section class="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <div class="bg-white rounded-xl shadow-sm border border-[#F7F0E8] p-6 border-t-4 border-t-[#88AD4B]">
                         <h3 class="text-lg font-bold mb-3 text-[#355B36]">🎯 Klinisch Beeld</h3>
                         <ul class="space-y-2 text-sm text-slate-600">
-                            <li class="flex items-start"><svg class="w-4 h-4 text-[#88AD4B] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-check"></use></svg><span>Onvermogen om het DIP-gewricht actief te strekken.</span></li>
-                            <li class="flex items-start"><svg class="w-4 h-4 text-[#88AD4B] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-check"></use></svg><span>Typerende 'hangende' vingertop na axiaal inwerkend letsel.</span></li>
+                            <li class="flex items-start"><svg class="w-4 h-4 text-[#88AD4B] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-check"></use></svg><span>Onvermogen om het DIP-gewricht actief te strekken. Patiënt voelt dat er 'spanning mist' op het eindkootje.</span></li>
+                            <li class="flex items-start"><svg class="w-4 h-4 text-[#88AD4B] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-check"></use></svg><span>Typerende 'hangende' vingertop na een axiaal inwerkend letsel (bijv. een bal op gestrekte vinger).</span></li>
                         </ul>
                     </div>
                     <div class="bg-white rounded-xl shadow-sm border border-[#F7F0E8] p-6 border-t-4 border-t-[#355B36]">
                         <h3 class="text-lg font-bold mb-3 text-[#355B36]">🩺 Differentiatie</h3>
                         <ul class="space-y-2 text-sm text-slate-600">
-                            <li class="flex items-start"><svg class="w-4 h-4 text-[#88AD4B] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-check"></use></svg><span><strong>Tendinogeen:</strong> Zuivere ruptuur terminale extensorpees. (6-8wk immobilisatie).</span></li>
-                            <li class="flex items-start"><svg class="w-4 h-4 text-[#88AD4B] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-check"></use></svg><span><strong>Ossaal:</strong> Afgescheurd botfragmentje. Heelt vaak sneller (6wk).</span></li>
+                            <li class="flex items-start"><svg class="w-4 h-4 text-[#88AD4B] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-check"></use></svg><span><strong>Tendinogeen:</strong> Zuivere weefsel ruptuur terminale extensorpees. (Slechte doorbloeding: 6-8wk immobilisatie).</span></li>
+                            <li class="flex items-start"><svg class="w-4 h-4 text-[#88AD4B] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-check"></use></svg><span><strong>Ossaal (Avulsion):</strong> Afgescheurd botfragment. Heelt vaak sneller en betrouwbaarder bot-op-bot (6wk).</span></li>
                         </ul>
                     </div>
                     <div class="bg-white rounded-xl shadow-sm border border-[#E7B24F]/30 p-6 border-t-4 border-t-[#E7B24F]">
                         <h3 class="text-lg font-bold text-[#E7B24F] mb-3">🚨 CAVE</h3>
                         <ul class="space-y-2 text-sm text-slate-700">
-                            <li class="flex items-start"><svg class="w-4 h-4 text-[#E7B24F] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-alert"></use></svg><span><strong>Swan-Neck:</strong> Compensatoire hyperextensie van PIP. PIP mobiliteit waarborgen.</span></li>
-                            <li class="flex items-start"><svg class="w-4 h-4 text-[#E7B24F] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-alert"></use></svg><span><strong>Vroegtijdige buiging:</strong> 1 sec DIP flexie in fase 1 reset de klok terug naar 0 dagen!</span></li>
+                            <li class="flex items-start"><svg class="w-4 h-4 text-[#E7B24F] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-alert"></use></svg><span><strong>Swan-Neck:</strong> Compensatoire fysiologische hyperextensie van PIP ten opzichte van DIP flexie. Waarborg PIP mobiliteit!</span></li>
+                            <li class="flex items-start"><svg class="w-4 h-4 text-[#E7B24F] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-alert"></use></svg><span><strong>Vroegtijdige buiging:</strong> 1 sec DIP flexie in fase 1 breekt de helende vezels af: klok direct terug naar 0 dagen!</span></li>
                         </ul>
                     </div>
                 </section>
@@ -750,21 +638,22 @@
                     <div class="bg-white rounded-xl shadow-sm border border-[#F7F0E8] p-6"><h3 class="text-xl font-bold mb-4 text-[#355B36]">Herstel Traject</h3><div class="chart-container-large"><canvas id="malletRecoveryChart"></canvas></div></div>
                 </section>
                 <section class="bg-white rounded-xl shadow-sm border border-[#F7F0E8] p-6 md:p-10 mt-8">
-                    <h3 class="text-2xl font-extrabold mb-8 text-center text-[#355B36]">Het 3-Fasen Protocol</h3>
+                    <h3 class="text-2xl font-extrabold mb-8 text-center text-[#355B36]">Het Gedifferentieerde 3-Fasen Protocol</h3>
                     <div class="relative max-w-5xl mx-auto">
                         <div class="timeline-line absolute left-5 top-5 bottom-4 w-1 bg-[#88AD4B]/30 rounded-full z-0"></div>
                         <div class="relative z-10 pl-12 pb-8">
                             <div class="timeline-dot absolute left-[6px] top-1 w-8 h-8 rounded-full bg-[#E7B24F] flex items-center justify-center text-white font-bold text-sm shadow ring-4 ring-white">1</div>
                             <div class="bg-[#F7F0E8]/50 border border-[#F7F0E8] rounded-xl p-6 hover:shadow-md transition-shadow">
-                                <h4 class="text-lg font-bold text-[#355B36] mb-2">Fase 1: Strikte Immobilisatie (Wk 0-6/8)</h4>
+                                <h4 class="text-lg font-bold text-[#355B36] mb-2">Fase 1: Strikte Absolute Immobilisatie (Wk 0-6/8)</h4>
+                                <p class="text-sm text-slate-600 mb-4 font-medium">Doel: Weefseladaptatie en ongestoorde fusie (callusvorming of collageen crosslinking) van de terminale extensorpees op het distale falanx.</p>
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                     <div class="bg-white p-4 rounded shadow-sm border-l-4 border-l-[#88AD4B]">
                                         <h5 class="text-sm font-bold text-[#355B36] mb-2">1. Tendinogeen</h5>
-                                        <p class="text-xs text-slate-700"><strong>6-8 weken continu</strong> DIP-extensiespalk (Stack-spalk). DIP 0° tot lichte hyperextensie. Bij wassen vingertop strikt ondersteunen. Geen flexie!</p>
+                                        <p class="text-xs text-slate-700">Patiënt is verplicht tot een intensieve compliance van <strong>6 tot 8 weken continu en ononderbroken</strong> dragen van een voorgeschreven DIP-extensiespalk (bijv. Stack-spalk of op maat gemaakte thermoplast). DIP moet in 0° tot lichte, zachte hyperextensie. Bij wassen vingertop absoluut en passief ondersteunen. Geen enkele graad onbedoelde flexie toegestaan!</p>
                                     </div>
                                     <div class="bg-white p-4 rounded shadow-sm border-l-4 border-l-[#E7B24F]">
                                         <h5 class="text-sm font-bold text-[#355B36] mb-2">2. Ossaal</h5>
-                                        <p class="text-xs text-slate-700"><strong>6 weken continu</strong> DIP-extensiespalk. Eerste weken evt. röntgencontrole ter uitsluiting subluxatie.</p>
+                                        <p class="text-xs text-slate-700">Dankzij superieure bot-heling is vaak <strong>6 weken continu</strong> DIP-extensiespalken voldoende om adequate callusvorming toe te staan. Tijdens de eerste kritieke weken kan een röntgencontrole geïndiceerd zijn om een onopgemerkte volaire gewrichtssubluxatie per direct veilig uit te sluiten en indien nodig operatief in te grijpen.</p>
                                     </div>
                                 </div>
                             </div>
@@ -772,15 +661,16 @@
                         <div class="relative z-10 pl-12 pb-8">
                             <div class="timeline-dot absolute left-[6px] top-1 w-8 h-8 rounded-full bg-[#88AD4B] flex items-center justify-center text-white font-bold text-sm shadow ring-4 ring-white">2</div>
                             <div class="bg-[#F7F0E8]/50 border border-[#F7F0E8] rounded-xl p-6 hover:shadow-md transition-shadow">
-                                <h4 class="text-lg font-bold text-[#355B36] mb-2">Fase 2: Gecontroleerde AROM (Wk 6-10)</h4>
+                                <h4 class="text-lg font-bold text-[#355B36] mb-2">Fase 2: Gecontroleerde Voorzichtige AROM (Wk 6-10)</h4>
+                                <p class="text-sm text-slate-600 mb-4 font-medium">Doel: Geleidelijke, actieve introductie van buiging zonder de uiterst fragiele pees/botverbinding te overrekken en kapot te trekken.</p>
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                     <div class="bg-white p-4 rounded shadow-sm border-l-4 border-l-[#88AD4B]">
                                         <h5 class="text-sm font-bold text-[#355B36] mb-2">1. Tendinogeen</h5>
-                                        <p class="text-xs text-slate-700">Start spalk afbouwen overdag. Actief strekken en mild buigen (max 30-40°). Bij toename extensielag >10° direct spalk resetten.</p>
+                                        <p class="text-xs text-slate-700">Aanvang is gefaseerd: eerste dagen spalk af en toe weglaten voor zachte AROM (actief strekken en mild buigen tot max 30-40°). Controleer extensielag zorgvuldig. Bij toename van de lag (>10° wegzakken), direct stoppen en spalkbeleid herstarten (reset). Nachtspalk blijft ter veiligheid strikt gehandhaafd.</p>
                                     </div>
                                     <div class="bg-white p-4 rounded shadow-sm border-l-4 border-l-[#E7B24F]">
                                         <h5 class="text-sm font-bold text-[#355B36] mb-2">2. Ossaal</h5>
-                                        <p class="text-xs text-slate-700">Onbelast AROM flexie opbouwen op stijfheid. Forceer eindflexie nooit passief. Nachtspalk nog 2-4 weken dragen.</p>
+                                        <p class="text-xs text-slate-700">Start stapsgewijs weglaten van de vaste spalk overdag vanaf week 6. Het onbelaste bot trainen in een functionele buiging op geleide van stijfheid. Het is klinisch zinloos en gevaarlijk om in deze fase eindflexie 'passief' door te drukken! Nachtspalk nog 2-4 nachten handhaven ter preventie van rek tijdens slaap.</p>
                                     </div>
                                 </div>
                             </div>
@@ -788,15 +678,16 @@
                         <div class="relative z-10 pl-12 pb-8">
                             <div class="timeline-dot absolute left-[6px] top-1 w-8 h-8 rounded-full bg-[#355B36] flex items-center justify-center text-white font-bold text-sm shadow ring-4 ring-white">3</div>
                             <div class="bg-[#F7F0E8]/50 border border-[#F7F0E8] rounded-xl p-6 hover:shadow-md transition-shadow">
-                                <h4 class="text-lg font-bold text-[#355B36] mb-2">Fase 3: Volledige ROM & Belasting (Wk 8-12+)</h4>
+                                <h4 class="text-lg font-bold text-[#355B36] mb-2">Fase 3: Functionele Volledige ROM & Belasting (Wk 8-12+)</h4>
+                                <p class="text-sm text-slate-600 mb-4 font-medium">Doel: Vrijgeven van het protocol, integratie in zwaardere belasting en transparant verwachtingsmanagement communiceren.</p>
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                     <div class="bg-white p-4 rounded shadow-sm border-l-4 border-l-[#88AD4B]">
                                         <h5 class="text-sm font-bold text-[#355B36] mb-2">1. Tendinogeen</h5>
-                                        <p class="text-xs text-slate-700">Nachtspalk af, lichte weerstandsoefeningen opbouwen. Lichte extensielag (5° - 10°) is klinisch acceptabel.</p>
+                                        <p class="text-xs text-slate-700">Nachtspalk mag definitief af. Start lichte en progressieve weerstandsoefeningen voor DIP versterking. Sporthervatting toegestaan, adviseer preventief aftapen tijdens contact. Een definitieve, lichte extensielag ('haakje' van 5-10°) is klinisch volkomen acceptabel en verwacht.</p>
                                     </div>
                                     <div class="bg-white p-4 rounded shadow-sm border-l-4 border-l-[#E7B24F]">
                                         <h5 class="text-sm font-bold text-[#355B36] mb-2">2. Ossaal</h5>
-                                        <p class="text-xs text-slate-700">Volledige belasting. Patiënten ervaren vaak nog maanden een lichte verdikking (callusvorming).</p>
+                                        <p class="text-xs text-slate-700">Volledige, ongehinderde belasting bij dagelijkse taken en sport. Informeer de patiënt dat aanhoudende dorsale verdikking, roodheid en milde stijfheid bij de gewrichtsspleet nog maanden zal blijven (callusvorming). Bij extreme persisterende pijn: gewrichtsschade (artrose) uitsluiten.</p>
                                     </div>
                                 </div>
                             </div>
@@ -818,53 +709,52 @@
                     </button>
                     <h2 class="text-[#88AD4B] font-bold tracking-widest uppercase text-xs mb-2">Protocol 07</h2>
                     <h1 class="text-3xl md:text-5xl font-extrabold mb-4 tracking-tight text-[#F7F0E8]">CMC-1 Artrose (Post-op)</h1>
-                    <p class="text-lg text-[#F7F0E8]/80 max-w-3xl font-light pr-24">Revalidatieprotocol na chirurgische interventie (trapeziumectomie of prothese) bij CMC-1 artrose.</p>
+                    <p class="text-lg text-[#F7F0E8]/80 max-w-3xl font-light pr-24">Revalidatieprotocol na chirurgische interventie (trapeziumectomie of prothese) bij chronische CMC-1 artrose.</p>
                 </header>
                 <section class="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <div class="bg-white rounded-xl shadow-sm border border-[#F7F0E8] p-6 border-t-4 border-t-[#88AD4B]">
                         <h3 class="text-lg font-bold mb-3 text-[#355B36]">🎯 Klinisch Beeld</h3>
                         <ul class="space-y-2 text-sm text-slate-600">
-                            <li class="flex items-start"><svg class="w-4 h-4 text-[#88AD4B] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-check"></use></svg><span>Patiënt na chronische artrose van het zadelgewricht.</span></li>
-                            <li class="flex items-start"><svg class="w-4 h-4 text-[#88AD4B] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-check"></use></svg><span>Doel is pijnreductie, functionele pinch-grip en stabiliteit creëren.</span></li>
+                            <li class="flex items-start"><svg class="w-4 h-4 text-[#88AD4B] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-check"></use></svg><span>Patiënt post-operatief na chronische en invaliderende artrose (bot-op-bot slijtagekraakbeen) van het duim zadelgewricht.</span></li>
+                            <li class="flex items-start"><svg class="w-4 h-4 text-[#88AD4B] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-check"></use></svg><span>Hoofddoel na operatie: pijndemping, herstel van een pijnvrije pinch- en steungrip, en weefselstabiliteit creëren.</span></li>
                         </ul>
                     </div>
                     <div class="bg-white rounded-xl shadow-sm border border-[#F7F0E8] p-6 border-t-4 border-t-[#355B36]">
                         <h3 class="text-lg font-bold mb-3 text-[#355B36]">🧬 Interventies</h3>
                         <ul class="space-y-2 text-sm text-slate-600">
-                            <li class="flex items-start"><svg class="w-4 h-4 text-[#88AD4B] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-check"></use></svg><span><strong>Trapeziumectomie:</strong> Verwijdering os trapezium.</span></li>
-                            <li class="flex items-start"><svg class="w-4 h-4 text-[#88AD4B] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-check"></use></svg><span><strong>CMC-1 Prothese:</strong> Gewrichtsvervanging; snellere mobilisatie mogelijk.</span></li>
+                            <li class="flex items-start"><svg class="w-4 h-4 text-[#88AD4B] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-check"></use></svg><span><strong>Trapeziumectomie (LRTI):</strong> Bot verwijdering van os trapezium. Vereist fysiologisch langere immobilisatie ten behoeve van stabiel collageen kapsel of verankering door chirurg.</span></li>
+                            <li class="flex items-start"><svg class="w-4 h-4 text-[#88AD4B] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-check"></use></svg><span><strong>CMC-1 Prothese:</strong> Lokale gewrichtsvervanging. Zorgt voor direct eerdere biomechanische stabiliteit en laat snellere mobilisatie toe.</span></li>
                         </ul>
                     </div>
                     <div class="bg-white rounded-xl shadow-sm border border-[#E7B24F]/30 p-6 border-t-4 border-t-[#E7B24F]">
                         <h3 class="text-lg font-bold text-[#E7B24F] mb-3">🚨 CAVE</h3>
                         <ul class="space-y-2 text-sm text-slate-700">
-                            <li class="flex items-start"><svg class="w-4 h-4 text-[#E7B24F] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-alert"></use></svg><span><strong>Pinch kracht:</strong> Vermijding tip-to-tip pinch en zwaar tillen eerste 6-8 wk.</span></li>
-                            <li class="flex items-start"><svg class="w-4 h-4 text-[#E7B24F] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-alert"></use></svg><span><strong>Adductie contractuur:</strong> Bewaak actief de webspace.</span></li>
+                            <li class="flex items-start"><svg class="w-4 h-4 text-[#E7B24F] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-alert"></use></svg><span><strong>Kritieke Pinch kracht:</strong> Strikte vermijding van elke tip-to-tip pinch en zwaar tillen in de eerste 6-8 wk ter preventie van prothesedislocatie of peesoverrekking!</span></li>
+                            <li class="flex items-start"><svg class="w-4 h-4 text-[#E7B24F] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-alert"></use></svg><span><strong>Adductie contractuur:</strong> Bewaak actief wekelijks het verlies in de webspace (spier contractuur van de M. Adductor Pollicis).</span></li>
                         </ul>
                     </div>
                 </section>
-
                 <section class="grid grid-cols-1 lg:grid-cols-2 gap-8">
                     <div class="bg-white rounded-xl shadow-sm border border-[#F7F0E8] p-6"><h3 class="text-xl font-bold mb-4 text-[#355B36]">Behandelfocus</h3><div class="chart-container-large"><canvas id="cmc1ModalityChart"></canvas></div></div>
                     <div class="bg-white rounded-xl shadow-sm border border-[#F7F0E8] p-6"><h3 class="text-xl font-bold mb-4 text-[#355B36]">Herstel Traject</h3><div class="chart-container-large"><canvas id="cmc1RecoveryChart"></canvas></div></div>
                 </section>
-
                 <section class="bg-white rounded-xl shadow-sm border border-[#F7F0E8] p-6 md:p-10 mt-8">
-                    <h3 class="text-2xl font-extrabold mb-8 text-center text-[#355B36]">Het Gedifferentieerde Protocol</h3>
+                    <h3 class="text-2xl font-extrabold mb-8 text-center text-[#355B36]">Het Gedifferentieerde 4-Fasen Protocol</h3>
                     <div class="relative max-w-5xl mx-auto">
                         <div class="timeline-line absolute left-5 top-5 bottom-4 w-1 bg-[#88AD4B]/30 rounded-full z-0"></div>
                         <div class="relative z-10 pl-12 pb-8">
                             <div class="timeline-dot absolute left-[6px] top-1 w-8 h-8 rounded-full bg-[#E7B24F] flex items-center justify-center text-white font-bold text-sm shadow ring-4 ring-white">1</div>
                             <div class="bg-[#F7F0E8]/50 border border-[#F7F0E8] rounded-xl p-6 hover:shadow-md transition-shadow">
                                 <h4 class="text-lg font-bold text-[#355B36] mb-2">Fase 1: Wondgenezing & Immobilisatie (Wk 0-4)</h4>
+                                <p class="text-sm text-slate-600 mb-4 font-medium">Doel: Effectief weefselherstel initiëren en beheersen van post-traumatisch oedeem en wondheling.</p>
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                     <div class="bg-white p-4 rounded shadow-sm border-l-4 border-l-[#88AD4B]">
                                         <h5 class="text-sm font-bold text-[#355B36] mb-2">1. Trapeziumectomie</h5>
-                                        <p class="text-xs text-slate-700">Gips vanuit ziekenhuis (2-4 weken). Vrij bewegen van de vingers en evt pols.</p>
+                                        <p class="text-xs text-slate-700">Verplichte gipsimmobilisatie (2 tot 4 weken). Hooghouden (elevatie) op een kussen is cruciaal voor oedeemreductie. Vrij en frequent bewegen van de onbelaste vingers en elleboog ter circulatiestimulatie.</p>
                                     </div>
                                     <div class="bg-white p-4 rounded shadow-sm border-l-4 border-l-[#E7B24F]">
                                         <h5 class="text-sm font-bold text-[#355B36] mb-2">2. CMC-1 Prothese</h5>
-                                        <p class="text-xs text-slate-700">Kortere gipsperiode (1-2 weken). Focus op wondgenezing en vermijden zware kracht.</p>
+                                        <p class="text-xs text-slate-700">Door implantaat-stabiliteit een veel kortere gipsperiode (1-2 weken). Focus in deze eerste dagen ligt eveneens op wondgenezing en absoluut vermijden van de duim in belaste posities. Elevatie- en pomp-oefeningen.</p>
                                     </div>
                                 </div>
                             </div>
@@ -873,14 +763,15 @@
                             <div class="timeline-dot absolute left-[6px] top-1 w-8 h-8 rounded-full bg-[#88AD4B] flex items-center justify-center text-white font-bold text-sm shadow ring-4 ring-white">2</div>
                             <div class="bg-[#F7F0E8]/50 border border-[#F7F0E8] rounded-xl p-6 hover:shadow-md transition-shadow">
                                 <h4 class="text-lg font-bold text-[#355B36] mb-2">Fase 2: Gecontroleerde Mobilisatie (Wk 4-6)</h4>
+                                <p class="text-sm text-slate-600 mb-4 font-medium">Doel: Gips af, opbouwen van onbelaste Range of Motion (ROM) en start littekenbehandeling.</p>
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                     <div class="bg-white p-4 rounded shadow-sm border-l-4 border-l-[#88AD4B]">
                                         <h5 class="text-sm font-bold text-[#355B36] mb-2">1. Trapeziumectomie</h5>
-                                        <p class="text-xs text-slate-700">Aanmeten CMC-1 spalk. Start onbelast mobiliseren. GEEN krachtige tip-to-tip oppositie.</p>
+                                        <p class="text-xs text-slate-700">Gips verwijderd. Aanmeten comfortabele thermoplastische CMC-1 (duimspica) spalk. Start onbelast, actief en pijnvrij mobiliseren (palmaire en radiale abductie) ter preventie van webspace contractuur. GEEN tip-to-tip oppositie met kracht.</p>
                                     </div>
                                     <div class="bg-white p-4 rounded shadow-sm border-l-4 border-l-[#E7B24F]">
                                         <h5 class="text-sm font-bold text-[#355B36] mb-2">2. CMC-1 Prothese</h5>
-                                        <p class="text-xs text-slate-700">Vroege AROM. Spalkbeleid sneller afgebouwd. Start ADL zonder weerstand.</p>
+                                        <p class="text-xs text-slate-700">Vroege start actieve AROM onder begeleiding. Flexie/extensie en zeer voorzichtige oppositie. Spalkbeleid wordt sneller afgebouwd (afh. van stabiliteit prothese). Start voorzichtig met lichte, onbelaste ADL.</p>
                                     </div>
                                 </div>
                             </div>
@@ -889,14 +780,15 @@
                             <div class="timeline-dot absolute left-[6px] top-1 w-8 h-8 rounded-full bg-[#355B36] flex items-center justify-center text-white font-bold text-sm shadow ring-4 ring-white">3</div>
                             <div class="bg-[#F7F0E8]/50 border border-[#F7F0E8] rounded-xl p-6 hover:shadow-md transition-shadow">
                                 <h4 class="text-lg font-bold text-[#355B36] mb-2">Fase 3: Stabilisatie (Wk 6-8)</h4>
+                                <p class="text-sm text-slate-600 mb-4 font-medium">Doel: Dynamische stabiliteit van het basisgewricht vergroten middels intrinsieke musculatuur sturing.</p>
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                     <div class="bg-white p-4 rounded shadow-sm border-l-4 border-l-[#88AD4B]">
                                         <h5 class="text-sm font-bold text-[#355B36] mb-2">1. Trapeziumectomie</h5>
-                                        <p class="text-xs text-slate-700">Spalk overdag afbouwen. Start actieve stabilisatieoefeningen (Isometrisch trainen APB/FDI).</p>
+                                        <p class="text-xs text-slate-700">Spalk overdag afbouwen (alleen nog bij zware taken/buitenshuis). Start actieve stabilisatieoefeningen: Isometrisch trainen M. APB en FDI om de duimbasis gecentreerd en krachtig op zijn plek te houden ("centering").</p>
                                     </div>
                                     <div class="bg-white p-4 rounded shadow-sm border-l-4 border-l-[#E7B24F]">
                                         <h5 class="text-sm font-bold text-[#355B36] mb-2">2. CMC-1 Prothese</h5>
-                                        <p class="text-xs text-slate-700">Spalk afgebouwd. Lichte/middelzware ADL. Start van milde weerstandsoefeningen.</p>
+                                        <p class="text-xs text-slate-700">Spalk inmiddels afgebouwd. Patiënt kan hand inzetten bij lichte en middelzware ADL. Verdere optimalisatie fijne motoriek en introductie van milde weerstandsoefeningen voor grijp- en pinchkracht.</p>
                                     </div>
                                 </div>
                             </div>
@@ -905,14 +797,15 @@
                             <div class="timeline-dot absolute left-[6px] top-1 w-8 h-8 rounded-full bg-[#355B36] flex items-center justify-center text-white font-bold text-sm shadow ring-4 ring-white">4</div>
                             <div class="bg-[#F7F0E8]/50 border border-[#F7F0E8] rounded-xl p-6 hover:shadow-md transition-shadow">
                                 <h4 class="text-lg font-bold text-[#355B36] mb-2">Fase 4: Volledig Belasten (Wk 8-12+)</h4>
+                                <p class="text-sm text-slate-600 mb-4 font-medium">Doel: Realiseren van een krachtige, pijnvrije, en duurzame handfunctie voor in het dagelijks leven en werk.</p>
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                     <div class="bg-white p-4 rounded shadow-sm border-l-4 border-l-[#88AD4B]">
                                         <h5 class="text-sm font-bold text-[#355B36] mb-2">1. Trapeziumectomie</h5>
-                                        <p class="text-xs text-slate-700">Opbouwen Pinch- en Gripkracht. Volledige sporthervatting. Patiënt voorlichten dat maximaal herstel tot 12 mnd kan duren.</p>
+                                        <p class="text-xs text-slate-700">Intensief opbouwen van Pinch- en Gripkracht (met putty/knijpers). Volledige sporthervatting en huishoudelijke taken. Patiënt duidelijk voorlichten dat een maximaal weefsel/krachtherstel tot wel 12 maanden kan duren!</p>
                                     </div>
                                     <div class="bg-white p-4 rounded shadow-sm border-l-4 border-l-[#E7B24F]">
                                         <h5 class="text-sm font-bold text-[#355B36] mb-2">2. CMC-1 Prothese</h5>
-                                        <p class="text-xs text-slate-700">Volledige belasting toegestaan. Bij klikken/knakken overleggen met chirurg.</p>
+                                        <p class="text-xs text-slate-700">Volledige vrije belasting toegestaan. Pijn moet nagenoeg nihil zijn. Waarschuw de patiënt: bij aanhoudende pijn, scherpe steken of luid klikken/knakken direct laagdrempelig en per ommegaande chirurg consulteren ter uitsluiting luxatie.</p>
                                     </div>
                                 </div>
                             </div>
@@ -934,28 +827,28 @@
                     </button>
                     <h2 class="text-[#88AD4B] font-bold tracking-widest uppercase text-xs mb-2">Protocol 08</h2>
                     <h1 class="text-3xl md:text-5xl font-extrabold mb-4 tracking-tight text-[#F7F0E8]">Instabiele Pols</h1>
-                    <p class="text-lg text-[#F7F0E8]/80 max-w-3xl font-light pr-24">Conservatief protocol voor carpale instabiliteit (SL-letsel & Midcarpaal).</p>
+                    <p class="text-lg text-[#F7F0E8]/80 max-w-3xl font-light pr-24">Conservatief protocol voor carpale instabiliteit (SL-letsel & Midcarpaal). Focus op proprioceptie en neuromusculaire controle.</p>
                 </header>
                 <section class="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <div class="bg-white rounded-xl shadow-sm border border-[#F7F0E8] p-6 border-t-4 border-t-[#88AD4B]">
                         <h3 class="text-lg font-bold mb-3 text-[#355B36]">🎯 Klinisch Beeld</h3>
                         <ul class="space-y-2 text-sm text-slate-600">
-                            <li class="flex items-start"><svg class="w-4 h-4 text-[#88AD4B] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-check"></use></svg><span>Diepe pijn centraal of ulnair in de pols. Onvermogen om kracht te zetten.</span></li>
-                            <li class="flex items-start"><svg class="w-4 h-4 text-[#88AD4B] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-check"></use></svg><span>Patiënt beschrijft 'klikken' of het gevoel dat de pols 'doorzakt'.</span></li>
+                            <li class="flex items-start"><svg class="w-4 h-4 text-[#88AD4B] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-check"></use></svg><span>Patiënt klaagt over diepe pijn, zwakte of een pijnlijk "doorzak"-gevoel centraal, radiaal of ulnair in het polsgewricht bij het krachtig axiaal afsteunen (bijv. push-ups).</span></li>
+                            <li class="flex items-start"><svg class="w-4 h-4 text-[#88AD4B] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-check"></use></svg><span>Vaak beschrijft men een hoorbaar of voelbaar 'knappen', 'klikken' of 'verspringen' van de polsbeentjes in specifieke gecombineerde rotatie bewegingen.</span></li>
                         </ul>
                     </div>
                     <div class="bg-white rounded-xl shadow-sm border border-[#F7F0E8] p-6 border-t-4 border-t-[#355B36]">
                         <h3 class="text-lg font-bold text-[#355B36] mb-3">🧬 Differentiatie</h3>
                         <ul class="space-y-3 text-sm text-slate-700">
-                            <li class="flex items-start"><svg class="w-4 h-4 text-[#88AD4B] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-check"></use></svg><span><strong>SL-Instabiliteit:</strong> Vaak na trauma. Focus op DTM.</span></li>
-                            <li class="flex items-start"><svg class="w-4 h-4 text-[#88AD4B] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-check"></use></svg><span><strong>Midcarpaal (MCI):</strong> Vaak atraumatisch. Focus op FCU/ECU.</span></li>
+                            <li class="flex items-start"><svg class="w-4 h-4 text-[#88AD4B] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-check"></use></svg><span><strong>SL-Instabiliteit (Scapholunate):</strong> Vaak het gevolg van direct trauma (FOOSH val). Typisch pijn in de tabatière anatomique. Focus therapie is de Dart-Thrower's Motion.</span></li>
+                            <li class="flex items-start"><svg class="w-4 h-4 text-[#88AD4B] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-check"></use></svg><span><strong>Midcarpaal (MCI):</strong> Vaak atraumatisch verloop door algehele hypermobiliteit. Typische 'Catch-up clunk' bij ulnair deviatie. Focus: ulnaire flexoren/extensoren.</span></li>
                         </ul>
                     </div>
                     <div class="bg-white rounded-xl shadow-sm border border-[#E7B24F]/30 p-6 border-t-4 border-t-[#E7B24F]">
                         <h3 class="text-lg font-bold text-[#E7B24F] mb-3">🚨 CAVE</h3>
                         <ul class="space-y-2 text-sm text-slate-700">
-                            <li class="flex items-start"><svg class="w-4 h-4 text-[#E7B24F] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-alert"></use></svg><span><strong>Totaal SL-letsel:</strong> Bij acute ruptuur, consulteer chirurg.</span></li>
-                            <li class="flex items-start"><svg class="w-4 h-4 text-[#E7B24F] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-alert"></use></svg><span><strong>Overmatige rek:</strong> Vermijd extreme eindstandige rekkingen!</span></li>
+                            <li class="flex items-start"><svg class="w-4 h-4 text-[#E7B24F] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-alert"></use></svg><span><strong>Totaal SL-letsel:</strong> Bij verdenking op een acute, volledige ruptuur van het SL-ligament (< 4 wkn na trauma), direct chirurg consulteren wegens risico op SLAC-pols!</span></li>
+                            <li class="flex items-start"><svg class="w-4 h-4 text-[#E7B24F] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-alert"></use></svg><span><strong>Overmatige weefselrek:</strong> Vermijd altijd zware, passieve en uiterste eindstandige rekkingen. De ligamenten zijn immers al te laks en overrekt.</span></li>
                         </ul>
                     </div>
                 </section>
@@ -970,15 +863,16 @@
                         <div class="relative z-10 pl-12 pb-8">
                             <div class="timeline-dot absolute left-[6px] top-1 w-8 h-8 rounded-full bg-[#E7B24F] flex items-center justify-center text-white font-bold text-sm shadow ring-4 ring-white">1</div>
                             <div class="bg-[#F7F0E8]/50 border border-[#F7F0E8] rounded-xl p-6 hover:shadow-md transition-shadow">
-                                <h4 class="text-lg font-bold text-[#355B36] mb-2">Fase 1: Acute Fase & Proprioceptie (Wk 0-4)</h4>
+                                <h4 class="text-lg font-bold text-[#355B36] mb-2">Fase 1: Acute Pijndemping & Proprioceptieve Gewaarwording (Wk 0-4)</h4>
+                                <p class="text-sm text-slate-600 mb-4 font-medium">Doel: Acuut pijn dempen, beschermen van de verstuikte ligamenten en de spieren "wakker maken" voor actieve neuromusculaire controle.</p>
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                     <div class="bg-white p-4 rounded shadow-sm border-l-4 border-l-[#88AD4B]">
                                         <h5 class="text-sm font-bold text-[#355B36] mb-2">1. SL-Instabiliteit</h5>
-                                        <p class="text-xs text-slate-700">Immobilisatie met brace. Start isometrische activatie FCR en APL/EPB. Pijn = grens. Geen polsextensie!</p>
+                                        <p class="text-xs text-slate-700">Beleid: Immobilisatie middels maatwerk polsbrace of comfortabele dart-thrower spalk (ter pijndemping in het dagelijks leven). Start met gerichte isometrische (onbelaste, niet bewegende) activatie van de Flexor Carpi Radialis (FCR) en APL/EPB. Pijnvrij trainen is de bovengrens. Geen zware belaste polsextensie of passieve krachten!</p>
                                     </div>
                                     <div class="bg-white p-4 rounded shadow-sm border-l-4 border-l-[#E7B24F]">
                                         <h5 class="text-sm font-bold text-[#355B36] mb-2">2. Midcarpaal (MCI)</h5>
-                                        <p class="text-xs text-slate-700">Ondersteuning middels ulnar gutter. Focus op isometrische activatie van ulnaire stabilisatoren (FCU/ECU).</p>
+                                        <p class="text-xs text-slate-700">Beleid: Bied directe mechanische weefsel-ondersteuning aan het luxerende segment door middel van een strakke pisiform-boost tape (ulnar sided) of tijdelijke ulnar gutter spalk. Focus de initiële isometrische activatie en spiertraining exclusief op het versterken van de ulnaire polsstabilisatoren (M. FCU en ECU).</p>
                                     </div>
                                 </div>
                             </div>
@@ -986,15 +880,16 @@
                         <div class="relative z-10 pl-12 pb-8">
                             <div class="timeline-dot absolute left-[6px] top-1 w-8 h-8 rounded-full bg-[#88AD4B] flex items-center justify-center text-white font-bold text-sm shadow ring-4 ring-white">2</div>
                             <div class="bg-[#F7F0E8]/50 border border-[#F7F0E8] rounded-xl p-6 hover:shadow-md transition-shadow">
-                                <h4 class="text-lg font-bold text-[#355B36] mb-2">Fase 2: Dynamische Stabiliteit (Wk 4-8)</h4>
+                                <h4 class="text-lg font-bold text-[#355B36] mb-2">Fase 2: Dynamische Stabiliteit & Bewuste Beweegcontrole (Wk 4-8)</h4>
+                                <p class="text-sm text-slate-600 mb-4 font-medium">Doel: Bewuste neuromusculaire controle opbouwen en co-contracties versterken binnen uitsluitend veilige bewegingsvlakken (biomechanisch pad van de minste weerstand).</p>
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                     <div class="bg-white p-4 rounded shadow-sm border-l-4 border-l-[#88AD4B]">
                                         <h5 class="text-sm font-bold text-[#355B36] mb-2">1. SL-Instabiliteit</h5>
-                                        <p class="text-xs text-slate-700">Spalk stapsgewijs afbouwen. Start actieve, onbelaste *Dart-Thrower's Motion*. Vermijd pure sagittale extensie.</p>
+                                        <p class="text-xs text-slate-700">Spalkgebruik mag overdag stapsgewijs afgebouwd worden. Start met actieve, bewuste en onbelaste fysiologische *Dart-Thrower's Motion* oefeningen. Deze specifieke beweging ontziet de kwetsbare spanning op het scapholunate ligament aanzienlijk. Vermijd in deze fase nog pure, strakke sagittale (loodrechte) polsextensie of -flexie krachten.</p>
                                     </div>
                                     <div class="bg-white p-4 rounded shadow-sm border-l-4 border-l-[#E7B24F]">
                                         <h5 class="text-sm font-bold text-[#355B36] mb-2">2. Midcarpaal (MCI)</h5>
-                                        <p class="text-xs text-slate-700">Bewuste sturing trainen. Gecontroleerde pro/supinatie, vloeiende beweging zonder clunk.</p>
+                                        <p class="text-xs text-slate-700">Focus op uiterst trage en bewuste actieve sturing (motor control). Oefen gecontroleerde pro- en supinatie transities en ulnaire deviaties, met nadruk op een continue, vloeiende en beheerste beweging exact zónder dat de pijnlijke 'catch-up clunk' luxatie optreedt. Patiënt moet leren de botjes middels eigen pees/spierkracht te "fixeren" tijdens beweging.</p>
                                     </div>
                                 </div>
                             </div>
@@ -1002,19 +897,21 @@
                         <div class="relative z-10 pl-12 pb-8">
                             <div class="timeline-dot absolute left-[6px] top-1 w-8 h-8 rounded-full bg-[#355B36] flex items-center justify-center text-white font-bold text-sm shadow ring-4 ring-white">3</div>
                             <div class="bg-[#F7F0E8]/50 border border-[#F7F0E8] rounded-xl p-6 hover:shadow-md transition-shadow">
-                                <h4 class="text-lg font-bold text-[#355B36] mb-2">Fase 3: Reactieve Stabiliteit (Wk 8-12+)</h4>
+                                <h4 class="text-lg font-bold text-[#355B36] mb-2">Fase 3: Reactieve, Onbewuste Stabiliteit & Volledig Belasten (Wk 8-12+)</h4>
+                                <p class="text-sm text-slate-600 mb-4 font-medium">Doel: De spieren conditioneren in een extreem snelle en onbewuste (reactieve) spierrespons om het gewricht op reflex-basis te stabiliseren bij zware of onverwachte externe lasten.</p>
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                     <div class="bg-white p-4 rounded shadow-sm border-l-4 border-l-[#88AD4B]">
                                         <h5 class="text-sm font-bold text-[#355B36] mb-2">1. SL-Instabiliteit</h5>
-                                        <p class="text-xs text-slate-700">Progressieve belasting. Eerst kracht opbouwen in DTM-vlak. Bij sport evt. tape inzetten.</p>
+                                        <p class="text-xs text-slate-700">Introduceer progressieve en dynamische belasting en weerstand. Bouw eerst in het veilige DTM-vlak kracht op, verken daarna uiterst gecontroleerd en langzaam de overige vlakken met hulpmiddelen. Bijv: trillende Powerball, Bodyblade of plyometrische ketenoefeningen. Bij intensieve of explosieve terugkeer naar sport mag preventief een sporttape als back-up dienen.</p>
                                     </div>
                                     <div class="bg-white p-4 rounded shadow-sm border-l-4 border-l-[#E7B24F]">
                                         <h5 class="text-sm font-bold text-[#355B36] mb-2">2. Midcarpaal (MCI)</h5>
-                                        <p class="text-xs text-slate-700">Ritmische stabilisatie, afsteunen op onstabiele ondergrond. Bij onvoldoende effect: operatief consult.</p>
+                                        <p class="text-xs text-slate-700">De focus verschuift naar zware en gelijktijdige co-contracties van alle actieve flexoren en extensoren rondom de pols (ritmische stabilisatie en perturbatietraining). Voer oefeningen en asdruk uit op zachte/instabiele ondergronden (een Bosu ball of wankel kussen). Indien na lange conservatieve inzet patiënt geen controle verwerft: indicatie voor operatief consult.</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
+
                         <div class="relative z-10 pl-12 mt-2 pb-4">
                             <div class="timeline-dot absolute left-[6px] top-1 w-8 h-8 rounded-full bg-[#88AD4B]/10 border border-[#88AD4B]/30 flex items-center justify-center text-[#88AD4B] shadow-sm ring-4 ring-[#F7F0E8] z-10"><svg class="w-5 h-5"><use href="#icon-check"></use></svg></div>
                             <div class="pt-1.5"><span class="text-[#88AD4B] font-bold tracking-widest text-sm uppercase">Revalidatie Voltooid</span></div>
@@ -1023,9 +920,7 @@
                 </section>
             </div>
 
-            <!-- ========================================== -->
-            <!-- 9. NIEUW: CMC-1 ARTROSE CONSERVATIEF       -->
-            <!-- ========================================== -->
+            <!-- 9. CMC-1 ARTROSE CONSERVATIEF -->
             <div id="sec-cmc1-cons" class="protocol-section hidden fade-in space-y-8">
                 <header class="bg-[#355B36] rounded-2xl p-8 md:p-10 text-white shadow-xl relative overflow-hidden">
                     <div class="absolute -right-10 -top-10 w-64 h-64 bg-[#88AD4B]/20 rounded-full blur-3xl pointer-events-none"></div>
@@ -1034,89 +929,215 @@
                     </button>
                     <h2 class="text-[#88AD4B] font-bold tracking-widest uppercase text-xs mb-2">Protocol 09</h2>
                     <h1 class="text-3xl md:text-5xl font-extrabold mb-4 tracking-tight text-[#F7F0E8]">CMC-1 Artrose (Conservatief)</h1>
-                    <p class="text-lg text-[#F7F0E8]/80 max-w-3xl font-light pr-24">Conservatief beleid voor slijtage van het duimbasisgewricht. Focus op spalken, adaptatie en actieve stabiliteit.</p>
+                    <p class="text-lg text-[#F7F0E8]/80 max-w-3xl font-light pr-24">Conservatief beleid voor kraakbeenslijtage van het duimbasisgewricht. De focus ligt sterk op spalken, gedragsadaptatie en intrinsieke actieve sturing/stabiliteit.</p>
                 </header>
-                
                 <section class="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <div class="bg-white rounded-xl shadow-sm border border-[#F7F0E8] p-6 border-t-4 border-t-[#88AD4B]">
                         <h3 class="text-lg font-bold mb-3 text-[#355B36]">🎯 Klinisch Beeld</h3>
                         <ul class="space-y-2 text-sm text-slate-600">
-                            <li class="flex items-start"><svg class="w-4 h-4 text-[#88AD4B] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-check"></use></svg><span>Pijn aan de duimbasis, vooral bij knijpen, wringen en potten opendraaien.</span></li>
-                            <li class="flex items-start"><svg class="w-4 h-4 text-[#88AD4B] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-check"></use></svg><span>Ochtendstijfheid, startpijn en krachtsverlies in de pinch-grip.</span></li>
+                            <li class="flex items-start"><svg class="w-4 h-4 text-[#88AD4B] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-check"></use></svg><span>Doffe of vlammende pijn diep in de radiale duimbasis, vaak sterk en direct verergerend of uitschietend bij knijpen, theedoek wringen, draaien van sloten en stugge potten of flessen opendraaien.</span></li>
+                            <li class="flex items-start"><svg class="w-4 h-4 text-[#88AD4B] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-check"></use></svg><span>Vaak in de opstart sprake van merkbare en stugge ochtendstijfheid in het gewricht, pijn direct bij startende belasting (startpijn) en een duidelijk meetbaar krachtsverlies in de fijne pinch- en sleutelgreep.</span></li>
                         </ul>
                     </div>
                     <div class="bg-white rounded-xl shadow-sm border border-[#F7F0E8] p-6 border-t-4 border-t-[#355B36]">
-                        <h3 class="text-lg font-bold text-[#355B36] mb-3">🧬 Differentiatie</h3>
+                        <h3 class="text-lg font-bold text-[#355B36] mb-3">🧬 Differentiatie & Fase</h3>
                         <ul class="space-y-3 text-sm text-slate-700">
-                            <li class="flex items-start"><svg class="w-4 h-4 text-[#88AD4B] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-check"></use></svg><span><strong>Milde Artrose:</strong> Pijn staat op de voorgrond. Gewricht is stuurbaar. Focus op spierkracht/sturing.</span></li>
-                            <li class="flex items-start"><svg class="w-4 h-4 text-[#88AD4B] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-check"></use></svg><span><strong>Ernstige Artrose:</strong> Zichtbare (sub)luxatie, Z-deformiteit. Focus op spalken en gewrichtsbescherming.</span></li>
+                            <li class="flex items-start"><svg class="w-4 h-4 text-[#88AD4B] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-check"></use></svg><span><strong>Milde / Matige Artrose:</strong> De pijnprikkel staat op de voorgrond. Het bot / gewricht is echter nog actief en bewust stuurbaar. Primaire focus ligt hierbij op spierkracht en neuromusculaire sturing opbouwen (M. APB).</span></li>
+                            <li class="flex items-start"><svg class="w-4 h-4 text-[#88AD4B] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-check"></use></svg><span><strong>Ernstige, destructieve Artrose:</strong> Er is een klinisch zichtbare, harde (sub)luxatie of bot deformatie opgetreden (Z-deformiteit of hyperextensie MCP). Focus ligt hierbij veel strikter op passief spalken en structurele gewrichtsbescherming.</span></li>
                         </ul>
                     </div>
                     <div class="bg-white rounded-xl shadow-sm border border-[#E7B24F]/30 p-6 border-t-4 border-t-[#E7B24F]">
                         <h3 class="text-lg font-bold text-[#E7B24F] mb-3">🚨 CAVE</h3>
                         <ul class="space-y-2 text-sm text-slate-700">
-                            <li class="flex items-start"><svg class="w-4 h-4 text-[#E7B24F] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-alert"></use></svg><span><strong>Tip-to-tip pinch:</strong> Vermijd zware krachten (pincetgreep) waarbij de duim luxeert.</span></li>
-                            <li class="flex items-start"><svg class="w-4 h-4 text-[#E7B24F] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-alert"></use></svg><span><strong>Adductie contractuur:</strong> Bewaak actief de webspace tussen duim en wijsvinger.</span></li>
+                            <li class="flex items-start"><svg class="w-4 h-4 text-[#E7B24F] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-alert"></use></svg><span><strong>Schadelijke Tip-to-tip pinch:</strong> Patiënt instrueren tot de absolute vermijding van fijne en zware krachten (pincet greep) waarbij de duimtop loodrecht en direct de kracht op de wijsvinger top levert. Dit luxeert (verschuift) de toch al verzwakte CMC-1 botstructuren.</span></li>
+                            <li class="flex items-start"><svg class="w-4 h-4 text-[#E7B24F] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-alert"></use></svg><span><strong>Adductie contractuur:</strong> Bewaak actief wekelijks het verlies of de stugheid in de webspace boog tussen de basis van de duim en wijsvinger, om permanente spierverkorting (M. Adductor Pollicis) te voorkomen.</span></li>
+                        </ul>
+                    </div>
+                </section>
+                <section class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <div class="bg-white rounded-xl shadow-sm border border-[#F7F0E8] p-6"><h3 class="text-xl font-bold mb-4 text-[#355B36]">Behandelfocus</h3><div class="chart-container-large"><canvas id="cmc1ConsModalityChart"></canvas></div></div>
+                    <div class="bg-white rounded-xl shadow-sm border border-[#F7F0E8] p-6"><h3 class="text-xl font-bold mb-4 text-[#355B36]">Pijn vs. Belastbaarheid</h3><div class="chart-container-large"><canvas id="cmc1ConsRecoveryChart"></canvas></div></div>
+                </section>
+                <section class="bg-white rounded-xl shadow-sm border border-[#F7F0E8] p-6 md:p-10 mt-8">
+                    <h3 class="text-2xl font-extrabold mb-8 text-center text-[#355B36]">Het Conservatieve 3-Fasen Protocol</h3>
+                    <div class="relative max-w-5xl mx-auto">
+                        <div class="timeline-line absolute left-5 top-5 bottom-4 w-1 bg-[#88AD4B]/30 rounded-full z-0"></div>
+                        <div class="relative z-10 pl-12 pb-8">
+                            <div class="timeline-dot absolute left-[6px] top-1 w-8 h-8 rounded-full bg-[#E7B24F] flex items-center justify-center text-white font-bold text-sm shadow ring-4 ring-white">1</div>
+                            <div class="bg-[#F7F0E8]/50 border border-[#F7F0E8] rounded-xl p-6 hover:shadow-md transition-shadow">
+                                <h4 class="text-lg font-bold text-[#355B36] mb-2">Fase 1: Pijndemping & Ontlasten (Wk 0-4)</h4>
+                                <p class="text-sm text-slate-600 mb-4 font-medium">Doel: De vicieuze pijn- en ontstekingscirkel in het artrotische gewricht doorbreken door externe stabilisatie en gedragsaanpassing.</p>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div class="bg-white p-4 rounded shadow-sm border-l-4 border-l-[#88AD4B]">
+                                        <h5 class="text-sm font-bold text-[#355B36] mb-2">1. Spalkbeleid</h5>
+                                        <p class="text-xs text-slate-700">Aanmeten van een specifieke en ondersteunende CMC-1 brace (bijv. Push Ortho CMC of maatwerk thermoplast) met de duim gepositioneerd in goede abductie. Draagadvies: uitsluitend inzetten of verplichten overdag tijdens de belastende en zware ADL. Bij ernstige en onafgebroken ontstekingspijn is ook tijdelijk een comfort nachtspalk (rustspalk) te overwegen ter pijndemping.</p>
+                                    </div>
+                                    <div class="bg-white p-4 rounded shadow-sm border-l-4 border-l-[#E7B24F]">
+                                        <h5 class="text-sm font-bold text-[#355B36] mb-2">2. Gewrichtsbescherming</h5>
+                                        <p class="text-xs text-slate-700">Voorlichting en ergonomie. Analyseer en registreer de dagelijkse taken. Introduceer hulpmiddelen (zoals pottenopeners, verdikte pennen, aangepaste scharen) om repetitieve en krachtige pinch-belasting te vermijden.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="relative z-10 pl-12 pb-8">
+                            <div class="timeline-dot absolute left-[6px] top-1 w-8 h-8 rounded-full bg-[#88AD4B] flex items-center justify-center text-white font-bold text-sm shadow ring-4 ring-white">2</div>
+                            <div class="bg-[#F7F0E8]/50 border border-[#F7F0E8] rounded-xl p-6 hover:shadow-md transition-shadow">
+                                <h4 class="text-lg font-bold text-[#355B36] mb-2">Fase 2: Mobiliteit & Proprioceptie (Wk 4-8)</h4>
+                                <p class="text-sm text-slate-600 mb-4 font-medium">Doel: De afhankelijke musculatuur rondom het versleten gewricht versterken om 'eigen' (intrinsieke) stabilisatie te creëren.</p>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div class="bg-white p-4 rounded shadow-sm border-l-4 border-l-[#88AD4B]">
+                                        <h5 class="text-sm font-bold text-[#355B36] mb-2">1. Spierbalans herstellen</h5>
+                                        <p class="text-xs text-slate-700">Spalkgebruik mag geleidelijk afgebouwd worden bij lichte taken. Start isometrische activatie van de thenar-musculatuur (M. APB) en First Dorsal Interosseus (FDI) om het MC-1 bot centraal in het zadelgewricht te 'trekken' en subluxatie actief tegen te gaan.</p>
+                                    </div>
+                                    <div class="bg-white p-4 rounded shadow-sm border-l-4 border-l-[#E7B24F]">
+                                        <h5 class="text-sm font-bold text-[#355B36] mb-2">2. Webspace behoud</h5>
+                                        <p class="text-xs text-slate-700">Introduceer milde, onbelaste Range of Motion (ROM) oefeningen. Voorkom verstijving van de adductor pollicis (webspace massage en voorzichtige stretches). Oefen het maken van een bewuste 'grote C' (sleutelgreep in plaats van de provocerende smalle pincetgreep).</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="relative z-10 pl-12 pb-8">
+                            <div class="timeline-dot absolute left-[6px] top-1 w-8 h-8 rounded-full bg-[#355B36] flex items-center justify-center text-white font-bold text-sm shadow ring-4 ring-white">3</div>
+                            <div class="bg-[#F7F0E8]/50 border border-[#F7F0E8] rounded-xl p-6 hover:shadow-md transition-shadow">
+                                <h4 class="text-lg font-bold text-[#355B36] mb-2">Fase 3: Kracht & Duurzame Belasting (Wk 8+)</h4>
+                                <p class="text-sm text-slate-600 mb-4 font-medium">Doel: Terugkeer naar een acceptabel activiteitenniveau, versterking van functionele grepen en een lange-termijn zelfmanagement plan.</p>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div class="bg-white p-4 rounded shadow-sm border-l-4 border-l-[#88AD4B]">
+                                        <h5 class="text-sm font-bold text-[#355B36] mb-2">1. Functioneel Belasten</h5>
+                                        <p class="text-xs text-slate-700">Dynamische krachtoefeningen (putty, elastiek) gericht op het integreren van de nieuw aangeleerde sleutelgreep en krachtige cylindergreep in ADL-taken. De spalk wordt nu voornamelijk als 'gereedschap' ingezet en alleen omgehouden tijdens de extra zware huishoudelijke of werkgerelateerde taken.</p>
+                                    </div>
+                                    <div class="bg-white p-4 rounded shadow-sm border-l-4 border-l-[#E7B24F]">
+                                        <h5 class="text-sm font-bold text-[#355B36] mb-2">2. Lange-termijn beleid</h5>
+                                        <p class="text-xs text-slate-700">Artrose is van nature progressief (het gaat niet over). Behandeldoel is acceptatie, pijndemping en maximaal functiebehoud. Bij blijvende, invaliderende klachten ondanks 3-6 maanden intensieve conservatieve therapie (en evt. een corticosteroïdinjectie via de huisarts): verwijs door voor een operatief (orthopedisch) consult.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="relative z-10 pl-12 mt-2 pb-4">
+                            <div class="timeline-dot absolute left-[6px] top-1 w-8 h-8 rounded-full bg-[#88AD4B]/10 border border-[#88AD4B]/30 flex items-center justify-center text-[#88AD4B] shadow-sm ring-4 ring-[#F7F0E8] z-10"><svg class="w-5 h-5"><use href="#icon-check"></use></svg></div>
+                            <div class="pt-1.5"><span class="text-[#88AD4B] font-bold tracking-widest text-sm uppercase">Revalidatie Voltooid</span></div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- 10. DUIMBASIS FRACTUUR SECTION -->
+            <div id="sec-duimbasis" class="protocol-section hidden fade-in space-y-8">
+                <header class="bg-[#355B36] rounded-2xl p-8 md:p-10 text-white shadow-xl relative overflow-hidden">
+                    <div class="absolute -right-10 -top-10 w-64 h-64 bg-[#88AD4B]/20 rounded-full blur-3xl pointer-events-none"></div>
+                    <button onclick="window.print()" class="print-hidden absolute top-6 right-6 bg-white/10 hover:bg-white/20 text-white px-4 py-2.5 rounded-lg flex items-center gap-2 transition-all duration-200 border border-white/20 backdrop-blur-sm z-20 focus:ring-2 focus:ring-white/50">
+                        <svg class="w-5 h-5"><use href="#icon-print"></use></svg><span class="text-sm font-semibold tracking-wide">Afdrukken</span>
+                    </button>
+                    <h2 class="text-[#88AD4B] font-bold tracking-widest uppercase text-xs mb-2">Protocol 10</h2>
+                    <h1 class="text-3xl md:text-5xl font-extrabold mb-4 tracking-tight text-[#F7F0E8]">Duimbasis Fractuur</h1>
+                    <p class="text-lg text-[#F7F0E8]/80 max-w-3xl font-light pr-24">Conservatief en post-operatief protocol na een fractuur van os metacarpale 1 (incl. Bennett / Rolando).</p>
+                </header>
+                <section class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-white rounded-xl shadow-sm border border-[#F7F0E8] p-6 border-t-4 border-t-[#88AD4B]">
+                        <h3 class="text-lg font-bold mb-3 text-[#355B36]">🎯 Klinisch Beeld</h3>
+                        <ul class="space-y-2 text-sm text-slate-600">
+                            <li class="flex items-start"><svg class="w-4 h-4 text-[#88AD4B] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-check"></use></svg><span>Pijn, forse zwelling en asdrukpijn aan de basis van de duim (CMC-1). Ontstaan door direct, axiaal trauma (bijv. vuistslag of val).</span></li>
+                            <li class="flex items-start"><svg class="w-4 h-4 text-[#88AD4B] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-check"></use></svg><span>Patiënt ervaart een totaal onvermogen tot krachtzetten en actieve abductie van de duim ten opzichte van de handpalm.</span></li>
+                        </ul>
+                    </div>
+                    <div class="bg-white rounded-xl shadow-sm border border-[#F7F0E8] p-6 border-t-4 border-t-[#355B36]">
+                        <h3 class="text-lg font-bold text-[#355B36] mb-3">🧬 Differentiatie</h3>
+                        <ul class="space-y-3 text-sm text-slate-700">
+                            <li class="flex items-start"><svg class="w-4 h-4 text-[#88AD4B] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-check"></use></svg><span><strong>Extra-articulair:</strong> Breuklijn blijft buiten het gewricht (vaak dwarse fractuur). Is relatief stabieler en wordt vaak conservatief behandeld (gips).</span></li>
+                            <li class="flex items-start"><svg class="w-4 h-4 text-[#88AD4B] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-check"></use></svg><span><strong>Intra-articulair (Bennett/Rolando):</strong> Breuklijn loopt dóór in het zadelgewricht. Zeer instabiel en luxeert door spiertractie (APL). Vraagt meestal operatieve fixatie.</span></li>
+                        </ul>
+                    </div>
+                    <div class="bg-white rounded-xl shadow-sm border border-[#E7B24F]/30 p-6 border-t-4 border-t-[#E7B24F]">
+                        <h3 class="text-lg font-bold text-[#E7B24F] mb-3">🚨 CAVE</h3>
+                        <ul class="space-y-2 text-sm text-slate-700">
+                            <li class="flex items-start"><svg class="w-4 h-4 text-[#E7B24F] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-alert"></use></svg><span><strong>Adductie contractuur:</strong> Gevaar voor onomkeerbaar verlies van de "webspace" (spanwijdte duim/wijsvinger) door verlittekening tijdens de gipsfase.</span></li>
+                            <li class="flex items-start"><svg class="w-4 h-4 text-[#E7B24F] mr-2 flex-shrink-0 mt-0.5"><use href="#icon-alert"></use></svg><span><strong>Secundaire artrose:</strong> Intra-articulaire breuken (vooral met trapje in het gewrichtsvlak) geven een sterk verhoogd risico op vroege CMC-1 artrose!</span></li>
                         </ul>
                     </div>
                 </section>
 
                 <section class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                    <div class="bg-white rounded-xl shadow-sm border border-[#F7F0E8] p-6"><h3 class="text-xl font-bold mb-4 text-[#355B36]">Behandelfocus</h3><div class="chart-container-large"><canvas id="cmc1ConsModalityChart"></canvas></div></div>
-                    <div class="bg-white rounded-xl shadow-sm border border-[#F7F0E8] p-6"><h3 class="text-xl font-bold mb-4 text-[#355B36]">Pijn vs. Belastbaarheid</h3><div class="chart-container-large"><canvas id="cmc1ConsRecoveryChart"></canvas></div></div>
+                    <div class="bg-white rounded-xl shadow-sm border border-[#F7F0E8] p-6"><h3 class="text-xl font-bold mb-4 text-[#355B36]">Behandelfocus</h3><div class="chart-container-large"><canvas id="duimbasisModalityChart"></canvas></div></div>
+                    <div class="bg-white rounded-xl shadow-sm border border-[#F7F0E8] p-6"><h3 class="text-xl font-bold mb-4 text-[#355B36]">Botgenezing vs Belastbaarheid</h3><div class="chart-container-large"><canvas id="duimbasisRecoveryChart"></canvas></div></div>
                 </section>
 
                 <section class="bg-white rounded-xl shadow-sm border border-[#F7F0E8] p-6 md:p-10 mt-8">
-                    <h3 class="text-2xl font-extrabold mb-8 text-center text-[#355B36]">Het Conservatieve 3-Fasen Protocol</h3>
+                    <h3 class="text-2xl font-extrabold mb-8 text-center text-[#355B36]">Het 4-Fasen Protocol</h3>
                     <div class="relative max-w-5xl mx-auto">
                         <div class="timeline-line absolute left-5 top-5 bottom-4 w-1 bg-[#88AD4B]/30 rounded-full z-0"></div>
                         
+                        <!-- Fase 1 -->
                         <div class="relative z-10 pl-12 pb-8">
                             <div class="timeline-dot absolute left-[6px] top-1 w-8 h-8 rounded-full bg-[#E7B24F] flex items-center justify-center text-white font-bold text-sm shadow ring-4 ring-white">1</div>
                             <div class="bg-[#F7F0E8]/50 border border-[#F7F0E8] rounded-xl p-6 hover:shadow-md transition-shadow">
-                                <h4 class="text-lg font-bold text-[#355B36] mb-2">Fase 1: Pijndemping & Ontlasten (Wk 0-4)</h4>
+                                <h4 class="text-lg font-bold text-[#355B36] mb-2">Fase 1: Fractuurheling & Immobilisatie (Wk 0-4/6)</h4>
+                                <p class="text-sm text-slate-600 mb-4 font-medium">Doel: Onverstoorde callusvorming (botgenezing) en reductie van het post-traumatische oedeem in de gehele hand.</p>
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                     <div class="bg-white p-4 rounded shadow-sm border-l-4 border-l-[#88AD4B]">
-                                        <h5 class="text-sm font-bold text-[#355B36] mb-2">1. Spalkbeleid</h5>
-                                        <p class="text-xs text-slate-700">Aanmeten CMC-1 brace (bijv. Push Ortho of thermoplast) in goede abductie. Overdag inzetten bij belastende ADL. Bij ernstige pijn ook nachtspalk ter rust.</p>
+                                        <h5 class="text-sm font-bold text-[#355B36] mb-2">1. Extra-articulair (Conservatief)</h5>
+                                        <p class="text-xs text-slate-700">Immobilisatie middels een goed sluitend gipsverband, vaak met inbegrip van het IP-gewricht om rotaties te blokkeren. Geef de patiënt strikte instructie voor hooghouden en actieve TGE's (Tendon Gliding Exercises) van de niet-betrokken vingers om stijfheid in de rest van de hand tegen te gaan.</p>
                                     </div>
                                     <div class="bg-white p-4 rounded shadow-sm border-l-4 border-l-[#E7B24F]">
-                                        <h5 class="text-sm font-bold text-[#355B36] mb-2">2. Gewrichtsbescherming</h5>
-                                        <p class="text-xs text-slate-700">Ergonomie. Analyseer dagelijkse taken. Introduceer hulpmiddelen (pottenopeners, verdikte pennen) om repetitieve, krachtige pinch-belasting te vermijden.</p>
+                                        <h5 class="text-sm font-bold text-[#355B36] mb-2">2. Intra-articulair (Post-operatief)</h5>
+                                        <p class="text-xs text-slate-700">Na operatieve fixatie (K-draden of mini-schroefjes) volgt tevens een strikte gipsperiode ter stabilisatie. Bij percutane (uitstekende) K-draden is extra aandacht voor pin-site care essentieel (infectiepreventie). Absolute rust en bescherming van het gewricht is in deze helingsfase prioritair.</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         
+                        <!-- Fase 2 -->
                         <div class="relative z-10 pl-12 pb-8">
                             <div class="timeline-dot absolute left-[6px] top-1 w-8 h-8 rounded-full bg-[#88AD4B] flex items-center justify-center text-white font-bold text-sm shadow ring-4 ring-white">2</div>
                             <div class="bg-[#F7F0E8]/50 border border-[#F7F0E8] rounded-xl p-6 hover:shadow-md transition-shadow">
-                                <h4 class="text-lg font-bold text-[#355B36] mb-2">Fase 2: Mobiliteit & Proprioceptie (Wk 4-8)</h4>
+                                <h4 class="text-lg font-bold text-[#355B36] mb-2">Fase 2: Gecontroleerde Mobilisatie & Spalk wean-off (Wk 4-6)</h4>
+                                <p class="text-sm text-slate-600 mb-4 font-medium">Doel: Veilig herwinnen van de basis beweeglijkheid zonder rek of frictie op de vormende bot-callus te plaatsen.</p>
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                     <div class="bg-white p-4 rounded shadow-sm border-l-4 border-l-[#88AD4B]">
-                                        <h5 class="text-sm font-bold text-[#355B36] mb-2">1. Spierbalans</h5>
-                                        <p class="text-xs text-slate-700">Start isometrische activatie thenar (APB) en FDI om MC-1 bot centraal in het zadelgewricht te 'trekken' en subluxatie tegen te gaan. Spalk afbouwen bij lichte taken.</p>
+                                        <h5 class="text-sm font-bold text-[#355B36] mb-2">1. Extra-articulair</h5>
+                                        <p class="text-xs text-slate-700">Zodra het gips verwijderd is, wordt een afneembare thermoplastische duimspica aangemeten. Start met lichte, pijnvrije AROM (Active Range of Motion) van het CMC-1, MCP en IP gewricht. Geen passieve rek of weerstand toepassen. De duimspica moet buiten het oefenen om nog consequent gedragen worden.</p>
                                     </div>
                                     <div class="bg-white p-4 rounded shadow-sm border-l-4 border-l-[#E7B24F]">
-                                        <h5 class="text-sm font-bold text-[#355B36] mb-2">2. Webspace behoud</h5>
-                                        <p class="text-xs text-slate-700">Milde, onbelaste ROM oefeningen. Voorkom contractuur van de adductor. Oefen de 'grote C' (sleutelgreep in plaats van pincetgreep).</p>
+                                        <h5 class="text-sm font-bold text-[#355B36] mb-2">2. Intra-articulair</h5>
+                                        <p class="text-xs text-slate-700">Indien K-draden geplaatst waren, worden deze meestal rond week 4-5 poli-klinisch verwijderd. Aanmeten van de afneembare duimspica. Start uiterst voorzichtige en onbelaste AROM. Besteed in deze fase speciale aandacht aan het actief soepel houden van de webspace (M. adductor pollicis).</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         
+                        <!-- Fase 3 -->
                         <div class="relative z-10 pl-12 pb-8">
                             <div class="timeline-dot absolute left-[6px] top-1 w-8 h-8 rounded-full bg-[#355B36] flex items-center justify-center text-white font-bold text-sm shadow ring-4 ring-white">3</div>
                             <div class="bg-[#F7F0E8]/50 border border-[#F7F0E8] rounded-xl p-6 hover:shadow-md transition-shadow">
-                                <h4 class="text-lg font-bold text-[#355B36] mb-2">Fase 3: Kracht & Duurzame Belasting (Wk 8+)</h4>
+                                <h4 class="text-lg font-bold text-[#355B36] mb-2">Fase 3: Consolidatie & Dynamische Stabilisatie (Wk 6-8)</h4>
+                                <p class="text-sm text-slate-600 mb-4 font-medium">Doel: Na het bereiken van klinische botvastheid, de bescherming afbouwen en neuromusculaire controle vergroten.</p>
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                     <div class="bg-white p-4 rounded shadow-sm border-l-4 border-l-[#88AD4B]">
-                                        <h5 class="text-sm font-bold text-[#355B36] mb-2">1. Functioneel Belasten</h5>
-                                        <p class="text-xs text-slate-700">Dynamische oefeningen (putty, elastiek) gericht op integratie van de sleutelgreep in de ADL. Spalk is nu een 'gereedschap' voor uitsluitend zware taken.</p>
+                                        <h5 class="text-sm font-bold text-[#355B36] mb-2">1. Extra-articulair</h5>
+                                        <p class="text-xs text-slate-700">De klinische consolidatie is veelal bereikt. Spalkgebruik afbouwen naar alleen tijdens zware ADL taken of als nachtelijke rustspalk. Start met isometrische stabilisatie-oefeningen (focus op de M. APB en de 1e Dorsale Interosseus) en de geleidelijke introductie van lichte concentrische weerstand (putty).</p>
                                     </div>
                                     <div class="bg-white p-4 rounded shadow-sm border-l-4 border-l-[#E7B24F]">
-                                        <h5 class="text-sm font-bold text-[#355B36] mb-2">2. Lange-termijn beleid</h5>
-                                        <p class="text-xs text-slate-700">Artrose is progressief. Focus op acceptatie en functiebehoud. Bij invaliderende klachten ondanks conservatieve inzet (> 3-6 mnd): verwijs voor operatief consult.</p>
+                                        <h5 class="text-sm font-bold text-[#355B36] mb-2">2. Intra-articulair</h5>
+                                        <p class="text-xs text-slate-700">Volgt in principe hetzelfde opbouwschema. Indien AROM echter stagneert en alléén op expliciete aanwijzing van arts, kan zeer voorzichtig en gedoseerd PROM (zoals een milde webspace stretch) gestart worden. Vermijd nog steeds alle krachtige schuifkrachten of tractie over het recent geheelde aangedane gewricht.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Fase 4 -->
+                        <div class="relative z-10 pl-12 pb-8">
+                            <div class="timeline-dot absolute left-[6px] top-1 w-8 h-8 rounded-full bg-[#355B36] flex items-center justify-center text-white font-bold text-sm shadow ring-4 ring-white">4</div>
+                            <div class="bg-[#F7F0E8]/50 border border-[#F7F0E8] rounded-xl p-6 hover:shadow-md transition-shadow">
+                                <h4 class="text-lg font-bold text-[#355B36] mb-2">Fase 4: Volledig Belasten & Remodellering (Wk 8-12+)</h4>
+                                <p class="text-sm text-slate-600 mb-4 font-medium">Doel: Veilige terugkeer naar 100% functie in sport en beroep, met langdurige pijndemping en preventie-kennis.</p>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div class="bg-white p-4 rounded shadow-sm border-l-4 border-l-[#88AD4B]">
+                                        <h5 class="text-sm font-bold text-[#355B36] mb-2">1. Extra-articulair</h5>
+                                        <p class="text-xs text-slate-700">De spalk is geheel weggelaten. Vrije opbouw van zware functionele pinch- en gripkracht naar het oorspronkelijke ADL en werk niveau. Een volledige, onbeperkte sporthervatting is in de regel na circa 8 tot 10 weken veilig toegestaan, mede afhankelijk van het type impact en contact binnen de sport.</p>
+                                    </div>
+                                    <div class="bg-white p-4 rounded shadow-sm border-l-4 border-l-[#E7B24F]">
+                                        <h5 class="text-sm font-bold text-[#355B36] mb-2">2. Intra-articulair</h5>
+                                        <p class="text-xs text-slate-700">Hervatten van krachttraining en specifieke sporthervatting. Overweeg preventief het tijdelijk inzetten van een zachte neopreen duimbrace tijdens contact- of balsporten ter schokdemping. Informeer de patiënt actief en eerlijk over het reële verhoogde risico op lichte gewrichtsstijfheid en latere artrosevorming.</p>
                                     </div>
                                 </div>
                             </div>
@@ -1133,15 +1154,17 @@
         </main>
     </div>
 
+    <!-- SCRIPT LOGIC (COMPACT & FOOLPROOF) -->
     <script>
         Chart.defaults.font.family = "'Inter', sans-serif";
-        const chartsInitialized = { ecu: false, radius: false, ctr: false, quervain: false, trigger: false, mallet: false, cmc1: false, instabiel: false, 'cmc1-cons': false };
+        const chartsInitialized = { ecu: false, radius: false, ctr: false, quervain: false, trigger: false, mallet: false, cmc1: false, instabiel: false, 'cmc1-cons': false, duimbasis: false };
 
         function toggleCategory(catId) {
             const ul = document.getElementById(catId);
             const icon = document.getElementById('icon-' + catId);
+            if (!ul) return;
             if (ul.style.maxHeight === '0px' || ul.style.maxHeight === '') {
-                ul.style.maxHeight = ul.scrollHeight + 'px';
+                ul.style.maxHeight = ul.scrollHeight + 100 + 'px'; // +100 as buffer
                 ul.style.opacity = '1';
                 ul.style.marginTop = '0.5rem';
                 if(icon) icon.classList.add('rotate-180');
@@ -1154,17 +1177,19 @@
         }
 
         function switchTab(tabId) {
+            // Style reset buttons
             document.querySelectorAll('.nav-btn').forEach(btn => {
                 btn.classList.remove('bg-[#88AD4B]', 'text-white', 'shadow-md', 'shadow-[#88AD4B]/20');
                 btn.classList.add('text-[#F7F0E8]/80', 'hover:bg-[#F7F0E8]/10');
             });
+            // Style active button
             const activeBtn = document.getElementById('nav-' + tabId);
             if (activeBtn) {
                 activeBtn.classList.remove('text-[#F7F0E8]/80', 'hover:bg-[#F7F0E8]/10');
                 activeBtn.classList.add('bg-[#88AD4B]', 'text-white', 'shadow-md', 'shadow-[#88AD4B]/20');
                 const parentUl = activeBtn.closest('ul');
                 if (parentUl && parentUl.id.startsWith('cat-')) {
-                    parentUl.style.maxHeight = '500px'; 
+                    parentUl.style.maxHeight = parentUl.scrollHeight + 100 + 'px'; 
                     parentUl.style.opacity = '1';
                     parentUl.style.marginTop = '0.5rem';
                     const iconElem = document.getElementById('icon-' + parentUl.id);
@@ -1172,20 +1197,23 @@
                 }
             }
 
+            // Hide/Show sections
             document.querySelectorAll('.protocol-section').forEach(sec => sec.classList.add('hidden'));
             const targetSec = document.getElementById('sec-' + tabId);
             if (targetSec) targetSec.classList.remove('hidden');
 
+            // Init charts safely
             if (!chartsInitialized[tabId]) {
                 if (tabId === 'ecu') initEcuCharts();
-                if (tabId === 'radius') initRadiusCharts();
-                if (tabId === 'ctr') initCtrCharts();
-                if (tabId === 'quervain') initQuervainCharts();
-                if (tabId === 'trigger') initTriggerCharts();
-                if (tabId === 'mallet') initMalletCharts();
-                if (tabId === 'cmc1') initCmc1Charts();
-                if (tabId === 'instabiel') initInstabielCharts();
-                if (tabId === 'cmc1-cons') initCmc1ConsCharts();
+                else if (tabId === 'radius') initRadiusCharts();
+                else if (tabId === 'ctr') initCtrCharts();
+                else if (tabId === 'quervain') initQuervainCharts();
+                else if (tabId === 'trigger') initTriggerCharts();
+                else if (tabId === 'mallet') initMalletCharts();
+                else if (tabId === 'cmc1') initCmc1Charts();
+                else if (tabId === 'instabiel') initInstabielCharts();
+                else if (tabId === 'cmc1-cons') initCmc1ConsCharts();
+                else if (tabId === 'duimbasis') initDuimbasisCharts();
                 chartsInitialized[tabId] = true;
             }
         }
@@ -1197,10 +1225,14 @@
         const oLine = (max1, max2) => ({ responsive: true, maintainAspectRatio: false, scales: { y: { position: 'left', max: max1 }, y1: { position: 'right', max: max2, grid: {drawOnChartArea:false} } } });
 
         function cBar(id, lbls, l1,d1,c1, l2,d2,c2, l3,d3,c3, extraOpts) {
-            new Chart(document.getElementById(id), { type: 'bar', data: { labels: lbls, datasets: [ {label:l1, data:d1, backgroundColor:c1}, {label:l2, data:d2, backgroundColor:c2}, {label:l3, data:d3, backgroundColor:c3} ]}, options: extraOpts || oBar });
+            const el = document.getElementById(id);
+            if(!el) return;
+            new Chart(el, { type: 'bar', data: { labels: lbls, datasets: [ {label:l1, data:d1, backgroundColor:c1}, {label:l2, data:d2, backgroundColor:c2}, {label:l3, data:d3, backgroundColor:c3} ]}, options: extraOpts || oBar });
         }
         function cLine(id, lbls, l1,d1,c1, l2,d2,c2, max1, max2) {
-            new Chart(document.getElementById(id), { type: 'line', data: { labels: lbls, datasets: [ {label:l1, data:d1, borderColor:c1, yAxisID:'y'}, {label:l2, data:d2, borderColor:c2, yAxisID:'y1'} ]}, options: oLine(max1, max2) });
+            const el = document.getElementById(id);
+            if(!el) return;
+            new Chart(el, { type: 'line', data: { labels: lbls, datasets: [ {label:l1, data:d1, borderColor:c1, yAxisID:'y'}, {label:l2, data:d2, borderColor:c2, yAxisID:'y1'} ]}, options: oLine(max1, max2) });
         }
 
         function initEcuCharts() {
@@ -1220,10 +1252,15 @@
             cLine('quervainRecoveryChart', ['Wk 0','Wk 3','Wk 6+'], 'Pijnscore',[8,4,0],'#E7B24F', 'Tolerantie (%)',[10,50,100],'#355B36', 10, 100);
         }
         function initTriggerCharts() {
-            const noLg = { responsive: true, maintainAspectRatio: false, scales: { x: { stacked: true }, y: { stacked: true, max: 100, ticks:{display:false} } }, plugins: { legend: { display: false } } };
-            cBar('tfPulleyChart', p3, 'A',[90,40,0],'#88AD4B', 'B',[10,60,20],'#355B36', 'C',[0,0,80],'#E7B24F', noLg);
-            cBar('tfTenoChart', p3, 'A',[90,30,0],'#E7B24F', 'B',[10,60,20],'#88AD4B', 'C',[0,10,80],'#355B36', noLg);
-            cBar('tfTendinoChart', p3, 'A',[50,20,0],'#88AD4B', 'B',[50,40,20],'#355B36', 'C',[0,40,80],'#E7B24F', noLg);
+            const tfOpts = { 
+                responsive: true, 
+                maintainAspectRatio: false, 
+                scales: { x: { stacked: true }, y: { stacked: true, max: 100, ticks:{display:false} } }, 
+                plugins: { legend: { display: true, position: 'bottom', labels: { boxWidth: 10, font: { size: 10 } } } } 
+            };
+            cBar('tfPulleyChart', p3, 'Spalk / Rust',[90,40,0],'#88AD4B', 'Mobilisatie',[10,60,20],'#355B36', 'Belasting',[0,0,80],'#E7B24F', tfOpts);
+            cBar('tfTenoChart', p3, 'Spalk / Rust',[90,30,0],'#E7B24F', 'Mobilisatie',[10,60,20],'#88AD4B', 'Belasting',[0,10,80],'#355B36', tfOpts);
+            cBar('tfTendinoChart', p3, 'Spalk / Rust',[50,20,0],'#88AD4B', 'Mobilisatie',[50,40,20],'#355B36', 'Belasting',[0,40,80],'#E7B24F', tfOpts);
             cLine('tfRecoveryChart', ['Wk 0','Wk 4','Wk 8+'], 'Pijn',[8,2,0],'#E7B24F', 'Quinnell',[3,1,0],'#355B36', 10, 4);
         }
         function initMalletCharts() {
@@ -1242,11 +1279,15 @@
             cBar('cmc1ConsModalityChart', p3, 'Spalk/Ontlasten',[80,40,10],'#355B36', 'Stabiliteit/Proprioceptie',[20,60,40],'#88AD4B', 'Functionele Kracht',[0,10,80],'#E7B24F');
             cLine('cmc1ConsRecoveryChart', ['Wk 0','Wk 4','Wk 8+'], 'Pijnscore (VAS)',[7,4,2],'#E7B24F', 'Functionele Belastbaarheid (%)',[20,50,80],'#355B36', 10, 100);
         }
+        function initDuimbasisCharts() {
+            cBar('duimbasisModalityChart', p4, 'Gips/Spalk',[100,60,20,0],'#355B36', 'Mobilisatie',[0,40,60,20],'#88AD4B', 'Kracht/Belasting',[0,0,20,80],'#E7B24F');
+            cLine('duimbasisRecoveryChart', ['Wk 0','Wk 4','Wk 6','Wk 8','Wk 12+'], 'Consolidatie (%)',[0,20,60,90,100],'#88AD4B', 'Belasting (%)',[0,0,30,80,100],'#355B36', 100, 100);
+        }
 
         window.onload = () => {
             ['cat-pols', 'cat-duim', 'cat-vingers'].forEach(id => {
                 const ul = document.getElementById(id);
-                if(ul){ ul.style.maxHeight = '500px'; ul.style.opacity = '1'; }
+                if(ul){ ul.style.maxHeight = ul.scrollHeight + 100 + 'px'; ul.style.opacity = '1'; }
                 const i = document.getElementById('icon-' + id);
                 if(i) i.classList.add('rotate-180');
             });
