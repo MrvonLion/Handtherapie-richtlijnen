@@ -35,9 +35,18 @@
             transform: translateY(-5px);
             box-shadow: 0 10px 25px -5px rgba(53, 91, 54, 0.1), 0 8px 10px -6px rgba(53, 91, 54, 0.1);
         }
+
+        .dark-fysio-pattern {
+            background-color: #355B36;
+            background-image: radial-gradient(#4a7a4b 1px, transparent 1px);
+            background-size: 12px 12px;
+        }
     </style>
 </head>
 <body class="bg-fysio-beige font-sans text-slate-800 pb-20 selection:bg-fysio-light/30 min-h-screen">
+
+    <!-- VERBORGEN AUDIO SPELER -->
+    <audio id="main-audio" src="" onended="onAudioEnded()"></audio>
 
     <!-- NAVIGATIE BALK (ALTIJD ZICHTBAAR) -->
     <nav class="bg-fysio-dark text-white py-4 px-6 sticky top-0 z-50 shadow-md">
@@ -56,7 +65,9 @@
         </div>
     </nav>
 
-    <!-- PORTAAL OVERZICHT -->
+    <!-- ============================================== -->
+    <!-- VIEW: PORTAAL OVERZICHT (KEUZEMENU)            -->
+    <!-- ============================================== -->
     <div id="view-portal" class="max-w-6xl mx-auto px-6 py-12 animate-fade-in-up">
         <header class="mb-12 text-center md:text-left">
             <h1 class="text-4xl md:text-5xl font-extrabold text-fysio-dark mb-4 tracking-tight">Waar heb je last van?</h1>
@@ -115,55 +126,454 @@
         </footer>
     </div>
 
-    <!-- IFRAME CONTAINER VOOR DE DOCUMENTEN -->
-    <div id="view-document" class="hidden min-h-screen">
-        <div id="document-content"></div>
+    <!-- ============================================== -->
+    <!-- VIEW: DYNAMISCH DOCUMENT WEERGAVE              -->
+    <!-- ============================================== -->
+    <div id="view-document" class="hidden min-h-screen pt-10 pb-12">
+        <div class="max-w-4xl mx-auto px-4">
+            
+            <header class="mb-10 px-2 text-center md:text-left">
+                <h1 id="doc-title" class="text-4xl md:text-5xl font-extrabold tracking-tight leading-tight mb-3 text-fysio-dark">Laden...</h1>
+                <p id="doc-subtitle" class="text-slate-600 text-lg md:text-xl font-medium max-w-xl leading-relaxed">Laden...</p>
+            </header>
+
+            <div class="space-y-10">
+                <!-- INTRODUCTIE & AUDIO BLOK -->
+                <section class="bg-white rounded-2xl shadow-lg border border-slate-100 p-6 md:p-8 relative z-10">
+                    <div class="flex flex-col md:flex-row gap-8 items-start">
+                        <div class="flex-1">
+                            <h2 id="intro-title" class="text-2xl font-bold text-fysio-dark mb-3">Laden...</h2>
+                            <div id="intro-text" class="text-slate-600 leading-relaxed text-lg"></div>
+                        </div>
+
+                        <div class="w-full md:w-72 bg-fysio-beige rounded-xl p-5 border border-fysio-dark/10 shrink-0">
+                            <div class="flex justify-between items-start mb-4">
+                                <div>
+                                    <p class="font-bold text-fysio-dark">Voorbereiding</p>
+                                    <p id="audio-label" class="text-sm text-fysio-dark/70 font-medium">Laden...</p>
+                                </div>
+                                <div class="bg-white p-2 rounded-lg shadow-sm text-fysio-light">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
+                                </div>
+                            </div>
+                            <button id="audio-btn" onclick="toggleAudio()" class="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-lg font-bold transition-all duration-200">
+                                <!-- Tekst via JS -->
+                            </button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ROUTEKAART (Tabs) -->
+                <section>
+                    <div class="flex items-center justify-between mb-5 px-1">
+                        <div class="flex items-center gap-2">
+                            <span class="text-fysio-light">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="19" r="3"/><path d="M9 19h8.5a3.5 3.5 0 0 0 0-7h-11a3.5 3.5 0 0 1 0-7H15"/><circle cx="18" cy="5" r="3"/></svg>
+                            </span>
+                            <h3 class="text-xl font-bold text-fysio-dark">Tijdlijn / Fases</h3>
+                        </div>
+                    </div>
+                    <div class="relative" id="timeline-container"></div>
+                </section>
+
+                <!-- INHOUD CONTAINER -->
+                <section id="content-container"></section>
+            </div>
+
+        </div>
     </div>
 
+    <!-- ============================================== -->
+    <!-- LOGICA EN DATA (CENTRAAL BEHEER)               -->
+    <!-- ============================================== -->
     <script>
-        // Functie om de weergave te wisselen
-        function showView(view) {
-            const portal = document.getElementById('view-portal');
-            const documentView = document.getElementById('view-document');
-            const backBtn = document.getElementById('back-to-portal');
-            const content = document.getElementById('document-content');
+        // Universele Icoontjes
+        const ICONS = {
+            play: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>`,
+            square: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/></svg>`,
+            target: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>`,
+            activity: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>`,
+            checklist: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 11 3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1 2-2V5a2 2 0 0 1 2-2h11"/></svg>`,
+            lock: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>`,
+            arrow: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>`,
+            refresh: `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>`,
+            check: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" class="mt-0.5"><polyline points="20 6 9 17 4 12"/></svg>`,
+            echo: `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>`,
+            policy: `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>`
+        };
 
-            // Reset view
-            portal.classList.add('hidden');
-            documentView.classList.add('hidden');
-            backBtn.classList.add('hidden');
+        // Gecentraliseerde Data voor alle protocollen
+        const DATA_STORE = {
+            pols: {
+                title: "Pols Revalidatie Stappenplan",
+                subtitle: "Gestructureerd en veilig opbouwen naar een pijnvrije pols",
+                audioSrc: "https://files.catbox.moe/i0w5js.mp3",
+                audioLabel: "Audiogids • 2 min",
+                introTitle: "A-specifieke Polsklachten",
+                introText: "Geen aanwijsbare schade in je pols, maar wel vervelende pijn. Dit betekent dat we de pols weer veilig sterker kunnen maken. Jouw herstel is opgedeeld in fases. <strong>Je mag pas naar een volgende fase als je aan de voorwaarden voldoet.</strong> Neem even de tijd om de inleidende audiogids te beluisteren voor we starten.",
+                layout: "standard",
+                timeline: [
+                    {
+                        phaseName: "Fase 1", phaseLabel: "Bewust & Onbelast",
+                        goal: "Het weer leren 'voelen' van je pols in de juiste houding, zonder zware belasting.",
+                        bodyText: "In deze eerste fase focussen we ons volledig op de basis. We noemen dit 'proprioceptie': het gevoel van waar je gewricht zich bevindt in de ruimte. Je leert de pols in een lichte, neutrale stand te houden (ongeveer 20 graden omhoog gekanteld). Het is normaal dat je pols in het begin nog wat pijnlijk of stijf aanvoelt. Forceer niets en train onbelast.",
+                        exercises: ["Maak een vuist en leg je onderarm en vuist plat op tafel. Kijk of de pols in een mooie rechte lijn staat.", "Houd een lichte stok (bijv. een pvc-buis) vast, en draai je onderarm langzaam van handpalm naar beneden, naar handpalm naar boven.", "Strek je arm voor je uit en draai langzaam een 'achtje' (lemniscaat) in de lucht. Zorg dat de pols zelf neutraal en stijf blijft.", "Oefen het aanhouden van de perfecte polshouding. Gebruik eventueel een spiegel om jezelf te controleren."],
+                        criteriaTitle: "Voorwaarden om naar Fase 2 te gaan:",
+                        criteria: ["Je kunt 60 seconden lang een gewichtje van 0,5 kg vasthouden in de neutrale polspositie.", "Je onderarm of hand begint hierbij niet te trillen.", "De pijnscore is maximaal een 3 (op een schaal van 0 tot 10)."]
+                    },
+                    {
+                        phaseName: "Fase 2", phaseLabel: "Statisch Belasten",
+                        goal: "Spierkracht opbouwen rondom de pols, zonder het gewricht zelf te bewegen.",
+                        bodyText: "Nu de basis goed is en je de criteria van Fase 1 hebt gehaald, gaan we de spieren rondom de pols uitdagen. We doen dit 'isometrisch'. Dat betekent dat je wel kracht zet, maar de pols stilhoudt in de neutrale positie. Zo maken we de stabilisatoren van je pols sterker, zonder het gewricht overmatig te irriteren.",
+                        exercises: ["Kneed in een bolletje therapie-klei (putty) of trek het langzaam uit elkaar. Houd de pols continu kaarsrecht.", "Houd een 'flexbar' (weerstandsstaaf) vast met lichte tegendruk.", "Bevestig een weerstandsband (theraband) en zet er spanning op, houd je pols neutraal tegen de weerstand in.", "Probeer de oefeningen geleidelijk zwaarder te maken door er iets meer gewicht aan te hangen (tot max 1 kg) en van 5 tot 60 seconden op te bouwen.."],
+                        criteriaTitle: "Voorwaarden om naar Fase 3 te gaan:",
+                        criteria: ["Je kunt de oefeningen met 1 kg doen (2 series van 20 herhalingen) en 5 seconden vasthouden.", "De pols blijft gedurende alle herhalingen keurig in de neutrale stand.", "Je gebruikt geen antalgische (pijn-ontwijkende) houdingen met je schouder of elleboog.", "De pijnscore blijft onder de 3."]
+                    },
+                    {
+                        phaseName: "Fase 3", phaseLabel: "Dynamisch Belasten",
+                        goal: "Gecontroleerd bewegen mét weerstand om de functie van de pols te herstellen.",
+                        bodyText: "Je hebt bewezen dat je de pols statisch kunt stabiliseren. In deze uitdagende fase gaan we de pols daadwerkelijk buigen en strekken terwijl er weerstand op staat. De kwaliteit van de beweging is hier cruciaal. Het moet soepel, gecoördineerd en vloeiend voelen. Als je arm gaat trillen, is de oefening nog te zwaar en voldoe niet aan de criteria.",
+                        exercises: ["Beweeg je pols op en neer met een waterflesje of klein gewicht in je hand. Doe dit in verschillende standen van de onderarm doe dit 3 series van 15 herhalingen.", "Knijp actief en herhaaldelijk in een handknijper of stevige putty.", "Rol een stok met een touwtje en een gewichtje eraan langzaam op en af (wristroller).", "Buig je pols in 1 tel vlot naar boven, en laat hem in 5 tellen heel langzaam weer terugkomen naar neutraal (excentrisch trainen) doe dit 3 series van 15 herhalingen."],
+                        criteriaTitle: "Voorwaarden om naar Fase 4 te gaan:",
+                        criteria: ["Je kunt dynamische oefeningen met 1 kg (2x20 herhalingen) soepel en in één vloeiende lijn uitvoeren.", "Er treedt geen trillen van de arm op tijdens de beweging.", "Je hebt geen compensatiebewegingen nodig vanuit de rest van je arm.", "De pijnscore blijft onder de 3."]
+                    },
+                    {
+                        phaseName: "Fase 4", phaseLabel: "Onbewuste Controle",
+                        goal: "Onbewuste stabiliteit trainen voor onverwachte situaties in het dagelijks leven.",
+                        bodyText: "Je hebt de voorwaarden van Fase 3 gehaald. Je hoeft nu niet meer bewust na te denken over de positie van je pols; je lichaam pakt dit weer automatisch op. We gaan trainen op onverwachte verstoringen. Het doel is om je pols weer volledig in te zetten tijdens je normale dagelijkse werkzaamheden, hobby's en sport.",
+                        exercises: ["Loop rond met een dienblad waarop een balletje ligt dat je in beweging houdt zonder het te laten vallen.", "Gooi een bal tegen de muur en vang deze onverwachts op, met je handpalm naar beneden (pronatie).", "Oefen specifieke handelingen uit jouw eigen dagelijks leven (zoals autorijden, zwaar tillen op werk).", "Hervat rustig je sport, eerst zelfstandig oefenen en daarna pas weer in teamverband."],
+                        criteriaTitle: "Voorwaarden voor afronding:",
+                        criteria: ["Je hebt je vooraf opgestelde persoonlijke doelen (zoals sport of werk) bereikt.", "Je kunt je dagelijkse handelingen weer pijnvrij (of met acceptabele last) en zonder na te denken uitvoeren."]
+                    },
+                    {
+                        phaseName: "Afronding", phaseLabel: "Onderhoudsfase",
+                        goal: "Het behouden van de herwonnen belastbaarheid op de lange termijn.",
+                        bodyText: "Gefeliciteerd, je voldoet aan alle voorwaarden en hebt het intensieve traject afgerond! Om te voorkomen dat klachten terugkeren, is het belangrijk om de pols krachtig en stabiel te houden. In overleg met je fysiotherapeut bouw je de behandelingen nu af.",
+                        exercises: ["Kies één statische oefening, één dynamische oefening en één dagelijkse handeling uit de vorige fases.", "Voer deze 'Top 3' nog minstens 3 keer per week uit als controle en onderhoud.", "Gebruik handige hulpmiddelen zoals het draaien van een Powerball of het gebruiken van een Bodyblade om de stabiliteit structureel hoog te houden."],
+                        criteriaTitle: "Wat als het minder gaat?",
+                        criteria: ["Val je toch weer wat terug of neemt de pijn weer structureel toe boven een score van 3? Stap dan tijdelijk terug naar de oefeningen uit Fase 3 en bouw het van daaruit weer rustig op zodra de criteria weer gehaald worden."]
+                    }
+                ]
+            },
+            radius: {
+                title: "Herstel van een Gebroken Pols",
+                subtitle: "Traject zonder operatie (Conservatief)",
+                audioSrc: "https://files.catbox.moe/00uc54.mp3",
+                audioLabel: "Uitleg Traject",
+                introTitle: "Een gezamenlijk traject naar herstel",
+                introText: "Je hebt je pols gebroken (een radiusfractuur) en deze is behandeld met gips (of een stevige spalk). Nadat dit eraf mag, zal je pols stijf, dun en wat pijnlijk aanvoelen. Dat is volkomen normaal! Dit stappenplan is jouw routekaart om de hand weer verantwoord sterk te maken. In samenwerking met de handtherapeut doorlopen we dit traject voor een optimaal resultaat.<br/><br/><div class='bg-fysio-beige p-4 rounded-xl border border-fysio-dark/10 text-slate-700 text-sm'><strong>Hoe werkt het?</strong> We werken met vier opbouwende fases. Hierbij geldt een belangrijke basisregel: <strong>De aangegeven weken zijn met name ter indicatie en hoeven niet leidend te zijn.</strong> Ieder lichaam geneest op zijn eigen tempo. Jouw handtherapeut beoordeelt of je fysiek aan alle criteria voldoet om naar de volgende fase te gaan.</div>",
+                layout: "standard",
+                timeline: [
+                    {
+                        phaseName: "Fase 1", phaseLabel: "Bescherming & Zwelling (Wk 0-4)",
+                        goal: "De breuk veilig laten genezen in het gips, zwelling afvoeren en stijfheid in de rest van je arm voorkomen.",
+                        bodyText: "Je pols zit in het gips (of een strakke spalk) zodat het gebroken bot goed aan elkaar kan groeien. Het is cruciaal dat je pols nu stil blijft. Maar de rest van je arm, zoals je schouder, elleboog en vingers, moeten juist wél bewegen! Dit bevordert de bloedsomloop en helpt het vocht (oedeem) af te voeren.",
+                        exercises: ["<strong>Zwelling bestrijden:</strong> Leg je arm bij rust hoog (bijvoorbeeld op een kussen, boven harthoogte). Gebruik indien geadviseerd een druk-handschoentje (Coban) tegen vocht.", "<strong>Peesglijden (TGE's):</strong> Maak regelmatig een zo strak mogelijke vuist en strek je vingers en duim daarna helemáál recht uit. Dit werkt als een pompje voor je hand.", "<strong>Arm soepel houden:</strong> Beweeg dagelijks je schouder en elleboog goed door. Draai grote cirkels.", "<strong>Draaien:</strong> Als het gips of de spalk het toelaat, oefen dan heel voorzichtig met het naar boven en naar beneden draaien van je handpalm (supinatie/pronatie)."],
+                        criteriaTitle: "Wanneer ga je naar Fase 2?",
+                        criteria: ["Je hebt akkoord van de arts/gipsmeester om te starten met het afbouwen van het gips of de spalk.", "De forse zwelling rondom de hand en vingers is onder controle."]
+                    },
+                    {
+                        phaseName: "Fase 2", phaseLabel: "Vroege Mobilisatie (Wk 4-7)",
+                        goal: "Het gips gaat eraf! We starten voorzichtig met het onbelast 'wakker maken' van de pols.",
+                        bodyText: "Rond week 4 mag het gips er meestal af, of start je met het afbouwen van je afneembare spalk. Je arm zal dunner, stijf en best gevoelig zijn. Dit is normaal. We gaan je gewrichten nu voorzichtig weer in beweging brengen (AROM). Forceer niks met je andere hand; gebruik alléén de spieren van je gebroken arm zelf.",
+                        exercises: ["<strong>Pols onbelast buigen:</strong> Steun met je onderarm op tafel. Beweeg je hand rustig zover mogelijk omhoog en omlaag. Stop bij rek, forceer niet door de scherpe pijn heen.", "<strong>Onderarm draaien:</strong> Zet je elleboog in je zij. Draai je handpalm heel rustig naar boven en weer naar beneden. Laat je schouder niet meebewegen.", "<strong>Statische stabiliteit:</strong> Span de spieren rond je pols lichtjes aan zónder dat de pols beweegt (bijv. zachtjes tegen een muur duwen met een rechte pols).", "<strong>STRENGE REGELS:</strong> Nog niet zwaar op de pols steunen, absoluut niet zwaar tillen of doekjes wringen!"],
+                        criteriaTitle: "Wanneer ga je naar Fase 3?",
+                        criteria: ["De constante, stekende rustpijn in je pols is verdwenen.", "De onbelaste oefeningen zorgen niet voor een stijvere of pijnlijkere pols de dag erna.", "Je kunt de pols alweer redelijk zelfstandig in beweging brengen."]
+                    },
+                    {
+                        phaseName: "Fase 3", phaseLabel: "Opbouw & Coördinatie (Wk 7-13)",
+                        goal: "De beweeglijkheid verder optimaliseren en starten met lichte kracht en coördinatie.",
+                        bodyText: "Het bot is nu flink geconsolideerd (steviger geworden). We gaan de bewegingen intensiveren. Je handtherapeut mag nu zachtjes gaan meehelpen (PROM) om de uiterste grens van de pols op te zoeken. <em>Let op: zolang 100% botgenezing niet is bevestigd, doen we dit nooit met maximale, pijnlijke rek.</em> We starten nu ook met krachttraining.",
+                        exercises: ["<strong>Intensiveren:</strong> Blijf je pols, duim en vingers buigen en strekken, maar zoek de grenzen steeds verder op.", "<strong>Coördinatie & Kracht:</strong> Start een polsprogramma met lichte gewichtjes of een weerstandsbandje. Zorg voor vloeiende, rustige bewegingen (geen schokken).", "<strong>ADL (Dagelijks leven):</strong> Begin je hand weer in te schakelen bij normale, lichte activiteiten zoals een boterham smeren of jezelf aankleden.", "<strong>Afbouwen:</strong> Je mag de spalk overdag in principe helemaal afbouwen en wegleggen."],
+                        criteriaTitle: "Wanneer ga je naar Fase 4?",
+                        criteria: ["Je hebt een sterk verbeterde, bijna volledige beweeglijkheid (ROM) van de pols en onderarm behaald.", "Je coördinatie is goed (de pols trilt niet hevig bij lichte weerstand).", "Je fysiotherapeut beoordeelt dat het bot veilig genoeg is voor zwaardere belasting."]
+                    },
+                    {
+                        phaseName: "Fase 4", phaseLabel: "Belastbaarheid & Functie (Mnd 3-12)",
+                        goal: "Volledig herstel: De pols sterk maken voor jouw werk, hobby's en (zware) sport.",
+                        bodyText: "Dit is de langste fase. De pols is stevig genoeg om weer functioneel (zwaar) belast te worden. We gaan nu specifiek trainen voor de dingen die jij in het dagelijks leven moet kunnen. Houd er rekening mee dat het wegebben van de laatste restjes stijfheid vaak maanden de tijd nodig heeft.",
+                        exercises: ["<strong>Krachttraining:</strong> Verzwaar de oefeningen met gewichtjes of zwaardere weerstandsbanden. Train ook de grijpkracht.", "<strong>Steunoefeningen:</strong> Bouw het steunen op je hand geleidelijk op. Begin door op een tafel te leunen, bouw dit heel langzaam op naar 'opdrukken' tegen de muur of op de grond.", "<strong>Jouw doelen:</strong> Oefen bewegingen uit jouw specifieke sport of pak thuis stevige dozen op. Boots jouw werk/hobby na in de praktijk.", "<strong>Metingen:</strong> De therapeut zal af en toe metingen of vragenlijsten inzetten om te controleren of je doelen worden behaald."],
+                        criteriaTitle: "Wanneer ben je klaar?",
+                        criteria: ["Samen met je handtherapeut stel je vast dat je pols weer volledig belastbaar is.", "Voldoende kracht om werk en hobby veilig en zonder problemen uit te voeren.", "Je durft zonder over na te denken weer op je hand te steunen."]
+                    }
+                ]
+            },
+            trigger: {
+                title: "Triggerfinger",
+                subtitle: "Conservatief Traject - Uw route naar herstel",
+                audioSrc: "https://file.garden/ad-GGS68bHSSshZJ/Hoe_een_triggerfinger_je_vinger_blokkeert.mp3",
+                audioLabel: "Beluister Uitleg",
+                introTitle: "Wat kunt u verwachten?",
+                introText: "<p class='mb-3'>Door overbelasting of irritatie is uw buigpees of het tunneltje in uw hand opgezwollen. Dit veroorzaakt de pijnlijke 'klik' of het vastlopen van uw vinger. We kiezen nu bewust voor een <strong>conservatief traject</strong>, omdat de vinger in deze fase vaak nog goed te behandelen is. Hiermee proberen we een operatie uit te stellen of zelfs helemaal te voorkomen. Houd er wel rekening mee dat een conservatieve aanpak maar tot op zekere hoogte succesvol kan zijn; als de klachten in de toekomst verergeren, is een kleine ingreep soms alsnog nodig.</p><div class='bg-fysio-gold/20 p-4 rounded-xl border-l-4 border-fysio-gold text-slate-700 text-sm'><strong class='text-fysio-dark'>De Gouden Regel:</strong> Forceer de klik nooit expres om te 'testen', dit houdt de irritatie in stand! <strong>Let op:</strong> Maak in de eerste weken absoluut géén krachtige volle of platte vuist.</div>",
+                layout: "boxes",
+                timeline: [
+                    {
+                        phaseName: "De Start & Bescherming", phaseLabel: "Week 1",
+                        description: "<strong>Doel:</strong> We brengen uw klachten in kaart (belasting-belastbaarheid) en geven de vinger direct bescherming om de irritatie te kalmeren.",
+                        leftBox: { style: "light", title: "Wat u zelf doet", icon: "activity", items: ["<strong>Spalk:</strong> U draagt dag én nacht een spalk die voorkomt dat de vinger te ver buigt.", "<strong>Veilig Oefenen:</strong> Start met peesglijding (TGE's). Maak <em>alleen</em> een hoekvuist of een dakje.", "<strong>Waarschuwing:</strong> Maak géén krachtige volle of platte vuist! Dit rekt de irritatie op."] },
+                        rightBox: { style: "green", title: "Bij de Handtherapeut", icon: "check", items: ["Paramedische intake en de eerste nulmetingen worden gedaan.", "We leggen indien nodig een drukverband aan om eventuele zwelling (oedeem) te verminderen.", "We optimaliseren de strekking van uw gewricht (ROM PIP)."] }
+                    },
+                    {
+                        phaseName: "Advisering & Oefenen", phaseLabel: "Week 2 - 6",
+                        description: "<strong>Doel:</strong> De acute irritatie neemt af. We blijven de vinger beschermen en kijken kritisch naar hoe u uw hand gebruikt in het dagelijks leven.",
+                        leftBox: { style: "light", title: "Aan de slag", icon: "play", items: ["<strong>Advisering:</strong> We kijken naar het gebruik van uw hand tijdens dagelijkse taken, werk en ontspanning.", "<strong>Blijf Oefenen:</strong> Blijf de peesglijding (TGE's) optimaliseren met uitsluitend de hoekvuist en het dakje.", "<strong>Spalk:</strong> Blijf uw spalk trouw dragen."] },
+                        rightBox: { style: "green", title: "Verloop & Evaluatie", icon: "policy", items: ["De vinger zou in deze weken steeds minder moeten klikken of haperen.", "In week 7 volgt een belangrijk evaluatiemoment op basis van uw mobiliteit en functionaliteit."] }
+                    },
+                    {
+                        phaseName: "Opbouwen & Afbouwen", phaseLabel: "Week 7 - 12",
+                        description: "<strong>Doel:</strong> Na de evaluatie in week 7 verleggen we de focus van strikte rust naar het langzaam opbouwen van uw belastbaarheid en functionaliteit.",
+                        leftBox: { style: "dark", title: "Functionele Training", icon: "activity", items: ["<strong>Trainen:</strong> We starten met specifieke training gericht op uw dagelijkse bezigheden, werk en ontspanning.", "<strong>Spalk Afbouwen:</strong> In overleg met uw handtherapeut gaat u de spalk steeds minder dragen.", "<strong>Kracht:</strong> Het rustig opbouwen van knijp- en grijpkracht zonder pijn te provoceren."] },
+                        rightBox: { style: "green", title: "Criteria voor succes", icon: "lock", items: ["U ervaart meer controle en kunt de hand weer pijnvrij gebruiken.", "De hapering is nagenoeg weg en de spalk kan veilig worden afgebouwd."] }
+                    },
+                    {
+                        phaseName: "Eindfase & Controle", phaseLabel: "Maand 3 - 6",
+                        description: "<strong>Doel:</strong> De laatste fase van het traject. De nadruk ligt op het optimaliseren van uw handfunctie en het vastleggen van uw eindresultaat.",
+                        leftBox: { style: "light", title: "Onderhoud", icon: "play", items: ["<strong>Optimaliseren:</strong> U past alle geleerde adviezen nu zelfstandig en vol vertrouwen toe.", "<strong>Luister naar uw hand:</strong> Blijf uw eigen grenzen (belastbaarheid) respecteren om terugval te voorkomen.", "<strong>Volledig functieherstel:</strong> U heeft geen belemmeringen meer in dagelijkse taken."] },
+                        rightBox: { style: "dark", title: "Meten is Weten", icon: "echo", items: ["<strong>Controle:</strong> Rond de 3 maanden volgt een fysieke controle-afspraak bij de kliniek.", "<strong>Metingen:</strong> U vult de afsluitende online vragenlijsten in.", "<strong>Therapeut:</strong> De therapeut doet de laatste eindmetingen."] }
+                    }
+                ]
+            }
+        };
+
+        let currentActiveId = null;
+        let activeTab = 0;
+        let isPlaying = false;
+
+        // Hoofdnavigatie
+        function showView(view) {
+            const audioEl = document.getElementById('main-audio');
+            if (audioEl) { audioEl.pause(); audioEl.currentTime = 0; isPlaying = false; }
+            
+            document.getElementById('view-portal').classList.add('hidden');
+            document.getElementById('view-document').classList.add('hidden');
+            document.getElementById('back-to-portal').classList.add('hidden');
             window.scrollTo(0, 0);
 
             if (view === 'portal') {
-                portal.classList.remove('hidden');
+                document.getElementById('view-portal').classList.remove('hidden');
             } else {
-                documentView.classList.remove('hidden');
-                backBtn.classList.remove('hidden');
-                
-                // Hier laden we de specifieke content van het document
-                // Normaal zou je hier een fetch doen, maar voor deze demo 
-                // genereren we de HTML direct in de DOM of laden we de content in.
-                loadDocumentContent(view, content);
+                document.getElementById('view-document').classList.remove('hidden');
+                document.getElementById('back-to-portal').classList.remove('hidden');
+                loadDocument(view);
             }
         }
 
-        function loadDocumentContent(type, container) {
-            // In een echte productie omgeving zou je hier de losse HTML bestanden laden.
-            // Om de interactie binnen één bestand te houden, tonen we een placeholder 
-            // of sturen we de gebruiker naar een sectie.
+        function loadDocument(docId) {
+            currentActiveId = docId;
+            activeTab = 0; // Reset naar eerste tab
+            const data = DATA_STORE[docId];
+
+            document.getElementById('doc-title').innerText = data.title;
+            document.getElementById('doc-subtitle').innerText = data.subtitle;
+            document.getElementById('intro-title').innerText = data.introTitle;
+            document.getElementById('intro-text').innerHTML = data.introText;
+            document.getElementById('audio-label').innerText = data.audioLabel;
+            document.getElementById('main-audio').src = data.audioSrc;
             
-            let htmlContent = "";
-            
-            if (type === 'pols') {
-                htmlContent = `<div class="p-8 text-center"><p class="text-fysio-dark font-bold">Het document "A-specifieke Polsklachten" wordt geladen...</p><p class="text-sm opacity-60">Hier zou de volledige revalidatie HTML verschijnen.</p></div>`;
-                // Voor de demo in deze chat: de bestanden zijn apart geleverd. 
-                // In een echt systeem koppel je deze knoppen aan de specifieke URL's.
-                window.open('pols_revalidatie_hoogezand.html', '_self');
-            } else if (type === 'radius') {
-                window.open('radius_fractuur_hoogezand.html', '_self');
-            } else if (type === 'trigger') {
-                window.open('triggerfinger_hoogezand.html', '_self');
+            renderAudioButton();
+            renderTimeline();
+            renderContent();
+        }
+
+        // Audio Acties
+        function renderAudioButton() {
+            const btn = document.getElementById('audio-btn');
+            if (isPlaying) {
+                btn.className = "w-full flex items-center justify-center gap-2 py-3 px-4 rounded-lg font-bold transition-all duration-200 bg-fysio-light text-white shadow-md";
+                btn.innerHTML = `${ICONS.square} Pauzeren`;
+            } else {
+                btn.className = "w-full flex items-center justify-center gap-2 py-3 px-4 rounded-lg font-bold transition-all duration-200 bg-fysio-dark text-white hover:opacity-90 hover:shadow-md";
+                btn.innerHTML = `${ICONS.play} Start Luisteren`;
             }
+        }
+        function toggleAudio() {
+            const audioEl = document.getElementById('main-audio');
+            if (isPlaying) audioEl.pause(); else audioEl.play();
+            isPlaying = !isPlaying;
+            renderAudioButton();
+        }
+        function onAudioEnded() { isPlaying = false; renderAudioButton(); }
+
+        // Tabs
+        function setTab(idx) {
+            activeTab = idx;
+            renderTimeline();
+            renderContent();
+            document.getElementById('timeline-container').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        function renderTimeline() {
+            const protocol = DATA_STORE[currentActiveId];
+            const container = document.getElementById('timeline-container');
+            let html = `
+                <div class="absolute top-1/2 left-4 right-4 h-1.5 bg-fysio-dark/10 -translate-y-1/2 z-0 hidden md:block rounded-full"></div>
+                <div class="flex overflow-x-auto gap-3 pb-6 pt-2 snap-x hide-scrollbar relative z-10 px-1">
+            `;
+
+            protocol.timeline.forEach((item, index) => {
+                const isActive = index === activeTab;
+                const baseClasses = "snap-start shrink-0 flex flex-col items-center p-4 rounded-xl min-w-[140px] transition-all duration-200 relative border-2 ";
+                const activeClasses = isActive ? "bg-white border-fysio-light shadow-md transform -translate-y-1" : "bg-white border-transparent hover:border-fysio-light/30 hover:-translate-y-0.5 shadow-sm text-slate-500";
+                
+                html += `<button onclick="setTab(${index})" class="${baseClasses} ${activeClasses}">`;
+                if (isActive) html += `<div class="absolute -top-2 w-4 h-4 bg-fysio-light rounded-full border-2 border-white shadow-sm"></div>`;
+                
+                // Switch styling of subtitle based on layout
+                if(protocol.layout === 'boxes') {
+                    html += `<span class="text-xs font-semibold uppercase tracking-wider text-center leading-tight mb-1 ${isActive ? 'text-slate-500' : ''}">${item.phaseLabel}</span>
+                             <span class="text-lg font-black ${isActive ? 'text-fysio-light' : ''}">${item.phaseName}</span>`;
+                } else {
+                    html += `<span class="text-lg font-black mb-1 ${isActive ? 'text-fysio-light' : ''}">${item.phaseName}</span>
+                             <span class="text-xs font-semibold uppercase tracking-wider text-center leading-tight ${isActive ? 'text-fysio-dark' : ''}">${item.phaseLabel}</span>`;
+                }
+                html += `</button>`;
+            });
+
+            html += `</div>`;
+            container.innerHTML = html;
+        }
+
+        // Helpers voor Triggerfinger stijl
+        function getBoxClasses(style) {
+            if (style === "dark") return "dark-fysio-pattern rounded-xl p-6 border border-fysio-dark shadow-inner text-white/90";
+            if (style === "green") return "bg-fysio-dark/5 border-2 border-fysio-dark/10 rounded-xl p-6 md:p-8";
+            return "bg-fysio-beige/30 rounded-xl p-6 border border-fysio-dark/5";
+        }
+        function getBoxTitleClasses(style) {
+            if (style === "dark") return "font-bold text-fysio-light mb-4 uppercase text-sm tracking-widest flex items-center gap-2 border-b border-fysio-light/20 pb-2";
+            if (style === "green") return "font-bold text-fysio-dark mb-5 uppercase text-xl flex items-center gap-3";
+            return "font-bold text-fysio-dark mb-5 text-xl flex items-center gap-3 border-b border-fysio-dark/5 pb-3";
+        }
+        function getItemClasses(style) {
+            if (style === "dark") return "flex items-start gap-2.5 text-sm leading-relaxed text-white/80";
+            if (style === "green") return "flex items-start gap-4 text-fysio-dark font-medium text-lg leading-relaxed";
+            return "flex gap-4 items-start bg-white p-4 rounded-xl border border-fysio-dark/5 text-slate-700 text-lg leading-relaxed";
+        }
+        function getIconColor(style) { return (style === "green") ? "text-fysio-light shrink-0 mt-1" : "text-fysio-light shrink-0"; }
+
+        // Content Rendering
+        function renderContent() {
+            const protocol = DATA_STORE[currentActiveId];
+            const data = protocol.timeline[activeTab];
+            const container = document.getElementById('content-container');
+            const isLastTab = activeTab === protocol.timeline.length - 1;
+
+            container.className = "bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden";
+            void container.offsetWidth; 
+            container.classList.add("animate-fade-in-up");
+
+            let html = '';
+
+            // Standaard Lijst Weergave (Pols / Radius)
+            if (protocol.layout === 'standard') {
+                html += `
+                    <div class="bg-fysio-dark/5 border-b border-fysio-dark/10 p-6 md:p-8">
+                        <div class="flex items-start gap-4">
+                            <div class="bg-fysio-dark text-white p-3 rounded-xl shrink-0 shadow-sm">${ICONS.target}</div>
+                            <div>
+                                <h3 class="font-bold text-fysio-dark text-sm uppercase tracking-wider mb-1">De Focus in ${data.phaseName}</h3>
+                                <p class="text-slate-800 font-semibold text-xl leading-relaxed">"${data.goal}"</p>
+                            </div>
+                        </div>
+                        <p class="text-slate-600 leading-relaxed text-lg mt-5">${data.bodyText}</p>
+                    </div>
+                    <div class="p-6 md:p-8 space-y-8">
+                        <div>
+                            <div class="flex items-center gap-3 mb-5 border-b border-slate-100 pb-3">
+                                <span class="text-fysio-light">${ICONS.activity}</span>
+                                <h3 class="font-bold text-fysio-dark text-xl">De Oefeningen / Aan de slag</h3>
+                            </div>
+                            <ul class="space-y-4">
+                `;
+                data.exercises.forEach((ex, idx) => {
+                    html += `
+                        <li class="flex gap-4 items-start bg-fysio-beige/30 p-4 rounded-xl border border-fysio-dark/5">
+                            <div class="mt-0.5 w-6 h-6 rounded-full bg-fysio-light text-white flex items-center justify-center shrink-0 font-bold text-sm">${idx + 1}</div>
+                            <span class="text-slate-700 text-[15px] md:text-base leading-relaxed">${ex}</span>
+                        </li>
+                    `;
+                });
+                html += `
+                            </ul>
+                        </div>
+                        <div class="bg-fysio-dark/5 border border-fysio-dark/10 rounded-xl p-6 md:p-8">
+                            <div class="flex items-center gap-3 mb-5">
+                                <span class="text-fysio-light">${ICONS.checklist}</span>
+                                <h3 class="font-bold text-fysio-dark text-xl">${data.criteriaTitle}</h3>
+                            </div>
+                            <ul class="space-y-4 mb-5">
+                `;
+                data.criteria.forEach((crit) => {
+                    html += `
+                        <li class="flex gap-4 items-start">
+                            <div class="text-fysio-light shrink-0 mt-1">${ICONS.lock}</div>
+                            <span class="text-fysio-dark font-medium text-lg leading-relaxed">${crit}</span>
+                        </li>
+                    `;
+                });
+                html += `</ul>`;
+                if (!isLastTab) {
+                    html += `
+                        <div class="mt-6 pt-5 border-t border-fysio-gold/20">
+                            <p class="text-sm text-fysio-dark font-medium bg-fysio-gold/20 p-3 rounded-lg border-l-4 border-fysio-gold">
+                                ⚠️ Let op: Ga pas door naar de volgende fase als je al deze puntjes echt kunt afvinken. Overleg bij twijfel met je handtherapeut.
+                            </p>
+                        </div>
+                    `;
+                }
+                html += `</div>`;
+            } 
+            // Boxen Weergave (Triggerfinger)
+            else if (protocol.layout === 'boxes') {
+                const buildItems = (box) => box.items.map(item => `<li class="${getItemClasses(box.style)}"><span class="${getIconColor(box.style)}">${ICONS[box.icon] || ICONS.check}</span><span>${item}</span></li>`).join('');
+
+                html += `
+                    <div class="bg-fysio-dark/5 border-b border-fysio-dark/10 p-6 md:p-8">
+                        <div class="flex items-start gap-4 mb-5">
+                            <div class="bg-fysio-dark text-white p-3 rounded-xl shrink-0 shadow-sm">${ICONS.target}</div>
+                            <div>
+                                <h3 class="font-bold text-fysio-dark text-sm uppercase tracking-wider mb-1">${data.phaseLabel}</h3>
+                                <p class="text-slate-800 font-black text-2xl leading-relaxed">${data.phaseName}</p>
+                            </div>
+                        </div>
+                        <div class="text-slate-700 text-lg leading-relaxed text-justify">${data.description}</div>
+                    </div>
+                    <div class="p-6 md:p-8 space-y-8">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                            <div class="${getBoxClasses(data.leftBox.style)}">
+                                <h4 class="${getBoxTitleClasses(data.leftBox.style)}"><span class="${getIconColor(data.leftBox.style)}">${ICONS[data.leftBox.icon]}</span>${data.leftBox.title}</h4>
+                                <ul class="space-y-4">${buildItems(data.leftBox)}</ul>
+                            </div>
+                            <div class="${getBoxClasses(data.rightBox.style)}">
+                                <h4 class="${getBoxTitleClasses(data.rightBox.style)}"><span class="${getIconColor(data.rightBox.style)}">${ICONS[data.rightBox.icon]}</span>${data.rightBox.title}</h4>
+                                <ul class="space-y-4">${buildItems(data.rightBox)}</ul>
+                            </div>
+                        </div>
+                `;
+            }
+
+            // Gedeelde navigatie onderaan
+            if (!isLastTab) {
+                html += `
+                    <div class="pt-6 border-t border-slate-100 flex justify-center md:justify-end mt-8">
+                        <button onclick="setTab(${activeTab + 1})" class="group flex items-center justify-center gap-2 text-white font-bold py-3.5 px-8 bg-fysio-light hover:opacity-90 rounded-xl transition-all shadow-md hover:shadow-lg hover:-translate-y-0.5">
+                            Naar volgende fase
+                            <span class="group-hover:translate-x-1 transition-transform">${ICONS.arrow}</span>
+                        </button>
+                    </div>
+                `;
+            } else {
+                html += `
+                    <div class="pt-6 border-t border-slate-100 text-center mt-8">
+                        <button onclick="setTab(0)" class="inline-flex items-center justify-center gap-2 text-fysio-dark font-bold py-3 px-6 bg-fysio-beige/50 border border-fysio-dark/10 hover:bg-fysio-beige rounded-xl transition-colors">
+                            ${ICONS.refresh} Bekijk traject opnieuw
+                        </button>
+                    </div>
+                `;
+            }
+
+            html += `</div>`; // Afsluiten P-6 Container
+            container.innerHTML = html;
         }
     </script>
 </body>
